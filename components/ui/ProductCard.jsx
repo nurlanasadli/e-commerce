@@ -1,4 +1,5 @@
-import React from 'react';
+// ProductCard.jsx - Updated Toggle Logic
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { HeartIcon, CartAddIcon, CommentIcon, StarIcon, CompareIcon } from './icons';
 import { useProductContext } from '../../contexts/ProductContext';
 
@@ -17,7 +18,15 @@ const ProductCard = ({ product }) => {
   if (!product) return null;
   
   const { toggleFavorite, toggleCart, toggleComparison, formatPrice } = useProductContext();
-
+  
+  // Create local state to handle UI updates before the context state is updated
+  const [localIsFavorite, setLocalIsFavorite] = useState(false);
+  const [localIsInCart, setLocalIsInCart] = useState(false);
+  const [localIsInComparison, setLocalIsInComparison] = useState(false);
+  
+  const cartButtonRef = useRef(null);
+  const wishlistButtonRef = useRef(null);
+  
   const {
     id,
     title,
@@ -32,23 +41,69 @@ const ProductCard = ({ product }) => {
     isInCart,
     isInComparison
   } = product;
+  
+  // Sync local state with context
+  useEffect(() => {
+    setLocalIsFavorite(isFavorite);
+    setLocalIsInCart(isInCart);
+    setLocalIsInComparison(isInComparison);
+  }, [isFavorite, isInCart, isInComparison]);
+  
+  // Force browser repaint to ensure CSS changes are applied
+  const forceRepaint = useCallback((element) => {
+    if (!element) return;
+    
+    // Read property to force a browser reflow/repaint
+    // eslint-disable-next-line no-unused-vars
+    const reflow = element.offsetHeight;
+    
+    // For Safari & iOS Webkit, add and remove a class
+    element.classList.add('force-repaint');
+    setTimeout(() => {
+      element.classList.remove('force-repaint');
+    }, 10);
+  }, []);
 
-  const handleToggleFavorite = React.useCallback((e) => {
-  e.preventDefault(); 
-  toggleFavorite(id);
-}, [id, toggleFavorite]);
+  const handleToggleFavorite = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Update local state immediately for responsive UI
+    setLocalIsFavorite(prev => !prev);
+    
+    // Force CSS update
+    forceRepaint(wishlistButtonRef.current);
+    
+    // Call context method
+    toggleFavorite(id);
+  }, [id, toggleFavorite, forceRepaint]);
 
-  const handleToggleCart = React.useCallback((e) => {
-  e.preventDefault();
-  toggleCart(id);
-}, [id, toggleCart]);
+  const handleToggleCart = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Update local state immediately for responsive UI
+    setLocalIsInCart(prev => !prev);
+    
+    // Force CSS update
+    forceRepaint(cartButtonRef.current);
+    
+    // Call context method
+    toggleCart(id);
+  }, [id, toggleCart, forceRepaint]);
 
- const handleToggleComparison = React.useCallback((e) => {
-  e.preventDefault(); 
-  toggleComparison(id);
-}, [id, toggleComparison]);
+  const handleToggleComparison = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Update local state immediately for responsive UI
+    setLocalIsInComparison(prev => !prev);
+    
+    // Call context method
+    toggleComparison(id);
+  }, [id, toggleComparison]);
 
-  const handleImageError = React.useCallback((e) => {
+  const handleImageError = useCallback((e) => {
     e.target.onerror = null;
     e.target.src = PLACEHOLDER_IMAGE;
   }, []);
@@ -61,15 +116,14 @@ const ProductCard = ({ product }) => {
       
       <div className="product-card__image-container">
         <button 
-          className={`product-card__compare ${isInComparison ? 'product-card__compare--active' : ''}`}
+          className={`product-card__compare ${localIsInComparison ? 'product-card__compare--active' : ''}`}
           onClick={handleToggleComparison}
-          onTouchEnd={handleToggleComparison}
           aria-label="Müqayisə et"
           type="button"
         >
           <MemoizedCompareIcon 
             size={18} 
-            color={isInComparison ? "#e53935" : "#3F3F3F"} 
+            color={localIsInComparison ? "#e53935" : "#3F3F3F"} 
           />
         </button>
         
@@ -98,28 +152,28 @@ const ProductCard = ({ product }) => {
         <h3 className="product-card__title">{title}</h3>
         
         <div className="product-card__pricing-container">
-      <div className="product-card__price-wrapper">
-        {hasDiscount && (
-          <span className="product-card__old-price">{formatPrice(originalPrice)} ₼</span>
-        )}
-        <span className="product-card__price">{formatPrice(discountedPrice)} ₼</span>
-      </div>
-      
-      {installment && (
-        <div className="installment-wrapper">
-          <span className="installment__period">{installment.month} ay</span>
-          <span className="installment__price">{formatPrice(installment.price)} ₼</span>
+          <div className="product-card__price-wrapper">
+            {hasDiscount && (
+              <span className="product-card__old-price">{formatPrice(originalPrice)} ₼</span>
+            )}
+            <span className="product-card__price">{formatPrice(discountedPrice)} ₼</span>
+          </div>
+          
+          {installment && (
+            <div className="installment-wrapper">
+              <span className="installment__period">{installment.month} ay</span>
+              <span className="installment__price">{formatPrice(installment.price)} ₼</span>
+            </div>
+          )}
         </div>
-      )}
-    </div>
         
         <div className="product-card__actions">
           <button 
-            className={`product-card__button ${isInCart ? 'product-card__button--active' : ''}`}
+            ref={cartButtonRef}
+            className={`product-card__button ${localIsInCart ? 'product-card__button--active' : ''}`}
             onClick={handleToggleCart}
-            onTouchEnd={handleToggleCart}
             type="button"
-            aria-label="Səbətə əlavə et"
+            aria-label={localIsInCart ? "Səbətə keç" : "Səbətə əlavə et"}
           >
             <MemoizedCartAddIcon 
               size={17} 
@@ -130,10 +184,10 @@ const ProductCard = ({ product }) => {
           </button>
           
           <button 
-            className={`product-card__wishlist ${isFavorite ? 'product-card__wishlist--active' : ''}`}
+            ref={wishlistButtonRef}
+            className={`product-card__wishlist ${localIsFavorite ? 'product-card__wishlist--active' : ''}`}
             onClick={handleToggleFavorite}
-            onTouchEnd={handleToggleFavorite}
-            aria-label={isFavorite ? "Sevimlilərə əlavə et" : "Sevimlilərdən çıxart"}
+            aria-label={localIsFavorite ? "Sevimlilərdən çıxart" : "Sevimlilərə əlavə et"}
             type="button"
             data-product-id={id}
           >

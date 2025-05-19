@@ -460,16 +460,15 @@ button.category-button--active {
   white-space: nowrap;
 }
 
-/* ========== PRODUCT CARD ACTIONS ========== */
 .product-card__actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 8px;
   gap: 8px;
+  width: 100%;
 }
 
-/* Add to Cart Button */
 .product-card__button {
   flex: 1;
   height: 45px;
@@ -490,6 +489,7 @@ button.category-button--active {
   position: relative;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  will-change: transform, background-color;
 }
 
 .product-card__button-text::after {
@@ -536,12 +536,28 @@ button.category-button--active {
 .product-card__button--active .product-card__button-text::after {
   content: "Səbətə keç";
 }
+.product-card__button:not(.product-card__button--active) {
+  background-color: var(--color-button);
+  color: var(--color-text);
+}
+.product-card__button:not(.product-card__button--active) .product-card__button-icon path {
+  stroke: currentColor;
+}
+product-card__button:not(.product-card__button--active) .product-card__button-icon path {
+  stroke: currentColor;
+}
+
+.product-card__button--disabled {
+  background-color: var(--color-button) !important; 
+  color: var(--color-text) !important;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
 
 .product-card__button:active {
   transform: scale(0.98);
 }
 
-/* Wishlist Button */
 .product-card__wishlist {
   width: 45px;
   height: 45px;
@@ -557,6 +573,9 @@ button.category-button--active {
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  will-change: transform, background-color;
+  position: relative;
+  overflow: hidden;
 }
 
 .product-card__wishlist:hover {
@@ -570,14 +589,20 @@ button.category-button--active {
   color: var(--color-white);
 }
 
+.product-card__wishlist:not(.product-card__wishlist--active) {
+  background-color: var(--color-button);
+  color: var(--color-text);
+}
+
+
 .product-card__wishlist--active:hover {
   background-color: var(--color-primary-hover);
 }
 
 .product-card__wishlist svg {
   color: inherit;
+  transition: color 0.3s ease;
 }
-
 .product-card__wishlist svg path {
   fill: none;
   stroke: currentColor;
@@ -2078,14 +2103,14 @@ button.category-button--active {
     height: 30px;
   }
   
-  .products-section .products-grid .product-card .product-card__button-text::after {
+  .product-card__button-text::after {
     content: "Səbətə";
-    font-size: 9px;
-    margin-left: 8px;
+    font-size: 7px;
   }
   
-  .products-section .products-grid .product-card .product-card__button--active .product-card__button-text::after {
+  .product-card__button--active .product-card__button-text::after {
     content: "Səbətə";
+    font-size: 7px;
   }
   
   .products-section .products-grid .product-card .product-card__wishlist {
@@ -2357,7 +2382,6 @@ button.category-button--active {
   .product-card__wishlist,
   .product-card__compare {
     -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
   }
   
@@ -2367,22 +2391,17 @@ button.category-button--active {
     transform: scale(0.95);
   }
   
-  /* Enhanced touch feedback */
-  .product-card__button::before,
-  .product-card__wishlist::before {
+.product-card__button::after,
+  .product-card__wishlist::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     opacity: 0;
     pointer-events: none;
-    z-index: 1;
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    z-index: -1;
   }
   
   .product-card__button:active::before,
@@ -2393,6 +2412,15 @@ button.category-button--active {
     transition: width 0s, height 0s, opacity 0.2s ease;
   }
 
+  .product-card__button--active,
+  .product-card__wishlist--active {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .product-card__button:not(.product-card__button--active),
+  .product-card__wishlist:not(.product-card__wishlist--active) {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
   
 }
 
@@ -3037,7 +3065,6 @@ button.category-button--active {
 .product-card__compare:focus,
 .category-button:focus {
   outline: 2px solid transparent;
-  box-shadow: 0 0 0 2px rgba(234, 36, 39, 0.4);
 }
 
 /* Only apply focus styles when using keyboard navigation */
