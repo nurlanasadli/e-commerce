@@ -35,10 +35,12 @@ const ProductCard = ({ product }) => {
     isInComparison
   } = product;
   
-  
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
   const [localIsInCart, setLocalIsInCart] = useState(isInCart);
   const [localIsInComparison, setLocalIsInComparison] = useState(isInComparison);
+  
+  const [isCartPressed, setIsCartPressed] = useState(false);
+  const [isWishlistPressed, setIsWishlistPressed] = useState(false);
   
   useEffect(() => {
     if (isFavorite !== localIsFavorite) setLocalIsFavorite(isFavorite);
@@ -48,39 +50,6 @@ const ProductCard = ({ product }) => {
   
   const lastFavoriteState = useRef(localIsFavorite);
   const lastCartState = useRef(localIsInCart);
-  
-  const handleToggleFavorite = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const newState = !localIsFavorite;
-    
-    if (lastFavoriteState.current !== newState) {
-      setLocalIsFavorite(newState);
-      lastFavoriteState.current = newState;
-      animateWishlistToggle(newState);
-      
-      requestAnimationFrame(() => {
-        toggleFavorite(id);
-      });
-    }
-  }, [id, toggleFavorite, localIsFavorite, animateWishlistToggle]);
-
-useEffect(() => {
-  const handleOutsideClick = (e) => {
-    if (e.target.closest('.product-card') && 
-        !e.target.closest('.product-card__compare')) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  };
-
-  document.addEventListener('click', handleOutsideClick);
-  
-  return () => {
-    document.removeEventListener('click', handleOutsideClick);
-  };
-}, []);
 
   const handleToggleCart = useCallback((e) => {
     e.preventDefault();
@@ -88,46 +57,94 @@ useEffect(() => {
     
     const newState = !localIsInCart;
     
+    setLocalIsInCart(newState);
+    setIsCartPressed(true);
+    
+    setTimeout(() => setIsCartPressed(false), 150);
+    
     if (lastCartState.current !== newState) {
-      setLocalIsInCart(newState);
       lastCartState.current = newState;
       animateCartToggle(newState);
       
-      requestAnimationFrame(() => {
-        toggleCart(id);
-      });
+      toggleCart(id);
     }
   }, [id, toggleCart, localIsInCart, animateCartToggle]);
 
-
-const handleToggleComparison = useCallback((e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  
-  const button = e.currentTarget;
-  const wasActive = localIsInComparison;
-  
-  setLocalIsInComparison(!wasActive);
-    if (wasActive) {
-    button.classList.remove('product-card__compare--active');
-    button.classList.add('product-card__compare--deactivating');
+  const handleToggleFavorite = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
     
-    setTimeout(() => {
-      button.classList.remove('product-card__compare--deactivating');
-    }, 500);
-  } else {
-    button.classList.add('product-card__compare--active');
-  }
-    requestAnimationFrame(() => {
-    toggleComparison(id);
-  });
-}, [id, toggleComparison, localIsInComparison]);
-   
+    const newState = !localIsFavorite;
+    
+    setLocalIsFavorite(newState);
+    setIsWishlistPressed(true);
+    
+    setTimeout(() => setIsWishlistPressed(false), 150);
+    
+    if (lastFavoriteState.current !== newState) {
+      lastFavoriteState.current = newState;
+      animateWishlistToggle(newState);
+      
+      toggleFavorite(id);
+    }
+  }, [id, toggleFavorite, localIsFavorite, animateWishlistToggle]);
 
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (e.target.closest('.product-card') && 
+          !e.target.closest('.product-card__compare')) {
+        e.stopPropagation();
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('click', handleOutsideClick);
+    
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
+  const handleToggleComparison = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const button = e.currentTarget;
+    const wasActive = localIsInComparison;
+    
+    setLocalIsInComparison(!wasActive);
+    if (wasActive) {
+      button.classList.remove('product-card__compare--active');
+      button.classList.add('product-card__compare--deactivating');
+      
+      setTimeout(() => {
+        button.classList.remove('product-card__compare--deactivating');
+      }, 500);
+    } else {
+      button.classList.add('product-card__compare--active');
+    }
+    
+    toggleComparison(id);
+  }, [id, toggleComparison, localIsInComparison]);
+   
   const handleImageError = useCallback((e) => {
     e.target.onerror = null;
     e.target.src = PLACEHOLDER_IMAGE;
   }, []);
+
+  const getCartButtonClass = () => {
+    let className = 'product-card__button';
+    if (localIsInCart || isCartPressed) className += ' product-card__button--active';
+    if (isCartPressed) className += ' product-card__button--pressed';
+    return className;
+  };
+
+  const getWishlistButtonClass = () => {
+    let className = 'product-card__wishlist';
+    if (localIsFavorite || isWishlistPressed) className += ' product-card__wishlist--active';
+    if (isWishlistPressed) className += ' product-card__wishlist--pressed';
+    return className;
+  };
 
   return (
     <>
@@ -137,18 +154,18 @@ const handleToggleComparison = useCallback((e) => {
       
       <div className="product-card__image-container">
         <button 
-  className={`product-card__compare ${localIsInComparison ? 'product-card__compare--active' : ''}`}
-  onClick={handleToggleComparison}
-  aria-label="Müqayisə et"
-  type="button"
-  data-product-id={id}
-  data-prevent-propagation="true"
->
-  <MemoizedCompareIcon 
-    size={18} 
-    color={localIsInComparison ? "#e3935" : "#3F3F3F"} 
-  />
-</button>
+          className={`product-card__compare ${localIsInComparison ? 'product-card__compare--active' : ''}`}
+          onClick={handleToggleComparison}
+          aria-label="Müqayisə et"
+          type="button"
+          data-product-id={id}
+          data-prevent-propagation="true"
+        >
+          <MemoizedCompareIcon 
+            size={18} 
+            color={localIsInComparison ? "#e3935" : "#3F3F3F"} 
+          />
+        </button>
         
         <img 
           src={imageUrl || PLACEHOLDER_IMAGE}
@@ -193,10 +210,14 @@ const handleToggleComparison = useCallback((e) => {
         <div className="product-card__actions">
           <button 
             ref={cartButtonRef}
-            className={`product-card__button ${localIsInCart ? 'product-card__button--active' : ''}`}
+            className={getCartButtonClass()}
             onClick={handleToggleCart}
             type="button"
             aria-label={localIsInCart ? "Səbətə keç" : "Səbətə əlavə et"}
+            style={{
+              transform: isCartPressed ? 'scale(0.95)' : 'scale(1)',
+              transition: isCartPressed ? 'none' : 'all 0.2s ease'
+            }}
           >
             <MemoizedCartAddIcon 
               size={17} 
@@ -208,11 +229,15 @@ const handleToggleComparison = useCallback((e) => {
           
           <button 
             ref={wishlistButtonRef}
-            className={`product-card__wishlist ${localIsFavorite ? 'product-card__wishlist--active' : ''}`}
+            className={getWishlistButtonClass()}
             onClick={handleToggleFavorite}
             aria-label={localIsFavorite ? "Sevimlilərdən çıxart" : "Sevimlilərə əlavə et"}
             type="button"
             data-product-id={id}
+            style={{
+              transform: isWishlistPressed ? 'scale(0.9)' : 'scale(1)',
+              transition: isWishlistPressed ? 'none' : 'all 0.2s ease'
+            }}
           >
             <MemoizedHeartIcon 
               size={24} 
@@ -225,5 +250,4 @@ const handleToggleComparison = useCallback((e) => {
   );
 };
 
-// Performance optimization with memo
 export default React.memo(ProductCard);

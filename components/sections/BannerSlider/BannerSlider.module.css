@@ -279,6 +279,12 @@
     gap: 0 !important;
   }
 
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
+  }
+
   .slideContent {
     background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.2) 100%);
   } 
@@ -350,7 +356,7 @@
   
    
   .imageContainer {
-    border-radius: 12px;
+    border-radius: 33px;
     will-change: transform;
     transform: translateZ(0);
   }
@@ -358,12 +364,18 @@
    
   .slide {
     aspect-ratio: 5 / 3;  
-    border-radius: 12px;
+    border-radius: 33px;
     
      
     box-shadow: 
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
   .slideContent {
@@ -409,16 +421,22 @@
   
   .slide {
     aspect-ratio: 5 / 3;
-    border-radius: 12px;
+    border-radius: 33px;
     box-shadow: 
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 4px rgba(0, 0, 0, 0.08);
   }
   
   .imageContainer {
-    border-radius: 12px;
+    border-radius: 33px;
     will-change: transform;
     transform: translateZ(0);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
 }
 
@@ -474,6 +492,12 @@
     box-shadow: 
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
    
@@ -574,7 +598,13 @@
   }
   
   .slide {
-    border-radius: 12px;
+    border-radius: 33px;
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
 
   .imageContainer, .slideContent {
@@ -631,7 +661,13 @@
   }
   
   .slide {
-    border-radius: 10px;
+    border-radius: 33px;
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
   .imageContainer, .slideContent {
@@ -701,7 +737,7 @@
   
    
   .imageContainer {
-    border-radius: 12px;
+    border-radius: 33px;
     will-change: transform;
     transform: translateZ(0);
   }
@@ -709,12 +745,18 @@
    
   .slide {
     aspect-ratio: 5 / 3;  
-    border-radius: 12px;
+    border-radius: 33px;
     
      
     box-shadow: 
       0 4px 12px rgba(0, 0, 0, 0.15),
       0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
    
@@ -789,17 +831,23 @@
   }
   
   .imageContainer {
-    border-radius: 10px;
+    border-radius: 33px;
     will-change: transform;
     transform: translateZ(0);
   }
   
   .slide {
     aspect-ratio: 5 / 3;
-    border-radius: 10px;
+    border-radius: 33px;
     box-shadow: 
       0 3px 10px rgba(0, 0, 0, 0.12),
       0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
   .slideContent {
@@ -858,17 +906,23 @@
   }
   
   .imageContainer {
-    border-radius: 8px;
+    border-radius: 33px;
     will-change: transform;
     transform: translateZ(0);
   }
   
   .slide {
     aspect-ratio: 5 / 3;
-    border-radius: 8px;
+    border-radius: 33px;
     box-shadow: 
       0 3px 8px rgba(0, 0, 0, 0.1),
       0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+
+  .sliderContainer {
+    border-radius: 33px !important;
+    border-top-right-radius: 33px !important;
+    border-bottom-right-radius: 33px !important;
   }
   
   .slideContent {
@@ -919,7 +973,7 @@
   .navButton {
     width: 28px;
     height: 28px;
-    border-radius: 8px;
+    border-radius: 14px;
   }
   
   .navButton svg {
@@ -953,104 +1007,5 @@
   .activeSlide .slideImage {
     transform: scale(1.02);
     filter: contrast(1.08) saturate(1.11);
-  }
-  
-  .slide {
-    aspect-ratio: 5 / 3;
-    border-radius: 6px;
-  }
-  
-  .slideContent {
-    padding: 0 3%;
-    background: linear-gradient(
-      90deg, 
-      rgba(0,0,0,0.88) 0%, 
-      rgba(0,0,0,0.62) 55%, 
-      rgba(0,0,0,0.22) 100%
-    );
-  }
-  
-  .slideTitle {
-    font-size: 0.85rem;
-    font-weight: 600;
-    max-width: 90%;
-    margin-bottom: 0.3rem;
-    line-height: 1.1;
-    text-shadow: 
-      0 1px 3px rgba(0, 0, 0, 0.9),
-      0 0 4px rgba(0, 0, 0, 0.6);
-  }
-  
-  .slideDescription {
-    font-size: 0.55rem;
-    max-width: 90%;
-    margin-bottom: 0.6rem;
-    line-height: 1.2;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
-    
-     
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-  
-  .slideButton {
-    padding: 4px 8px;
-    font-size: 0.55rem;
-    border-radius: 12px;
-    font-weight: 500;
-  }
-  
-  .navButton {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .navButton svg {
-    width: 10px;
-    height: 10px;
-  }
-  
-  .bannerSection {
-    margin: 6px auto 16px;
-    padding: 0 6px;
-  }
-}
-
- 
-@media (max-width: 668px) {
-   
-  @media (prefers-reduced-motion: reduce) {
-    .slideImage {
-      transition: opacity 0.2s ease;
-    }
-    
-    .activeSlide .slideImage {
-      transform: none;
-    }
-  }
-  @media (hover: none) and (pointer: coarse) {
-    .slideButton:hover {
-      transform: none;
-    }
-    
-    .slideButton:active {
-      transform: scale(0.98);
-    }
-  }
-  
-   
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .slideImage {
-       
-      filter: contrast(1.01) saturate(1.02);
-    }
-  }
-  [data-theme="dark"] .slideImage {
-    filter: contrast(0.98) saturate(1.03) brightness(0.95);
-  }
-  
-  [data-theme="dark"] .activeSlide .slideImage {
-    filter: contrast(1.02) saturate(1.06) brightness(0.98);
   }
 }
