@@ -4,7 +4,6 @@ import { SunIcon, MoonIcon } from './icons';
 const DarkModeToggle = () => {
   const [isDarkMode, setIsDarkMode] = useState(null);
   
-  // Theme initialization
   useEffect(() => {
     const currentTheme = document.documentElement.getAttribute('data-theme');
     setIsDarkMode(currentTheme === 'dark');

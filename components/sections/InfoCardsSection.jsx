@@ -1,7 +1,6 @@
 import { memo } from 'react';
 import Card from '../ui/Card';
 
-// Performance optimization with React.memo
 const InfoCard = memo(({ icon, title, description }) => (
   <Card className="info-card">
     <div className="info-card__icon">

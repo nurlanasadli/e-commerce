@@ -4,7 +4,6 @@ import '../styles/main.css';
 import { ProductProvider } from '../contexts/ProductContext';
 
 export default function App({ Component, pageProps }) {
-  // Theme initialization
   useEffect(() => {
     if (typeof window !== 'undefined') {
       try {

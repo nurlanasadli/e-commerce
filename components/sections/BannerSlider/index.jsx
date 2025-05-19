@@ -6,7 +6,6 @@ import Icon from '../../ui/icons/Icon';
 const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
   if (!slides.length) return null;
   
-  // States
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
@@ -14,11 +13,9 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   
-  // Refs
   const slidesContainerRef = useRef(null);
   const autoplayTimerRef = useRef(null);
   
-  // Responsive handler
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth <= 992);
@@ -32,12 +29,10 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     };
   }, []);
   
-  // Infinite carousel setup
   const getVisibleSlides = () => {
     return [...slides, slides[0]];
   };
   
-  // Navigation methods
   const goToSlide = useCallback((index) => {
     if (isTransitioning) return;
     
@@ -65,7 +60,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     }
   }, [currentSlide, goToSlide, slides.length]);
   
-  // Layout calculation
   const getTranslateValue = () => {
     if (isMobile) {
       return `translateX(-${currentSlide * 100}%)`;
@@ -78,7 +72,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     }
   };
   
-  // Autoplay control
   useEffect(() => {
     const startAutoplay = () => {
       if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
@@ -101,7 +94,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     };
   }, [nextSlide, slides.length, autoplaySpeed, isPaused]);
   
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') {
@@ -117,7 +109,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     };
   }, [nextSlide, prevSlide]);
   
-  // Touch handlers
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
     setIsPaused(true);
@@ -150,7 +141,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     }, 1000);
   };
   
-  // Mouse hover handlers
   const handleMouseEnter = () => !('ontouchstart' in window) && setIsPaused(true);
   const handleMouseLeave = () => !('ontouchstart' in window) && setIsPaused(false);
   

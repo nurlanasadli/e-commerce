@@ -66,11 +66,8 @@ const ProductCard = ({ product }) => {
     }
   }, [id, toggleFavorite, localIsFavorite, animateWishlistToggle]);
 
-  // ProductCard komponentinə əlavə et
 useEffect(() => {
   const handleOutsideClick = (e) => {
-    // Əgər klik compare butonunun xaricində baş verirsə, 
-    // amma məhsul kartının daxilindədirsə, heç bir şey etməyək
     if (e.target.closest('.product-card') && 
         !e.target.closest('.product-card__compare')) {
       e.stopPropagation();
@@ -149,7 +146,7 @@ const handleToggleComparison = useCallback((e) => {
 >
   <MemoizedCompareIcon 
     size={18} 
-    color={localIsInComparison ? "#e53935" : "#3F3F3F"} 
+    color={localIsInComparison ? "#e3935" : "#3F3F3F"} 
   />
 </button>
         

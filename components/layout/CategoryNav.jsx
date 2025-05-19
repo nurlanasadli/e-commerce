@@ -3,18 +3,16 @@ import DarkModeToggle from '../ui/DarkModeToggle';
 import { ArrowDownIcon, HamburgerIcon } from '../ui/icons';
 
 const CategoryNav = () => {
-  // States
+
   const [activeCategory, setActiveCategory] = useState('Kampaniyalar');
   const [activeLanguage, setActiveLanguage] = useState('Aze');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
   
-  // Refs
   const dropdownRef = useRef(null);
   const mobileMenuRef = useRef(null);
 
-  // Data
   const categories = [
     'Kampaniyalar',
     'Xidmətlər',
@@ -29,7 +27,6 @@ const CategoryNav = () => {
     Ru: 'Ru'
   };
 
-  // Responsive handler
   useEffect(() => {
     const handleResize = () => {
       setIsMobileView(window.innerWidth < 769);
@@ -43,7 +40,6 @@ const CategoryNav = () => {
     };
   }, []);
 
-  // Active category scrolling
   useEffect(() => {
     if (isMobileView) return;
     
@@ -65,7 +61,6 @@ const CategoryNav = () => {
     }
   }, [activeCategory, isMobileView]);
   
-  // Outside click handler
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -83,7 +78,6 @@ const CategoryNav = () => {
     };
   }, []);
 
-  // Body scroll lock when menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -96,7 +90,6 @@ const CategoryNav = () => {
     };
   }, [isMobileMenuOpen]);
   
-  // Event handlers
   const handleLanguageChange = (lang) => {
     setActiveLanguage(lang);
     setIsDropdownOpen(false);

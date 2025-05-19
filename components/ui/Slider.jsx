@@ -24,7 +24,6 @@ const Slider = ({ slides = [], autoplay = true, interval = 5000 }) => {
     }
   };
   
-  // Autoplay functionality
   useEffect(() => {
     if (!isAutoplay || slides.length <= 1) return;
     
@@ -32,7 +31,6 @@ const Slider = ({ slides = [], autoplay = true, interval = 5000 }) => {
     return () => clearInterval(timer);
   }, [isAutoplay, interval, nextSlide, slides.length]);
   
-  // Pause autoplay when hovering over slider
   const pauseAutoplay = () => setIsAutoplay(false);
   const resumeAutoplay = () => autoplay && setIsAutoplay(true);
   

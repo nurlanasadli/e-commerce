@@ -16,7 +16,6 @@ const ProductsSection = ({ products = [] }) => {
     normalizedProducts
   } = useProductContext();
   
-  // Load products into context
   useEffect(() => {
     setProductsData(products);
   }, [products, setProductsData]);
@@ -98,7 +97,6 @@ const ProductsSection = ({ products = [] }) => {
     );
   }
   
-  // Empty state
   if (!normalizedProducts || normalizedProducts.length === 0) {
     return (
       <div className="products-section products-section--empty">

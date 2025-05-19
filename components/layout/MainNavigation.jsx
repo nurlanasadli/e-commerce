@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Icon } from '../ui/icons';
 
 const MainNavigation = () => {
-  // States
+
   const [isRegionDropdownOpen, setIsRegionDropdownOpen] = useState(false);
   const [selectedRegion, setSelectedRegion] = useState('Sumqayıt şəhəri...');
   const [isScrolled, setIsScrolled] = useState(false);
@@ -10,7 +10,6 @@ const MainNavigation = () => {
   
   const regions = ['Bakı', 'Ağsu', 'Şabran', 'Yevlax'];
   
-  // Scroll handler for sticky header
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -24,7 +23,6 @@ const MainNavigation = () => {
     };
   }, []);
   
-  // Outside click handler
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (regionDropdownRef.current && !regionDropdownRef.current.contains(event.target)) {
@@ -38,7 +36,6 @@ const MainNavigation = () => {
     };
   }, []);
   
-  // Event handlers
   const handleRegionSelect = (region) => {
     setSelectedRegion(region);
     setIsRegionDropdownOpen(false);
