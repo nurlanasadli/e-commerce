@@ -3175,19 +3175,6 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
     transform: translateZ(0);
   }
   
-  /* Improved touch feedback for card elements */
-  .product-card__button,
-  .product-card__wishlist,
-  .product-card__compare {
-    -webkit-tap-highlight-color: transparent;
-    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
-  }
-  
-  .product-card__button:active,
-  .product-card__wishlist:active,
-  .product-card__compare:active {
-    transform: scale(0.95);
-  }
   
 .product-card__button::after,
   .product-card__wishlist::after {
@@ -3207,12 +3194,6 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
     width: 120%;
     height: 120%;
     opacity: 1;
-    transition: width 0s, height 0s, opacity 0.2s ease;
-  }
-
-  .product-card__button:not(.product-card__button--active),
-  .product-card__wishlist:not(.product-card__wishlist--active) {
-    transition: background-color 0.2s ease, color 0.2s ease;
   }
   
 }
