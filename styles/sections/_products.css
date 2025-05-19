@@ -690,33 +690,33 @@
   }
 }
 
-@media (min-width: 1201px) {
-  .products-grid {
-    grid-template-columns: repeat(4, 1fr) !important;
+  @media (min-width: 1201px) {
+    .products-grid {
+      grid-template-columns: repeat(4, 1fr) !important;
+    }
+    
+    .product-card {
+      max-width: 288px;
+      min-height: 419px;
+    }
   }
-  
-  .product-card {
-    max-width: 288px;
-    min-height: 419px;
-  }
-}
 
-@media (max-width: 1200px) and (min-width: 933px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 20px;
+  @media (max-width: 1200px) and (min-width: 933px) {
+    .products-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 20px;
+    }
+    
+    .product-card {
+      max-width: 100%;
+      min-height: 400px;
+    }
+    
+    .product-card__image-container {
+      width: 230px;
+      height: 210px;
+    }
   }
-  
-  .product-card {
-    max-width: 100%;
-    min-height: 400px;
-  }
-  
-  .product-card__image-container {
-    width: 230px;
-    height: 210px;
-  }
-}
 
 @media (max-width: 932px) {
   .products-grid {
@@ -2244,12 +2244,17 @@
     padding: 5px 8px !important;
     border-radius: 8px !important;
   }
-  
-  .product-card__wishlist {
-    width: 36px !important;
-    height: 36px !important;
-    padding: 8px !important;
-    border-radius: 8px !important;
+
+   .product-card__button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: -1;
   }
   
   .product-card__button-text::after {
@@ -2269,11 +2274,6 @@
   .product-card__button-icon-left svg {
     width: 13px !important;
     height: 13px !important;
-  }
-  
-  .product-card__wishlist svg {
-    width: 16px !important;
-    height: 16px !important;
   }
   
   .product-card__discount {
@@ -2308,6 +2308,255 @@
   [data-theme="dark"] .product-card__button:active:not(.product-card__button--active) .product-card__button-text::after {
     color: white !important;
   }
+
+
+  .product-card__wishlist {
+    transition: background-color 0.2s ease, color 0.2s ease !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+  
+  /* Active state */
+  .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active:hover,
+  .product-card__wishlist--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  /* Non-active state */
+  .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active):hover,
+  .product-card__wishlist:not(.product-card__wishlist--active):active {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  /* Fix SVG icon */
+  .product-card__wishlist svg {
+    color: inherit !important;
+  }
+  
+  .product-card__wishlist--active svg path {
+    fill: none !important;
+    stroke: white !important;
+    stroke-width: 2 !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active) svg path {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+  
+  /* Dark mode specific fixes */
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active):hover,
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active):active {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active) svg path {
+    stroke: #E0E0E0 !important;
+  }
+  
+  /* Enhanced touch feedback */
+  .product-card__wishlist:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Specific improvements for mobile scrolling and touch experience */
+@media (max-width: 576px) {
+  /* Touch optimizations */
+  .products-section__filters {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    will-change: scroll-position;
+  }
+  
+  .products-section__filters::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .category-button {
+    scroll-snap-align: start;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  
+  /* Performance optimizations */
+  .product-card, 
+  .product-card__image-container, 
+  .product-card__button, 
+  .product-card__wishlist {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  
+  .product-card__button,
+  .product-card__wishlist {
+    position: relative;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+
+  .product-card__button::before,
+  .product-card__wishlist::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .product-card__button:active::before,
+  .product-card__wishlist:active::before {
+    width: 120%;
+    height: 120%;
+    opacity: 1;
+    transition: width 0s, height 0s, opacity 0.2s ease;
+  }
+  .product-card__button,
+  .product-card__wishlist {
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.07s ease !important;
+  }
+  .product-card__image {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+  
+  /* Touch event handling */
+  .product-card__actions {
+    touch-action: manipulation;
+  }
+  
+  .product-card__button,
+  .product-card__wishlist,
+  .product-card__compare {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s ease, background-color 0.2s ease, color 0.2s ease !important;
+  }
+  
+  .product-card__button:active,
+  .product-card__wishlist:active,
+  .product-card__compare:active {
+    transform: scale(0.95);
+  }
+
+  .product-card__button {
+    transition: background-color 0.2s ease, color 0.2s ease !important;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+
+  .product-card__button--active:hover,
+  .product-card__button--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+
+  .product-card__button--active .product-card__button-text::after {
+    content: "Səbətə keç" !important;
+    color: white !important;
+  }
+
+  .product-card__button--active .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+
+  .product-card__button:not(.product-card__button--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active):hover,
+  .product-card__button:not(.product-card__button--active):active {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
+    content: "Səbətə at" !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: var(--color-text) !important;
+  }
+  
+  /* Dark mode specific fixes */
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active):hover,
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active):active {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: #E0E0E0 !important;
+  }
+
+  .product-card__button:active {
+    transform: scale(0.98);
+  }
+.product-card__actions {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+.product-card__button-icon-left {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -2345,14 +2594,28 @@
     font-size: 10px !important;
   }
   
-  .product-card__button,
-  .product-card__wishlist {
+  .product-card__button {
     height: 32px !important;
+    transition: all 0.15s ease !important;
+
+  }
+
+   .product-card__actions {
+    transform: translateZ(0);
   }
   
   .product-card__wishlist {
     width: 32px !important;
+    height: 32px !important;
     padding: 7px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .product-card__wishlist svg {
+    width: 16px !important;
+    height: 16px !important;
   }
 
   .products-section__filters {
@@ -2413,6 +2676,22 @@
   .category-button {
     font-size: 11px !important;
     padding: 5px 9px !important;
+  }
+
+  .product-card__wishlist {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 6px !important;
+  }
+  
+  .product-card__wishlist svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+
+  .product-card__button .product-card__button-text::after,
+  .product-card__button .product-card__button-icon-left path {
+    transition: color 0.1s ease, stroke 0.1s ease !important;
   }
 }
 
@@ -2981,6 +3260,47 @@
   /* Fix for iOS touch handling */
   html, body {
     touch-action: manipulation;
+  }
+
+  .product-card__wishlist {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  .product-card__button--active,
+  .product-card__button:not(.product-card__button--active) {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .product-card__button,
+  .product-card__wishlist {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Force immediate visual feedback */
+  .product-card__button:active,
+  .product-card__wishlist:active {
+    opacity: 0.9;
+    transition: opacity 0.05s ease !important;
+  }
+  
+  /* Ensure iOS focus ring doesn't appear */
+  .product-card__button:focus,
+  .product-card__wishlist:focus {
+    outline: none !important;
+  }
+  
+  /* Add stronger hardware acceleration cues for smoother transitions */
+  html .product-card__button,
+  html .product-card__wishlist {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
 }
 
