@@ -13,6 +13,11 @@
   box-sizing: border-box;
 }
 
+body:has(.category-nav__mobile-overlay--active) .main-navigation {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
 .main-navigation--sticky {
   top: 0;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -27,6 +32,11 @@
   right: 0;
 }
 
+body:has(.category-nav__mobile-overlay--active) .main-navigation--sticky {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
 @keyframes slideDown {
   from { transform: translateY(-100%); }
   to { transform: translateY(0); }
@@ -35,7 +45,6 @@
 .main-navigation--sticky .main-navigation__container {
   height: 50px !important;
 }
-
 
 [data-theme="dark"] .main-navigation {
   background-color: var(--color-background, #1a1a1a);
@@ -53,6 +62,11 @@
   height: 50px;
   position: relative;
   transition: height var(--transition-normal);
+}
+
+body:has(.category-nav__mobile-overlay--active) .main-navigation__container {
+  z-index: 1 !important;
+  position: relative !important;
 }
 
 .main-navigation__logo {
@@ -124,6 +138,12 @@
   flex: 1;
   min-width: 0;
   max-width: 523px;
+  z-index: 10; 
+}
+
+body:has(.category-nav__mobile-overlay--active) .search-bar {
+  z-index: 1 !important;
+  position: relative !important;
 }
 
 .search-bar__input {
@@ -164,6 +184,11 @@
   margin: 0 15px;
   transition: all var(--transition-normal);
   flex-shrink: 0;
+}
+
+body:has(.category-nav__mobile-overlay--active) .region-select {
+  z-index: 1 !important;
+  position: relative !important;
 }
 
 .region-select__button {
@@ -251,6 +276,11 @@
   flex-shrink: 0;
 }
 
+body:has(.category-nav__mobile-overlay--active) .main-navigation__actions {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
 .action-button {
   display: flex;
   align-items: center;
@@ -279,6 +309,25 @@
   color: rgba(51, 51, 51, 1);
   opacity: 0.7;
 }
+
+.category-nav__mobile-overlay--active ~ * .main-navigation,
+.category-nav__mobile-overlay--active ~ * .search-bar,
+.category-nav__mobile-overlay--active ~ * .region-select,
+.category-nav__mobile-overlay--active ~ * .action-button {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
+.category-nav__mobile-overlay--active {
+  z-index: 999999 !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.category-nav__mobile-menu--active {
+  z-index: 1000000 !important;
+}
+
 
 @media (max-width: 1280px) {
   .main-navigation__logo-image {
@@ -682,7 +731,7 @@
 @media (max-width: 576px) {
   .main-navigation {
     height: 50px;
-    padding: 7px 10px;
+    padding: 0px 10px;
   }
       .main-navigation--sticky {
         height: 68px;
