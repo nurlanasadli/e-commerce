@@ -2525,9 +2525,18 @@
   .products-grid {
     gap: 5px !important;
   }
-  [data-theme="dark"] .product-card__button:hover .product-card__button-icon-left path {
-  stroke: white !important;
-}
+  [data-theme="dark"] .product-card__button .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:hover .product-card__button-icon-left path,
+  [data-theme="dark"] .product-card__button:active .product-card__button-icon-left path {
+    stroke: white !important;
+  }
   
   .product-card {
     max-width: 150px !important;
