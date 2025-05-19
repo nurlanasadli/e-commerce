@@ -11,37 +11,47 @@ const debug = (message, data) => {
   }
 };
 
-
-const loadMapFromStorage = (key, setter) => {
-  if (typeof window === 'undefined') return;
-  
-  try {
-    const saved = localStorage.getItem(key);
-    if (saved) {
-      const items = JSON.parse(saved);
-      const map = items.reduce((acc, id) => {
-        acc[String(id)] = true;
-        return acc;
-      }, {});
-      setter(map);
+// Improved storage utility
+class StorageManager {
+  static loadMapFromStorage(key) {
+    if (typeof window === 'undefined') return {};
+    
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const items = JSON.parse(saved);
+        const map = Array.isArray(items) 
+          ? items.reduce((acc, id) => {
+              acc[String(id)] = true;
+              return acc;
+            }, {})
+          : items;
+        return map;
+      }
+    } catch (error) {
+      console.error(`Error loading ${key}:`, error);
     }
-  } catch (error) {
-    console.error(`Error loading ${key}:`, error);
+    
+    return {};
   }
-};
 
-
-const saveMapToStorage = (key, map) => {
-  if (typeof window === 'undefined') return;
-  
-  try {
-    const array = Object.keys(map);
-    localStorage.setItem(key, JSON.stringify(array));
-  } catch (error) {
-    console.error(`Error saving ${key}:`, error);
+  static saveMapToStorage(key, map) {
+    if (typeof window === 'undefined') return;
+    
+    try {
+      // For backward compatibility we still save as array
+      const array = Object.keys(map);
+      localStorage.setItem(key, JSON.stringify(array));
+      
+      // Dispatch a custom event to notify other tabs
+      window.dispatchEvent(new CustomEvent('storage-updated', { 
+        detail: { key, data: array } 
+      }));
+    } catch (error) {
+      console.error(`Error saving ${key}:`, error);
+    }
   }
-};
-
+}
 
 export const ProductProvider = ({ children }) => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -53,35 +63,49 @@ export const ProductProvider = ({ children }) => {
   
   const [products, setProducts] = useState([]);
   
+  // Load data from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      loadMapFromStorage('favorites', setFavoriteMap);
-      loadMapFromStorage('cartItems', setCartMap);
-      loadMapFromStorage('comparisons', setComparisonMap);
+      setFavoriteMap(StorageManager.loadMapFromStorage('favorites'));
+      setCartMap(StorageManager.loadMapFromStorage('cartItems'));
+      setComparisonMap(StorageManager.loadMapFromStorage('comparisons'));
     }
   }, []);
   
   // Cross-tab sync
   useEffect(() => {
     const handleStorageChange = (e) => {
-      const updateStateFromStorage = (key, setter) => {
-        if (e.key === key) {
-          loadMapFromStorage(key, setter);
-        }
-      };
-      
-      updateStateFromStorage('favorites', setFavoriteMap);
-      updateStateFromStorage('cartItems', setCartMap);
-      updateStateFromStorage('comparisons', setComparisonMap);
+      if (e.key === 'favorites') {
+        setFavoriteMap(StorageManager.loadMapFromStorage('favorites'));
+      } else if (e.key === 'cartItems') {
+        setCartMap(StorageManager.loadMapFromStorage('cartItems'));
+      } else if (e.key === 'comparisons') {
+        setComparisonMap(StorageManager.loadMapFromStorage('comparisons'));
+      }
+    };
+    
+    const handleCustomStorageEvent = (e) => {
+      if (e.detail?.key === 'favorites') {
+        setFavoriteMap(StorageManager.loadMapFromStorage('favorites'));
+      } else if (e.detail?.key === 'cartItems') {
+        setCartMap(StorageManager.loadMapFromStorage('cartItems'));
+      } else if (e.detail?.key === 'comparisons') {
+        setComparisonMap(StorageManager.loadMapFromStorage('comparisons'));
+      }
     };
     
     if (typeof window !== 'undefined') {
       window.addEventListener('storage', handleStorageChange);
-      return () => window.removeEventListener('storage', handleStorageChange);
+      window.addEventListener('storage-updated', handleCustomStorageEvent);
+      
+      return () => {
+        window.removeEventListener('storage', handleStorageChange);
+        window.removeEventListener('storage-updated', handleCustomStorageEvent);
+      };
     }
   }, []);
   
-  // Düzəliş: toggleFavorite funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
+  // Improved toggle functions with callback for UI updates
   const toggleFavorite = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -93,20 +117,21 @@ export const ProductProvider = ({ children }) => {
     setFavoriteMap(prev => {
       const newMap = { ...prev };
       
-      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
-      // localStorage-də saxla
-      saveMapToStorage('favorites', newMap);
+      // Update localStorage
+      StorageManager.saveMapToStorage('favorites', newMap);
       return newMap;
     });
-  }, []);
+    
+    // Return the new state for immediate UI updates
+    return !favoriteMap[id];
+  }, [favoriteMap]);
   
-  // Düzəliş: toggleCart funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
   const toggleCart = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -118,20 +143,21 @@ export const ProductProvider = ({ children }) => {
     setCartMap(prev => {
       const newMap = { ...prev };
       
-      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
-      // localStorage-də saxla
-      saveMapToStorage('cartItems', newMap);
+      // Update localStorage
+      StorageManager.saveMapToStorage('cartItems', newMap);
       return newMap;
     });
-  }, []);
+    
+    // Return the new state for immediate UI updates
+    return !cartMap[id];
+  }, [cartMap]);
   
-  // Düzəliş: toggleComparison funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
   const toggleComparison = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -143,20 +169,23 @@ export const ProductProvider = ({ children }) => {
     setComparisonMap(prev => {
       const newMap = { ...prev };
       
-      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
-      // localStorage-də saxla
-      saveMapToStorage('comparisons', newMap);
+      // Update localStorage
+      StorageManager.saveMapToStorage('comparisons', newMap);
       return newMap;
     });
-  }, []);
+    
+    // Return the new state for immediate UI updates
+    return !comparisonMap[id];
+  }, [comparisonMap]);
   
-  // Helper functions
+  // Remaining methods (formatPrice, getProductImageUrl, etc.) stay the same
+  
   const formatPrice = useCallback((price) => {
     if (typeof price !== 'number' || isNaN(price)) return '0.00';
     return price.toFixed(2);
@@ -184,6 +213,9 @@ export const ProductProvider = ({ children }) => {
     };
   }, []);
   
+  // Rest of the context implementation remains unchanged...
+
+  // Categories and filtered products logic
   const categoryProductsMap = useMemo(() => {
     if (!Array.isArray(products) || products.length === 0) {
       return { all: [] };
@@ -258,7 +290,7 @@ export const ProductProvider = ({ children }) => {
     setActiveCategory(category);
   }, []);
   
-  // Düzəliş: İstifadəçilər tərəfindən əlavə olunmuş məhsulların sayını izləmək
+  // Product counts
   const favoriteProductsCount = useMemo(() => {
     return Object.keys(favoriteMap).length;
   }, [favoriteMap]);
@@ -278,7 +310,6 @@ export const ProductProvider = ({ children }) => {
     categories,
     normalizedProducts,
     
-    // Düzəliş: Sayğaclari əlavə edirik
     favoriteProductsCount,
     cartProductsCount,
     comparisonProductsCount,
@@ -298,7 +329,6 @@ export const ProductProvider = ({ children }) => {
     categories,
     normalizedProducts,
     
-    // Düzəliş: yeni dəyişənləri əlavə edirik
     favoriteProductsCount,
     cartProductsCount,
     comparisonProductsCount,

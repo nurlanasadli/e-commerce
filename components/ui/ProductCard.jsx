@@ -1,7 +1,8 @@
-// ProductCard.jsx - Updated Toggle Logic
+// components/ui/ProductCard.jsx
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { HeartIcon, CartAddIcon, CommentIcon, StarIcon, CompareIcon } from './icons';
 import { useProductContext } from '../../contexts/ProductContext';
+import { useToggleAnimation } from '../../hooks/useToggleAnimation';
 
 // Constants
 const PLACEHOLDER_IMAGE = '/product-placeholder.svg';
@@ -19,14 +20,11 @@ const ProductCard = ({ product }) => {
   
   const { toggleFavorite, toggleCart, toggleComparison, formatPrice } = useProductContext();
   
-  // Create local state to handle UI updates before the context state is updated
-  const [localIsFavorite, setLocalIsFavorite] = useState(false);
-  const [localIsInCart, setLocalIsInCart] = useState(false);
-  const [localIsInComparison, setLocalIsInComparison] = useState(false);
+  // Animate toggle hooks
+  const { elementRef: cartButtonRef, animateToggle: animateCartToggle } = useToggleAnimation();
+  const { elementRef: wishlistButtonRef, animateToggle: animateWishlistToggle } = useToggleAnimation();
   
-  const cartButtonRef = useRef(null);
-  const wishlistButtonRef = useRef(null);
-  
+  // Destructure product properties
   const {
     id,
     title,
@@ -42,67 +40,76 @@ const ProductCard = ({ product }) => {
     isInComparison
   } = product;
   
-  // Sync local state with context
+  // Local states for immediate UI updates
+  const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
+  const [localIsInCart, setLocalIsInCart] = useState(isInCart);
+  const [localIsInComparison, setLocalIsInComparison] = useState(isInComparison);
+  
+  // Sync with context state when it changes
   useEffect(() => {
-    setLocalIsFavorite(isFavorite);
-    setLocalIsInCart(isInCart);
-    setLocalIsInComparison(isInComparison);
+    if (isFavorite !== localIsFavorite) setLocalIsFavorite(isFavorite);
+    if (isInCart !== localIsInCart) setLocalIsInCart(isInCart);
+    if (isInComparison !== localIsInComparison) setLocalIsInComparison(isInComparison);
   }, [isFavorite, isInCart, isInComparison]);
   
-  // Force browser repaint to ensure CSS changes are applied
-  const forceRepaint = useCallback((element) => {
-    if (!element) return;
-    
-    // Read property to force a browser reflow/repaint
-    // eslint-disable-next-line no-unused-vars
-    const reflow = element.offsetHeight;
-    
-    // For Safari & iOS Webkit, add and remove a class
-    element.classList.add('force-repaint');
-    setTimeout(() => {
-      element.classList.remove('force-repaint');
-    }, 10);
-  }, []);
-
+  // Prevent repeated renders on same state
+  const lastFavoriteState = useRef(localIsFavorite);
+  const lastCartState = useRef(localIsInCart);
+  
+  // Handle Wishlist toggle with optimized animation
   const handleToggleFavorite = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Update local state immediately for responsive UI
-    setLocalIsFavorite(prev => !prev);
+    const newState = !localIsFavorite;
     
-    // Force CSS update
-    forceRepaint(wishlistButtonRef.current);
-    
-    // Call context method
-    toggleFavorite(id);
-  }, [id, toggleFavorite, forceRepaint]);
+    // Only update and animate if state actually changes
+    if (lastFavoriteState.current !== newState) {
+      setLocalIsFavorite(newState);
+      lastFavoriteState.current = newState;
+      animateWishlistToggle(newState);
+      
+      // Use requestAnimationFrame for smoother transition
+      requestAnimationFrame(() => {
+        toggleFavorite(id);
+      });
+    }
+  }, [id, toggleFavorite, localIsFavorite, animateWishlistToggle]);
 
+  // Handle Cart toggle with optimized animation
   const handleToggleCart = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Update local state immediately for responsive UI
-    setLocalIsInCart(prev => !prev);
+    const newState = !localIsInCart;
     
-    // Force CSS update
-    forceRepaint(cartButtonRef.current);
-    
-    // Call context method
-    toggleCart(id);
-  }, [id, toggleCart, forceRepaint]);
+    // Only update and animate if state actually changes
+    if (lastCartState.current !== newState) {
+      setLocalIsInCart(newState);
+      lastCartState.current = newState;
+      animateCartToggle(newState);
+      
+      // Use requestAnimationFrame for smoother transition
+      requestAnimationFrame(() => {
+        toggleCart(id);
+      });
+    }
+  }, [id, toggleCart, localIsInCart, animateCartToggle]);
 
+  // Handle Comparison toggle
   const handleToggleComparison = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     
-    // Update local state immediately for responsive UI
-    setLocalIsInComparison(prev => !prev);
+    setLocalIsInComparison(!localIsInComparison);
     
-    // Call context method
-    toggleComparison(id);
-  }, [id, toggleComparison]);
+    // Slight delay to ensure UI updates first
+    requestAnimationFrame(() => {
+      toggleComparison(id);
+    });
+  }, [id, toggleComparison, localIsInComparison]);
 
+  // Optimize image error handling
   const handleImageError = useCallback((e) => {
     e.target.onerror = null;
     e.target.src = PLACEHOLDER_IMAGE;
@@ -177,7 +184,7 @@ const ProductCard = ({ product }) => {
           >
             <MemoizedCartAddIcon 
               size={17} 
-              className="product-card__button-icon product-card__button-icon-left"
+              className="product-card__button-icon"
               color="currentColor"
             />
             <span className="product-card__button-text"></span>
@@ -202,4 +209,5 @@ const ProductCard = ({ product }) => {
   );
 };
 
+// Performance optimization with memo
 export default React.memo(ProductCard);
