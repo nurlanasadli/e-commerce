@@ -81,6 +81,7 @@ export const ProductProvider = ({ children }) => {
     }
   }, []);
   
+  // Düzəliş: toggleFavorite funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
   const toggleFavorite = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -92,17 +93,20 @@ export const ProductProvider = ({ children }) => {
     setFavoriteMap(prev => {
       const newMap = { ...prev };
       
+      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
+      // localStorage-də saxla
       saveMapToStorage('favorites', newMap);
       return newMap;
     });
   }, []);
   
+  // Düzəliş: toggleCart funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
   const toggleCart = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -114,17 +118,20 @@ export const ProductProvider = ({ children }) => {
     setCartMap(prev => {
       const newMap = { ...prev };
       
+      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
+      // localStorage-də saxla
       saveMapToStorage('cartItems', newMap);
       return newMap;
     });
   }, []);
   
+  // Düzəliş: toggleComparison funksiyasını daha yaxşı idarə etmək üçün yenidən yazırıq
   const toggleComparison = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -136,12 +143,14 @@ export const ProductProvider = ({ children }) => {
     setComparisonMap(prev => {
       const newMap = { ...prev };
       
+      // Toggle etmək - əgər varsa sil, yoxdursa əlavə et
       if (newMap[id]) {
         delete newMap[id];
       } else {
         newMap[id] = true;
       }
       
+      // localStorage-də saxla
       saveMapToStorage('comparisons', newMap);
       return newMap;
     });
@@ -249,12 +258,30 @@ export const ProductProvider = ({ children }) => {
     setActiveCategory(category);
   }, []);
   
+  // Düzəliş: İstifadəçilər tərəfindən əlavə olunmuş məhsulların sayını izləmək
+  const favoriteProductsCount = useMemo(() => {
+    return Object.keys(favoriteMap).length;
+  }, [favoriteMap]);
+  
+  const cartProductsCount = useMemo(() => {
+    return Object.keys(cartMap).length;
+  }, [cartMap]);
+  
+  const comparisonProductsCount = useMemo(() => {
+    return Object.keys(comparisonMap).length;
+  }, [comparisonMap]);
+  
   const contextValue = useMemo(() => ({
     products,
     isLoading,
     activeCategory,
     categories,
     normalizedProducts,
+    
+    // Düzəliş: Sayğaclari əlavə edirik
+    favoriteProductsCount,
+    cartProductsCount,
+    comparisonProductsCount,
     
     setProductsData,
     changeCategory,
@@ -270,6 +297,12 @@ export const ProductProvider = ({ children }) => {
     activeCategory,
     categories,
     normalizedProducts,
+    
+    // Düzəliş: yeni dəyişənləri əlavə edirik
+    favoriteProductsCount,
+    cartProductsCount,
+    comparisonProductsCount,
+    
     setProductsData,
     changeCategory,
     toggleFavorite,

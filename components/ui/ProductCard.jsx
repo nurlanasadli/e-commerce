@@ -34,16 +34,19 @@ const ProductCard = ({ product }) => {
   } = product;
 
   const handleToggleFavorite = React.useCallback((e) => {
-    toggleFavorite(id, e);
-  }, [id, toggleFavorite]);
+  e.preventDefault(); 
+  toggleFavorite(id);
+}, [id, toggleFavorite]);
 
   const handleToggleCart = React.useCallback((e) => {
-    toggleCart(id, e);
-  }, [id, toggleCart]);
+  e.preventDefault();
+  toggleCart(id);
+}, [id, toggleCart]);
 
-  const handleToggleComparison = React.useCallback((e) => {
-    toggleComparison(id, e);
-  }, [id, toggleComparison]);
+ const handleToggleComparison = React.useCallback((e) => {
+  e.preventDefault(); 
+  toggleComparison(id);
+}, [id, toggleComparison]);
 
   const handleImageError = React.useCallback((e) => {
     e.target.onerror = null;
