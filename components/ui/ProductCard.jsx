@@ -40,6 +40,7 @@ const ProductCard = ({ product }) => {
     isInComparison
   } = product;
   
+  
   // Local states for immediate UI updates
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
   const [localIsInCart, setLocalIsInCart] = useState(isInCart);
@@ -98,16 +99,15 @@ const ProductCard = ({ product }) => {
 
   // Handle Comparison toggle
   const handleToggleComparison = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    setLocalIsInComparison(!localIsInComparison);
-    
-    // Slight delay to ensure UI updates first
-    requestAnimationFrame(() => {
-      toggleComparison(id);
-    });
-  }, [id, toggleComparison, localIsInComparison]);
+  e.preventDefault();
+  e.stopPropagation();
+  
+  setLocalIsInComparison(!localIsInComparison);
+  
+  requestAnimationFrame(() => {
+    toggleComparison(id);
+  });
+}, [id, toggleComparison, localIsInComparison]);
 
   // Optimize image error handling
   const handleImageError = useCallback((e) => {
@@ -123,16 +123,17 @@ const ProductCard = ({ product }) => {
       
       <div className="product-card__image-container">
         <button 
-          className={`product-card__compare ${localIsInComparison ? 'product-card__compare--active' : ''}`}
-          onClick={handleToggleComparison}
-          aria-label="Müqayisə et"
-          type="button"
-        >
-          <MemoizedCompareIcon 
-            size={18} 
-            color={localIsInComparison ? "#e53935" : "#3F3F3F"} 
-          />
-        </button>
+  className={`product-card__compare ${localIsInComparison ? 'product-card__compare--active' : ''}`}
+  onClick={handleToggleComparison}
+  aria-label="Müqayisə et"
+  type="button"
+  data-product-id={id}
+>
+  <MemoizedCompareIcon 
+    size={18} 
+    color={localIsInComparison ? "#e53935" : "#3F3F3F"} 
+  />
+</button>
         
         <img 
           src={imageUrl || PLACEHOLDER_IMAGE}
