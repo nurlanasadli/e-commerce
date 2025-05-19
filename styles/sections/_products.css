@@ -690,33 +690,34 @@
   }
 }
 
-  @media (min-width: 1201px) {
-    .products-grid {
-      grid-template-columns: repeat(4, 1fr) !important;
-    }
-    
-    .product-card {
-      max-width: 288px;
-      min-height: 419px;
-    }
+@media (min-width: 1201px) {
+  .products-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
   }
+  
+  .product-card {
+    max-width: 288px;
+    min-height: 419px;
+  }
+}
 
-  @media (max-width: 1200px) and (min-width: 933px) {
-    .products-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
-      gap: 20px;
-    }
-    
-    .product-card {
-      max-width: 100%;
-      min-height: 400px;
-    }
-    
-    .product-card__image-container {
-      width: 230px;
-      height: 210px;
-    }
+
+@media (max-width: 1200px) and (min-width: 933px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 20px;
   }
+  
+  .product-card {
+    max-width: 100%;
+    min-height: 400px;
+  }
+  
+  .product-card__image-container {
+    width: 230px;
+    height: 210px;
+  }
+}
 
 @media (max-width: 932px) {
   .products-grid {
@@ -2151,27 +2152,28 @@
     margin-left: auto;
     margin-right: auto;
   }
+}
 
-  @media (max-width: 1300px) {
-    .products-section .container {
-      padding: 0 30px;
-    }
-    
-    .products-grid {
-      max-width: 1160px;
-    }
+@media (max-width: 1300px) {
+  .products-section .container {
+    padding: 0 30px;
   }
   
-  @media (max-width: 1250px) {
-    .products-section .container {
-      padding: 0 40px;
-    }
-    
-    .products-grid {
-      max-width: 1120px;
-    }
+  .products-grid {
+    max-width: 1160px;
   }
 }
+
+@media (max-width: 1250px) {
+  .products-section .container {
+    padding: 0 40px;
+  }
+  
+  .products-grid {
+    max-width: 1120px;
+  }
+}
+
 @media (max-width: 576px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2689,10 +2691,7 @@
     height: 15px !important;
   }
 
-  .product-card__button .product-card__button-text::after,
-  .product-card__button .product-card__button-icon-left path {
-    transition: color 0.1s ease, stroke 0.1s ease !important;
-  }
+  
 }
 
 @media (max-width: 376px) {
@@ -2708,6 +2707,7 @@
     padding: 5px 8px !important;
   }
 }
+
 
 @media (min-width: 1201px) and (max-width: 1366px) {
   .products-section .container {
@@ -2798,7 +2798,249 @@
     background-color: #333333 !important;
     color: #E0E0E0 !important;
   }
+
+  /* Active/inactive state fixes for both buttons */
+  .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__button--active:hover,
+  .product-card__button--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__button--active .product-card__button-text::after {
+    content: "Səbətə keç" !important;
+    color: white !important;
+  }
+  
+  .product-card__button--active .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active):hover {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
+    content: "Səbətə əlavə et" !important;
+    color: inherit !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active):hover .product-card__button-text::after {
+    color: white !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active):hover .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  /* Wishlist button fixes */
+  .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active:hover,
+  .product-card__wishlist--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+    transform: scale(1.05);
+  }
+  
+  .product-card__wishlist--active svg path {
+    fill: none !important;
+    stroke: white !important;
+    stroke-width: 2px !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active):hover {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+    transform: scale(1.05);
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active) svg path {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+  
+  .product-card__wishlist svg {
+    color: inherit !important;
+  }
+  
+  /* Dark mode specific fixes */
+  [data-theme="dark"] .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button--active .product-card__button-text::after {
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button--active .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:hover {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:hover .product-card__button-text::after {
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button:hover .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  /* Fix actions spacing */
+  .product-card__actions {
+    margin-top: 16px !important;
+    gap: 12px !important;
+  }
+  
+  /* Button specific styles */
+  .product-card__button {
+    height: 45px !important;
+    border-radius: var(--border-radius-button) !important;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease !important;
+  }
+  
+  .product-card__wishlist {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: var(--border-radius-button) !important;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease !important;
+  }
 }
+
+
+@media (min-width: 768px) and (max-width: 1366px) {
+  /* Enhanced scrolling for category filters */
+  .products-section__filters {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overscroll-behavior-x: contain;
+    will-change: scroll-position;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 2px;
+  }
+  
+  .products-section__filters::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .category-button {
+    scroll-snap-align: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  
+  /* Performance optimizations for tablets */
+  .product-card__image {
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+  
+  /* Button interaction improvements for tablets */
+  .product-card__button:active,
+  .product-card__wishlist:active {
+    transform: scale(0.98);
+  }
+  
+  /* Force redraw to prevent visual bugs */
+  .product-card__button::after,
+  .product-card__wishlist::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: -1;
+  }
+  
+  /* Fix for iPad Safari */
+  html.ios .product-card__button,
+  html.ios .product-card__wishlist {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+}
+
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
+  .products-section__filters {
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-right: 20px;
+  }
+  
+  .product-card__button--active,
+  .product-card__wishlist--active {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  
+  .product-card__button:not(.product-card__button--active),
+  .product-card__wishlist:not(.product-card__wishlist--active) {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
 
 @media (max-width: 375px) {
   .products-grid {
@@ -3267,40 +3509,9 @@
     touch-action: manipulation;
   }
 
-  .product-card__button--active,
-  .product-card__button:not(.product-card__button--active) {
-    -webkit-transform: translateZ(0);
+  .product-card__wishlist--active,
+  .product-card__wishlist:not(.product-card__wishlist--active) {
     transform: translateZ(0);
-    backface-visibility: hidden;
-    perspective: 1000px;
-  }
-
-  .product-card__button,
-  .product-card__wishlist {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Force immediate visual feedback */
-  .product-card__button:active,
-  .product-card__wishlist:active {
-    opacity: 0.9;
-    transition: opacity 0.05s ease !important;
-  }
-  
-  /* Ensure iOS focus ring doesn't appear */
-  .product-card__button:focus,
-  .product-card__wishlist:focus {
-    outline: none !important;
-  }
-  
-  /* Add stronger hardware acceleration cues for smoother transitions */
-  html .product-card__button,
-  html .product-card__wishlist {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
   }
 }
 
