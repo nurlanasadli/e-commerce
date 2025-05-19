@@ -623,19 +623,8 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
   color: var(--color-white) !important;
 }
 
-.product-card__button,
-.product-card__wishlist,
-.product-card__button--active,
-.product-card__wishlist--active {
-  backface-visibility: hidden;
-  transform: translateZ(0);
-  -webkit-font-smoothing: antialiased;
-}
 
-.product-card__button,
-.product-card__wishlist {
-  height: clamp(30px, 8vw, 45px);
-}
+
 
 .product-card__wishlist:not(.product-card__wishlist--active) {
   background-color: var(--color-button);
@@ -3161,7 +3150,6 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-bottom: 2px; /* Extra padding to improve touch area */
   }
   
   .products-section__filters::-webkit-scrollbar {
@@ -3179,8 +3167,6 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
   .category-button--active:active::before {
     display: none;
   }
-  
-
   
   .product-card__actions {
     touch-action: manipulation;
@@ -3222,11 +3208,6 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
     height: 120%;
     opacity: 1;
     transition: width 0s, height 0s, opacity 0.2s ease;
-  }
-
-  .product-card__button--active,
-  .product-card__wishlist--active {
-    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   .product-card__button:not(.product-card__button--active),
@@ -4145,9 +4126,7 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
 /* Apply expanded variables */
 
 
-.product-card:active {
-  box-shadow: var(--product-card-active-shadow);
-}
+
 
 .product-card__image-container {
   background-color: var(--product-image-bg);
@@ -4169,24 +4148,7 @@ product-card__button:not(.product-card__button--active) .product-card__button-ic
   }
 }
 
-/* ========== TRANSITION ANIMATIONS FOR THEME CHANGES ========== */
 
-.products-section,
-.product-card,
-.product-card__button,
-.product-card__wishlist,
-.product-card__compare,
-.product-card__price,
-.product-card__old-price,
-.product-card__title,
-.installment__price,
-.installment__period,
-.products-section__filters,
-.category-button,
-.products-section__title,
-.products-section__subheading {
-  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-}
 
 /* ========== CUSTOM SCROLLBAR FOR DESKTOP ========== */
 
