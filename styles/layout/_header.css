@@ -242,6 +242,7 @@
 
 .category-nav__mobile-menu--active {
   left: 0;
+  z-index: 100000 !important;
 }
 
 .category-nav__mobile-header {
