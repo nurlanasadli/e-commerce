@@ -11,7 +11,6 @@ const debug = (message, data) => {
   }
 };
 
-
 const loadMapFromStorage = (key, setter) => {
   if (typeof window === 'undefined') return;
   
@@ -30,7 +29,6 @@ const loadMapFromStorage = (key, setter) => {
   }
 };
 
-
 const saveMapToStorage = (key, map) => {
   if (typeof window === 'undefined') return;
   
@@ -41,7 +39,6 @@ const saveMapToStorage = (key, map) => {
     console.error(`Error saving ${key}:`, error);
   }
 };
-
 
 export const ProductProvider = ({ children }) => {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -244,7 +241,13 @@ export const ProductProvider = ({ children }) => {
   }, []);
   
   const changeCategory = useCallback((category) => {
+    const currentScrollY = window.scrollY;
+    
     setActiveCategory(category);
+    
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScrollY);
+    });
   }, []);
   
   const favoriteProductsCount = useMemo(() => {

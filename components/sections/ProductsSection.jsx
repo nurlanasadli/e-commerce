@@ -21,46 +21,36 @@ const ProductsSection = ({ products = [] }) => {
   }, [products, setProductsData]);
   
   useEffect(() => {
-  const scrollToActiveCategory = () => {
-    const filtersContainer = document.querySelector('.products-section__filters');
-    const activeButton = document.querySelector('.category-button--active');
-    
-    if (filtersContainer && activeButton) {
-      if (window.innerWidth <= 480) {
-        filtersContainer.scrollLeft = 0;
-      } else if (activeCategory === categories[0]) {
-        filtersContainer.scrollLeft = 0;
-      } else {
-        const containerWidth = filtersContainer.offsetWidth;
-        const buttonLeft = activeButton.offsetLeft;
-        const buttonWidth = activeButton.offsetWidth;
-        
-        const scrollTo = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
-        
-        filtersContainer.scrollTo({
-          left: Math.max(0, scrollTo),
-          behavior: 'smooth'
-        });
+    const scrollToActiveCategory = () => {
+      const filtersContainer = document.querySelector('.products-section__filters');
+      const activeButton = document.querySelector('.category-button--active');
+      
+      if (filtersContainer && activeButton) {
+        if (window.innerWidth <= 480) {
+          filtersContainer.scrollLeft = 0;
+        } else if (activeCategory === categories[0]) {
+          filtersContainer.scrollLeft = 0;
+        } else {
+          const containerWidth = filtersContainer.offsetWidth;
+          const buttonLeft = activeButton.offsetLeft;
+          const buttonWidth = activeButton.offsetWidth;
+          
+          const scrollTo = buttonLeft - (containerWidth / 2) + (buttonWidth / 2);
+          
+          filtersContainer.scrollLeft = Math.max(0, scrollTo);
+        }
       }
-    }
-  };
-  
-  const initialScrollTimeout = setTimeout(scrollToActiveCategory, 100);
-  const forceScrollReset = setTimeout(() => {
-    const filtersContainer = document.querySelector('.products-section__filters');
-    if (filtersContainer) {
-      filtersContainer.scrollLeft = 0;
-    }
-  }, 300);
-  
-  window.addEventListener('resize', scrollToActiveCategory);
-  
-  return () => {
-    window.removeEventListener('resize', scrollToActiveCategory);
-    clearTimeout(initialScrollTimeout);
-    clearTimeout(forceScrollReset);
-  };
-}, [activeCategory, categories]);
+    };
+    
+    const initialScrollTimeout = setTimeout(scrollToActiveCategory, 50);
+    
+    window.addEventListener('resize', scrollToActiveCategory);
+    
+    return () => {
+      window.removeEventListener('resize', scrollToActiveCategory);
+      clearTimeout(initialScrollTimeout);
+    };
+  }, [activeCategory, categories]);
   
   if (isLoading) {
     return (
