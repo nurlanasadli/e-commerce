@@ -1,41 +1,42 @@
-/* CategoryNav Styles - Professional & Optimized */
-
-/* Base Styles */
 .category-nav {
   display: flex;
   justify-content: center;
+  align-items: center; 
   width: 100%;
   height: 45px;
   margin: 0 auto 20px;
-  padding: 0 20px;
+  padding: 0; 
   transition: all var(--transition-normal);
+  position: relative; 
+  box-sizing: border-box; 
+  overflow: visible !important;  
 }
 
 .category-nav__container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1240px;
-  width: 100%;
+  width: 100%; 
   height: 45px;
   background: rgba(245, 245, 245, 1);
   border-radius: 25px;
   padding: 0 34px;
   transition: all var(--transition-normal);
+  box-sizing: border-box; 
+  margin: 0 auto; 
 }
 
-/* Category List */
 .category-nav__categories {
   display: flex;
   align-items: center;
   gap: 35px;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
   transition: gap var(--transition-normal);
 }
 
 .category-nav__categories::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none; 
 }
 
 .category-nav__item {
@@ -56,27 +57,12 @@
 .category-nav__item--active {
   font-weight: 700;
   color: rgba(51, 51, 51, 1);
-}
-
-.category-nav__item--active::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: currentColor;
-  border-radius: 1px;
-  opacity: 0.8;
-  transform: scaleX(0.7);
-  transition: transform var(--transition-fast);
-}
+}   
 
 .category-nav__item:hover:not(.category-nav__item--active) {
   color: rgba(51, 51, 51, 0.7);
 }
 
-/* Action Elements */
 .category-nav__actions {
   display: flex;
   align-items: center;
@@ -100,9 +86,9 @@
   text-decoration-thickness: 2px;
 }
 
-/* Language Dropdown */
 .category-nav__language-dropdown {
   position: relative;
+  z-index: 9999 !important; 
 }
 
 .category-nav__language-toggle {
@@ -144,8 +130,17 @@
   list-style: none;
   padding: 5px 0;
   z-index: 1000;
+  display: block;
   opacity: 0;
-  animation: fadeIn 0.2s ease forwards;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+}
+
+.category-nav__language-dropdown-menu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 @keyframes fadeIn {
@@ -179,13 +174,11 @@
   color: rgba(51, 51, 51, 1);
 }
 
-/* Dark Mode Toggle */
 .dark-mode-toggle {
   transform: scale(1);
   transition: transform var(--transition-normal);
 }
 
-/* Mobile Menu */
 .category-nav__hamburger {
   display: none;
   background: transparent;
@@ -310,7 +303,6 @@
   background-color: rgba(0, 0, 0, 0.03);
 }
 
-/* Dark Mode Styles */
 [data-theme="dark"] .category-nav__container {
   background: rgba(43, 43, 43, 1);
 }
@@ -368,6 +360,7 @@
 [data-theme="dark"] .category-nav__mobile-menu {
   background-color: var(--color-background, #222);
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
 }
 
 [data-theme="dark"] .category-nav__mobile-close:hover {
@@ -399,8 +392,6 @@
   }
 }
 
-/* Responsive Breakpoints */
-/* Large Desktop (1200px+) */
 @media (min-width: 1200px) {
   .category-nav__categories {
     gap: 35px;
@@ -415,7 +406,6 @@
   }
 }
 
-/* Medium Desktop (992px-1199px) */
 @media (min-width: 992px) and (max-width: 1199px) {
   .category-nav__container {
     padding: 0 30px;
@@ -483,13 +473,11 @@
     transform: scale(0.9);
   }
   
-  /* Hide hamburger on tablet */
   .category-nav__hamburger {
     display: none;
   }
 }
 
-/* Tablet to Small Desktop */
 @media (min-width: 570px) and (max-width: 767px) {
   .category-nav {
     height: 40px;
@@ -549,12 +537,10 @@
     border-radius: 20px;
   }
   
-  /* Show hamburger menu */
   .category-nav__hamburger {
     display: block;
   }
   
-  /* Hide desktop categories */
   .category-nav__categories {
     display: none;
   }
@@ -596,7 +582,6 @@
   }
 }
 
-/* Mobile (up to 570px) */
 @media (max-width: 570px) {
   .category-nav {
     height: 40px;
@@ -671,5 +656,133 @@
   .category-nav__mobile-button {
     font-size: 13px;
     padding: 9px 10px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .category-nav {
+    padding: 0;
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+  
+  .category-nav__container {
+    width: 100%;
+    max-width: 1240px;
+    padding: 0 34px;
+  }
+  
+  .category-nav__categories {
+    gap: 35px;
+  }
+  
+  .category-nav__actions {
+    gap: 25px;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1279px) {
+  .category-nav {
+    padding: 0 10px;
+    max-width: 1260px;
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+  
+  .category-nav__container {
+    width: 100%;
+    max-width: 1220px;
+    padding: 0 30px;
+  }
+  
+  .category-nav__categories {
+    gap: 35px;
+  }
+  
+  .category-nav__actions {
+    gap: 25px;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1280px) {
+  .category-nav {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 20px;
+    padding: 0 15px; 
+    box-sizing: border-box;
+  }
+  
+  .category-nav__container {
+    width: 100%;
+    box-sizing: border-box;
+    max-width: none; 
+  }
+  
+  .category-nav__categories {
+    gap: 30px;
+    flex: 1;
+  }
+  
+  .category-nav__actions {
+    gap: 20px;
+  }  
+  .category-nav__categories {
+    gap: 30px;
+  }
+  
+  .category-nav__actions {
+    gap: 20px;
+  }
+}
+
+@media (min-width: 993px) and (max-width: 1080px) {
+  .category-nav__container {
+    padding: 0 20px;
+  }
+  
+  .category-nav__categories {
+    gap: 25px;
+  }
+  
+  .category-nav__actions {
+    gap: 15px;
+  }
+}
+
+@media (min-width: 1081px) and (max-width: 1180px) {
+  .category-nav__container {
+    padding: 0 22px;
+  }
+  
+  .category-nav__categories {
+    gap: 28px;
+  }
+  
+  .category-nav__actions {
+    gap: 18px;
+  }
+}
+@media (min-width: 1281px) {
+   .category-nav {
+    max-width: 1240px;
+    width: 100%;
+    padding: 0;
+    margin: 0 auto 20px;
+  }
+  
+  .category-nav__container {
+    max-width: 1240px;
+    width: 100%;
+    padding: 0 34px;
+  }
+  
+  .category-nav__categories {
+    gap: 35px;
+  }
+  
+  .category-nav__actions {
+    gap: 25px;
   }
 }

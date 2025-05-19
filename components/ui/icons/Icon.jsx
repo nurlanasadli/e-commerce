@@ -353,7 +353,6 @@ const Icon = ({
         </g>
       )
     },
-    // Standardized versions of arrowLeft and arrowRight
     arrowLeft: {
       viewBox: "0 0 25 25",
       path: (
@@ -398,10 +397,8 @@ const Icon = ({
     }
   };
 
-  // İkon adına görə uyğun ikonu tap
   const icon = icons[name];
   
-  // İkon tapılmadısa
   if (!icon) {
     console.error(`Icon "${name}" not found`);
     return null;

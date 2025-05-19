@@ -2,80 +2,71 @@
   width: 54px;
   height: 30px;
   border-radius: 19px;
-  background: rgba(51, 51, 51, 1); /* Always dark background */
+  background: rgba(51, 51, 51, 1);
   position: relative;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 6px; /* Ensure icons are comfortably inside */
-  overflow: hidden; /* Hide icons when they're behind the circle */
-  border: none; /* Remove default button border */
-  transition: background-color 0.3s ease; /* Smooth transition for background */
+  padding: 0 6px; 
+  overflow: hidden; 
+  border: none; 
+  transition: background-color 0.3s ease; 
 }
 
-/* Circle always starts on the left */
+
 .dark-mode-toggle__circle {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: rgba(245, 245, 245, 1); /* White circle */
+  background: rgba(245, 245, 245, 1); 
   position: absolute;
   left: 3px;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 2; /* Above icons */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+  z-index: 2; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
 }
 
-/* Moon icon (left side) */
 .dark-mode-toggle__moon-icon {
   position: relative;
   z-index: 1;
-  margin-right: auto; /* Push to left */
-  opacity: 1 !important; /* Ensure visibility */
+  margin-right: auto; 
+  opacity: 1 !important; 
 }
 
-/* Sun icon (right side) */
 .dark-mode-toggle__sun-icon {
   position: relative;
   z-index: 1;
-  margin-left: auto; /* Push to right */
-  opacity: 1 !important; /* Ensure visibility */
+  margin-left: auto; 
+  opacity: 1 !important; 
 }
 
-/* Dark mode activated - ensure transition works both ways */
 .dark-mode-toggle.is-dark-mode .dark-mode-toggle__circle {
-  transform: translateX(24px); /* Move circle to right */
+  transform: translateX(24px); 
 }
 
-/* Not in dark mode - explicitly set left position */
 .dark-mode-toggle:not(.is-dark-mode) .dark-mode-toggle__circle {
-  transform: translateX(0); /* Ensure circle is on left */
+  transform: translateX(0); 
 }
 
-/* Ensure transition works for both appearance and disappearance */
 .dark-mode-toggle:focus {
-  outline: none; /* Remove focus outline */
-  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Add subtle focus indicator */
+  outline: none; 
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); 
 }
 
-/* Remove any transition delays */
 .dark-mode-toggle * {
   transition-delay: 0s !important;
 }
 
-/* Keep background color always the same */
 [data-theme="dark"] .dark-mode-toggle {
-  background: rgba(51, 51, 51, 1); /* Keep background dark */
+  background: rgba(51, 51, 51, 1);
 }
 
-/* Fix for language arrow icon disappearing */
 [data-theme="dark"] .category-nav__language-arrow {
-  color: inherit; /* Maintain icon color in dark mode */
-  opacity: 1 !important; /* Ensure visibility */
+  color: inherit; 
+  opacity: 1 !important; 
 }
 
-/* Ensure all SVG icons remain visible regardless of theme */
 svg {
   opacity: 1 !important;
 }

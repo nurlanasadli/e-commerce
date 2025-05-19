@@ -95,7 +95,6 @@ export async function getServerSideProps() {
   } catch (error) {
     console.error('Error in getServerSideProps:', error.message);
     
-    // Xəta halında boş massivlər qaytar
     return {
       props: {
         bannerData: [],

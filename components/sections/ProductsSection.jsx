@@ -1,16 +1,12 @@
-// components/sections/ProductsSection.jsx
-
 import React, { useEffect } from 'react';
 import Card from '../ui/Card';
 import ProductCard from '../ui/ProductCard';
 import { CategoryButton } from '../ui/CategoryButton';
 import { useProductContext } from '../../contexts/ProductContext';
 
-// Memoized CategoryButton
 const MemoizedCategoryButton = React.memo(CategoryButton);
 
 const ProductsSection = ({ products = [] }) => {
-  // Get everything we need from context
   const {
     isLoading,
     setProductsData,
@@ -26,21 +22,16 @@ const ProductsSection = ({ products = [] }) => {
   }, [products, setProductsData]);
   
   useEffect(() => {
-  // Aktiv kategori dəyişəndə və ya səhifə yükləndikdə
   const scrollToActiveCategory = () => {
     const filtersContainer = document.querySelector('.products-section__filters');
     const activeButton = document.querySelector('.category-button--active');
     
     if (filtersContainer && activeButton) {
-      // Kiçik ekranlarda həmişə scroll-u sıfırlayırıq
       if (window.innerWidth <= 480) {
-        // Sıfır pozisiyasına scroll
         filtersContainer.scrollLeft = 0;
       } else if (activeCategory === categories[0]) {
-        // İlk kategori aktiv olduqda da sıfır pozisiyasına scroll
         filtersContainer.scrollLeft = 0;
       } else {
-        // Digər hallarda mərkəzləşdirmə
         const containerWidth = filtersContainer.offsetWidth;
         const buttonLeft = activeButton.offsetLeft;
         const buttonWidth = activeButton.offsetWidth;
@@ -55,10 +46,7 @@ const ProductsSection = ({ products = [] }) => {
     }
   };
 
-  // İlkin scroll - komponent mount olduqdan sonra işə salınır
   const initialScrollTimeout = setTimeout(scrollToActiveCategory, 100);
-  
-  // Əlavə təminat - touch cihazlar üçün məcburi scroll reset
   const forceScrollReset = setTimeout(() => {
     const filtersContainer = document.querySelector('.products-section__filters');
     if (filtersContainer) {
@@ -66,10 +54,8 @@ const ProductsSection = ({ products = [] }) => {
     }
   }, 300);
   
-  // Window resize event-i zamanı yenidən hesablama
   window.addEventListener('resize', scrollToActiveCategory);
   
-  // Cleanup - komponent unmount olduqda
   return () => {
     window.removeEventListener('resize', scrollToActiveCategory);
     clearTimeout(initialScrollTimeout);

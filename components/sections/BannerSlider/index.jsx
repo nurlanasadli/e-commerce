@@ -4,10 +4,9 @@ import styles from './BannerSlider.module.css';
 import Icon from '../../ui/icons/Icon';
 
 const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
-  // Ensure we have at least one slide
   if (!slides.length) return null;
   
-  // State management
+  // States
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [touchStart, setTouchStart] = useState(null);
@@ -19,62 +18,46 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
   const slidesContainerRef = useRef(null);
   const autoplayTimerRef = useRef(null);
   
-  // Check if we're on mobile/tablet on mount and window resize
+  // Responsive handler
   useEffect(() => {
     const checkIfMobile = () => {
-      const mobile = window.innerWidth <= 992;
-      setIsMobile(mobile);
+      setIsMobile(window.innerWidth <= 992);
     };
     
-    // Initial check
     checkIfMobile();
-    
-    // Add resize listener
     window.addEventListener('resize', checkIfMobile);
     
-    // Cleanup
     return () => {
       window.removeEventListener('resize', checkIfMobile);
     };
   }, []);
   
-  // Create a "circular" array of slides for infinite effect
+  // Infinite carousel setup
   const getVisibleSlides = () => {
-    // For true infinite carousel, we need to create a circular array
-    // that repeats the first slide after the last slide
     return [...slides, slides[0]];
   };
   
-  // Move to specific slide with animation
+  // Navigation methods
   const goToSlide = useCallback((index) => {
     if (isTransitioning) return;
     
-    // Start transition
     setIsTransitioning(true);
-    
-    // Regular slide change
     setCurrentSlide(index);
     
-    // End transition after animation completes
     setTimeout(() => {
       setIsTransitioning(false);
       
-      // If we've reached the "clone" at the end, immediately jump back to the first slide
       if (index >= slides.length) {
         setCurrentSlide(0);
       }
     }, 500);
   }, [isTransitioning, slides.length]);
   
-  // Navigate to next slide
   const nextSlide = useCallback(() => {
-    const nextIndex = currentSlide + 1;
-    goToSlide(nextIndex);
+    goToSlide(currentSlide + 1);
   }, [currentSlide, goToSlide]);
   
-  // Navigate to previous slide
   const prevSlide = useCallback(() => {
-    // If at first slide, go to the last original slide
     if (currentSlide === 0) {
       goToSlide(slides.length - 1);
     } else {
@@ -82,13 +65,11 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     }
   }, [currentSlide, goToSlide, slides.length]);
   
-  // Calculate translate value for sliding animation
+  // Layout calculation
   const getTranslateValue = () => {
-    // For mobile (under 992px), we want to use 100% width per slide with NO gap
     if (isMobile) {
       return `translateX(-${currentSlide * 100}%)`;
     } else {
-      // For desktop, we use 80% for main slide + 2% gap (allowing 20% of next slide to show)
       const slideWidth = 80;
       const slideGap = 2;
       const totalMove = slideWidth + slideGap;
@@ -97,7 +78,7 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     }
   };
   
-  // Autoplay functionality
+  // Autoplay control
   useEffect(() => {
     const startAutoplay = () => {
       if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
@@ -113,7 +94,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
       startAutoplay();
     }
     
-    // Cleanup interval on unmount
     return () => {
       if (autoplayTimerRef.current) {
         clearInterval(autoplayTimerRef.current);
@@ -121,7 +101,7 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     };
   }, [nextSlide, slides.length, autoplaySpeed, isPaused]);
   
-  // Handle keyboard navigation
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') {
@@ -137,10 +117,9 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     };
   }, [nextSlide, prevSlide]);
   
-  // Touch event handlers with improved sensitivity
+  // Touch handlers
   const handleTouchStart = (e) => {
     setTouchStart(e.targetTouches[0].clientX);
-    // Pause autoplay during touch
     setIsPaused(true);
   };
   
@@ -152,7 +131,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
     if (!touchStart || !touchEnd) return;
     
     const distance = touchStart - touchEnd;
-    // For mobile, use smaller threshold for easier swiping
     const swipeThreshold = isMobile ? 30 : 50;
     
     const isLeftSwipe = distance > swipeThreshold;
@@ -164,34 +142,28 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
       prevSlide();
     }
     
-    // Reset touch positions
     setTouchStart(null);
     setTouchEnd(null);
     
-    // Resume autoplay after touch
     setTimeout(() => {
       setIsPaused(false);
     }, 1000);
   };
   
-  // Pause autoplay on hover (only on non-touch devices)
+  // Mouse hover handlers
   const handleMouseEnter = () => !('ontouchstart' in window) && setIsPaused(true);
   const handleMouseLeave = () => !('ontouchstart' in window) && setIsPaused(false);
   
-  // Get the circular slide array
   const visibleSlides = getVisibleSlides();
   
   return (
     <section className={styles.bannerSection} aria-label="Banner Slider">
-      {/* Slider Wrapper - allows arrows to extend outside */}
       <div className={styles.sliderWrapper}>
-        {/* Main Slider Container - with overflow hidden */}
         <div 
           className={styles.sliderContainer}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Main Slider Track - uses transform for smooth animation */}
           <div 
             ref={slidesContainerRef}
             className={styles.slidesTrack}
@@ -203,7 +175,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Map through the circular slide array (original slides + first slide repeated) */}
             {visibleSlides.map((slide, index) => (
               <div 
                 key={`slide-${slide.id || index}`}
@@ -219,7 +190,6 @@ const BannerSlider = ({ slides = [], autoplaySpeed = 5000 }) => {
           </div>
         </div>
         
-        {/* Navigation Buttons - these are outside of the overflow: hidden container */}
         {slides.length > 1 && (
           <>
             <button 

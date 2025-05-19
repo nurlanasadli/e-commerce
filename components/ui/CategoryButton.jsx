@@ -1,9 +1,6 @@
-// components/sections/CategoryButton.jsx
 import React from 'react';
 
-// Optimallaşdırılmış Category Button komponenti
 export const CategoryButton = React.memo(({ category, isActive, onClick }) => {
-  // Click hadisəsini idarə edən funksiya - requestAnimationFrame ilə optimallaşdırılmış
   const handleClick = React.useCallback(() => {
     requestAnimationFrame(() => {
       onClick(category);

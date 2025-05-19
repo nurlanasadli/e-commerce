@@ -1,5 +1,5 @@
 :root {
-  /* Breakpoints - əvvəlcədən mövcud */
+  /* Breakpoints */
   --breakpoint-xs: 375px;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -7,7 +7,7 @@
   --breakpoint-xl: 1080px;
   --breakpoint-xxl: 1200px;
   
-  /* Rənglər - Yeni */
+  /* Colors */
   --color-primary: rgba(234, 36, 39, 1);
   --color-text: rgba(63, 63, 63, 1);
   --color-text-light: rgba(130, 130, 130, 1);
@@ -17,7 +17,7 @@
   --color-button: #E1E1E1;
   --color-white: #FFFFFF;
   
-  /* Ölçülər və radiuslar - Yeni */
+  /* Sizes and radiuses */
   --border-radius-card: 24px;
   --border-radius-image: 20px;
   --border-radius-button: 12px;
@@ -25,7 +25,6 @@
   --card-padding: 16px;
   --card-margin-top: 40px;
 }
-
 
 .products-section {
   padding: 60px 0;
@@ -46,7 +45,7 @@
   align-items: center;
   margin-bottom: 32px;
   flex-wrap: wrap;
-  gap: 24px; /* Aralarında yaxşı məsafə üçün */
+  gap: 24px;
   position: relative;
   width: 100%;
 }
@@ -64,27 +63,30 @@
 [data-theme="dark"] .products-section__title {
   color: #E0E0E0;
 }
+
 .products-section__title-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .products-section__subheading {
   font-family: 'SF Pro Display', var(--font-family-primary);
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
   letter-spacing: 0;
-  color: rgba(234, 36, 39, 1); /* Qırmızı rəng Figma-dan */
+  color: rgba(234, 36, 39, 1);
   margin: 0;
 }
 
 [data-theme="dark"] .products-section__subheading {
   color: hsla(0, 0%, 100%, .5);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
 }
+
 .products-section__filters {
   display: flex;
   align-items: center;
@@ -93,7 +95,7 @@
   border-radius: 25px;
   padding: 13px 26px;
   max-width: 100%;
-  width: max-content; /* Default olaraq məzmuna görə genişlik */
+  width: max-content;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -102,12 +104,13 @@
   will-change: transform; 
   overscroll-behavior-x: contain; 
   scroll-behavior: smooth;
-  /* Desktop-da default sağda */
   margin-left: auto;
 }
+
 .products-section__filters::-webkit-scrollbar {
   display: none;
 }
+
 .category-button {
   font-family: 'SF Pro Display', var(--font-family-primary);
   font-size: 14px;
@@ -124,9 +127,9 @@
   white-space: nowrap;
   position: relative;
   z-index: 1;
-  flex-shrink: 0; /* Sıxılmasın */
+  flex-shrink: 0;
   outline: none;
-  -webkit-tap-highlight-color: transparent; /* iOS-da görünən highlight-ı aradan qaldırır */
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
 
@@ -138,8 +141,9 @@
   width: 0;
   height: 1.5px;
   transition: width .5s ease, left .5s ease;
-  background-color: rgba(130, 130, 130, 1); /* Default rəng */
+  background-color: rgba(130, 130, 130, 1);
 }
+
 .category-button:hover:after {
   content: "";
   position: absolute;
@@ -147,11 +151,10 @@
   left: 20%;
   width: 60%;
   height: 1.5px;
-  background-color: rgba(130, 130, 130, 1); /* Deactive category name rəngi */
+  background-color: rgba(130, 130, 130, 1);
   transition: width .3s ease, left .3s ease;
 }
 
-/* Active category button-a hover zamanı border line effekti */
 .category-button--active:hover:after {
   content: "";
   position: absolute;
@@ -159,23 +162,22 @@
   left: 20%;
   width: 60%;
   height: 1.5px;
-  background-color: rgba(63, 63, 63, 1); /* Active category name rəngi */
+  background-color: rgba(63, 63, 63, 1);
   transition: width .3s ease, left .3s ease;
 }
 
-
 [data-theme="dark"] .category-button:hover:after {
-  background-color: rgba(224, 224, 224, 1); /* Dark mode deactive category name rəngi */
+  background-color: rgba(224, 224, 224, 1);
 }
 
-/* Dark mode üçün rəng dəyişikliyi - active button */
 [data-theme="dark"] .category-button--active:hover:after {
-  background-color: #ffffff; /* Dark mode active category name rəngi */
+  background-color: #ffffff;
 }
+
 .category-button:focus,
 .category-button:active {
   outline: none;
-  background-color: transparent; /* Focus olanda arxa fonu dəyişməsin */
+  background-color: transparent;
 }
 
 .category-button--active:focus,
@@ -239,24 +241,24 @@
 
 .product-card__discount {
   position: absolute !important;
-  top: -20px !important; /* Yuxarıdan 10px */
-  left: 25px !important; /* Soldan 10px */
-  z-index: 3 !important; /* Şəkilin üzərində olması üçün */
+  top: -20px !important;
+  left: 25px !important;
+  z-index: 3 !important;
   background-color: var(--color-primary) !important;
   color: var(--color-white) !important;
   font-size: 10px !important;
   font-weight: 700 !important;
-  line-height: 1 !important; /* Mətn düzgün mərkəzləşdirilməsi üçün */
-  white-space: nowrap !important; /* Mətnin sınmaması üçün */
-  transform: none !important; /* Əvvəlki transform-ları ləğv etmək */
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  transform: none !important;
   padding: 7px 8px !important;
   border-radius: 10px !important;
 }
 
 .product-card__image-container {
   position: absolute;
-  width: 248px; /* Figma dizaynından */
-  height: 218px; /* Figma dizaynından */
+  width: 248px;
+  height: 218px;
   top: -35px;
   left: 50%;
   transform: translateX(-50%);
@@ -268,31 +270,33 @@
 }
 
 .product-card__compare {
-    position: absolute;
-    width: 42px;
-    height: 30px;
-    border-radius: 32px;
-    background: rgba(255, 255, 255, 1);
-    top: 12px;
-    right: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 9px 25px 0 #00000017;
-    z-index: 2;
-    transition: all 0.3s ease;
-    border: none;
+  position: absolute;
+  width: 42px;
+  height: 30px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 1);
+  top: 12px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 9px 25px 0 #00000017;
+  z-index: 2;
+  transition: all 0.3s ease;
+  border: none;
 }
 
 .product-card__compare:hover {
   background-color: #fce3e3 !important;
 }
+
 .product-card__compare:hover svg path {
-  fill: #ea2427 !important; /* Change the SVG fill color on hover */
+  fill: #ea2427 !important;
 }
+
 .product-card__compare--active {
-  background-color: #fce3e3 !important; /* Same as hover state */
+  background-color: #fce3e3 !important;
 }
 
 .product-card__compare--active svg path {
@@ -302,16 +306,19 @@
 [data-theme="dark"] .product-card__compare {
   background-color: rgba(255, 255, 255, 1) !important;
 }
+
 [data-theme="dark"] .product-card__compare:hover {
-    background-color: #fce3e3 !important;
+  background-color: #fce3e3 !important;
 }
 
 [data-theme="dark"] .product-card__compare--active {
-  background-color: #fce3e3 !important; /* Same as light mode active */
+  background-color: #fce3e3 !important;
 }
 
+[data-theme="dark"] .installment-wrapper { 
+  border-left-color: #dedede !important; 
+}
 
-[data-theme="dark"] .installment-wrapper { border-left-color: #dedede !important; }
 .product-card__image {
   position: absolute;
   top: 0;
@@ -333,13 +340,14 @@
   flex-direction: column;
   gap: 2px;
   flex: 1;
-  margin-top: 190px; /* Təsvir üçün yer */
+  margin-top: 190px;
 }
+
 .product-card__rating {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* Başdan sıralamalıyıq, yan-yana olsunlar */
-  gap: 16px; /* Aralarında məsafə */
+  justify-content: flex-start;
+  gap: 16px;
   width: 100%;
 }
 
@@ -349,7 +357,6 @@
   gap: 4px;
 }
 
-/* Review ikonları - margin-left: auto silinib */
 .product-card__reviews {
   display: flex;
   align-items: center;
@@ -357,8 +364,8 @@
 }
 
 .product-card__rating-value{
-    font-size: 10px;
-    color: rgba(63, 63, 63, 1);
+  font-size: 10px;
+  color: rgba(63, 63, 63, 1);
 }
 
 .product-card__reviews svg {
@@ -372,7 +379,6 @@
   letter-spacing: -0.3px;
 }
 
-/* Title stili */
 .product-card__title {
   font-family: 'SF Pro Display', var(--font-family-primary);
   font-size: clamp(12px, 1vw + 8px, 14px);
@@ -396,14 +402,12 @@
   margin-top: auto;
 }
 
-/* Sol qiymət bölməsi */
 .product-card__price-wrapper {
   display: flex;
   flex-direction: column;
   padding-right: 15px;
 }
 
-/* Qiymət stili */
 .product-card__price {
   font-size: 20px;
   line-height: 22px;
@@ -415,7 +419,6 @@
   margin: 0;
 }
 
-/* Köhnə qiymət stili */
 .product-card__old-price {
   font-size: 14px;
   line-height: 19px;
@@ -428,7 +431,6 @@
   text-decoration: line-through;
 }
 
-/* Kredit hissəsi */
 .installment-wrapper {
   display: flex;
   flex-direction: column;
@@ -436,7 +438,6 @@
   border-left: 1px solid #dedede;
 }
 
-/* Aylıq müddət */
 .installment__period {
   font-size: 14px;
   line-height: 19px;
@@ -446,7 +447,6 @@
   white-space: nowrap;
 }
 
-/* Aylıq ödəniş */
 .installment__price {
   font-size: 20px;
   line-height: 22px;
@@ -507,17 +507,17 @@
 
 .product-card__button-icon {
   position: absolute;
-  left: 15px; /* Düymənin sol tərəfindən məsafə */
+  left: 15px;
   top: 50%;
-  transform: translateY(-50%); /* Şaquli mərkəzləşdirmə */
+  transform: translateY(-50%);
   flex-shrink: 0;
   transition: stroke 0.3s ease;
 }
 
 .product-card__button-icon-left {
-  position: absolute; /* Mütləq mövqe */
-  left: 12px; /* Soldan məsafə */
-  z-index: 2; /* Mətnin üzərində görünməsi üçün */
+  position: absolute;
+  left: 12px;
+  z-index: 2;
 }
 
 .product-card__button:hover .product-card__button-icon-left path {
@@ -525,16 +525,16 @@
 }
 
 .product-card__button-text {
-    flex: 1 1;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-    margin-left: 10px;
+  flex: 1 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-left: 10px;
 }
 
 .product-card__button:hover {
-  background-color: rgba(234, 36, 39, 1); /* Figma hover dizaynı */
-  color: rgba(255, 255, 255, 1); /* Figma hover dizaynı */
+  background-color: rgba(234, 36, 39, 1);
+  color: rgba(255, 255, 255, 1);
 }
 
 .product-card__button:hover .product-card__button-text::after {
@@ -555,6 +555,7 @@
 [data-theme="dark"] .product-card__reviews-count {
   color: rgba(255, 255, 255, 1) !important;
 }
+
 .product-card__button:hover:not(.product-card__button--active) {
   background-color: rgba(234, 36, 39, 1);
   color: white;
@@ -579,10 +580,9 @@
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-
 .product-card__wishlist:hover {
-  background-color: rgba(234, 36, 39, 1); /* Figma hover dizaynı: #EA2427 */
-  color: white; /* Hover zamanı icon rəngi ağ olsun */
+  background-color: rgba(234, 36, 39, 1);
+  color: white;
   transform: scale(1.05);
 }
 
@@ -602,17 +602,14 @@
 }
 
 .product-card__wishlist svg {
-  color: inherit; /* Vərəsə alınan rəngi istifadə et */
+  color: inherit;
 }
 
 .product-card__button:active {
-  background-color: rgba(234, 36, 39, 0.8); /* Basdıqda hover-dan bir az fərqli */
+  background-color: rgba(234, 36, 39, 0.8);
   color: white;
 }
 
-
-
-/* Yüklənmə zamanı görünüş */
 .products-section--empty {
   display: flex;
   justify-content: center;
@@ -624,7 +621,6 @@
   font-size: 16px;
 }
 
-/* Skeleton zamanı görünüş */
 .product-card--skeleton .product-card__image-container,
 .product-card--skeleton .product-card__title,
 .product-card--skeleton .product-card__price,
@@ -639,7 +635,7 @@
   100% { opacity: 0.6; }
 }
 
-/* Dark mode spesifik stiller */
+/* Dark mode styles */
 [data-theme="dark"] .product-card__title,
 [data-theme="dark"] .product-card__price,
 [data-theme="dark"] .installment__price {
@@ -651,8 +647,6 @@
   background-color: #333333 !important;
   color: #E0E0E0 !important;
 }
-
-
 
 [data-theme="dark"] .product-card__wishlist--active {
   background-color: rgba(234, 36, 39, 1) !important;
@@ -666,7 +660,7 @@
 
 [data-theme="dark"] .product-card__button:hover,
 [data-theme="dark"] .product-card__wishlist:hover {
-  background-color: rgba(234, 36, 39, 1) !important; /* Hover zamanı eyni stil */
+  background-color: rgba(234, 36, 39, 1) !important;
   color: white;
 }
 
@@ -695,8 +689,6 @@
     height: 210px;
   }
 }
-
-
 
 @media (min-width: 1201px) {
   .products-grid {
@@ -747,39 +739,6 @@
   }
 }
 
-@media (max-width: 1200px) and (min-width: 993px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
-  .product-card {
-    max-width: 270px;
-    min-height: 400px;
-  }
-  
-  .product-card__image-container {
-    width: 230px;
-    height: 210px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .products-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  
-  .product-card {
-    max-width: 270px;
-    min-height: 400px;
-  }
-  
-  .product-card__image-container {
-    width: 230px;
-    height: 210px;
-  }
-}
 @media (max-width: 1080px) {
   .products-section__header {
     flex-direction: column;
@@ -793,9 +752,9 @@
   }
   
   .products-section__filters {
-    width: auto; /* width: 100% yerinə */
+    width: auto;
     max-width: 100%;
-    margin: 0 auto; /* Horizontal mərkəzləşdirmə */
+    margin: 0 auto;
   }
   
   .category-button {
@@ -812,27 +771,6 @@
   }
 }
 
-@media (max-width: 992px) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-  
-  .product-card {
-    max-width: 260px;
-    min-height: 390px;
-  }
-  
-  .product-card__image-container {
-    width: 220px;
-    height: 200px;
-  }
-  
-  .product-card__content {
-    margin-top: 180px;
-  }
-}
-
 @media (max-width: 900px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -841,30 +779,26 @@
     margin: 0 auto !important;
   }
   
-  /* BU STİLLƏR DOĞRUDUR - İSTƏDİYİNİZ KİMİ 300px HÜNDÜRLÜK */
   .product-card__image-container {
     width: 90% !important; 
     max-width: 600px !important;
-    height: 300px !important; /* 220px-dən 300px-ə dəyişdirdik - DOĞRUDUR */
+    height: 300px !important;
     top: -35px !important;
   }
   
-  /* Card'ın yüksəkliyi də doğrudur */
   .product-card {
     max-width: 100% !important;
     width: 100% !important;
-    min-height: 430px !important; /* DOĞRUDUR */
+    min-height: 430px !important;
   }
   
-  /* Content margin-top dəyəri də doğrudur */
   .product-card__content {
-    margin-top: 270px !important; /* DOĞRUDUR */
+    margin-top: 270px !important;
     padding: 15px !important;
   }
 }
 
 @media screen and (max-width: 900px) and (orientation: landscape) {
-  /* Üstün prioritet üçün spesifik seçici */
   body .products-grid,
   body .products-section .products-grid {
     display: grid !important;
@@ -873,50 +807,37 @@
   }
 }
 
-@media screen and (max-width: 900px) and (min-width: 736px) and (max-width: 932px) and (orientation: landscape) {
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 15px !important;
-  }
-}
-
 @media only screen and (min-width: 769px) and (max-width: 834px) {
-  /* Yalnız bu ölçü aralığında product-card__old-price üçün dəyişikliklər */
   .products-section .product-card .product-card__price-wrapper .product-card__old-price {
     position: absolute !important;
-    top: 1px !important; /* Daha yuxarıya qaldırmaq üçün -5px əlavə edilib */
+    top: 1px !important;
     left: 0 !important;
   }
-
   
-  
-  /* Əsas container üçün əlavə yüksəklik */
   .product-card__price-wrapper {
     position: relative !important;
-    margin-top: 5px !important; /* Yuxarıdan əlavə boşluq */
+    margin-top: 5px !important;
   }
 }
+
 @media (min-width: 602px) and (max-width: 834px) {
-  /* Container kənar boşluqlarını azaltmaq */
   .products-section .container {
     padding: 0 8px;
     max-width: 100%;
   }
   
-  /* 2 sütunlu grid ilə tam genişlik */
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px; /* Çox kiçik boşluq */
+    gap: 10px;
     width: 100%;
     padding-bottom: 10px;
   }
   
-  /* Daha böyük məhsul kartları */
   .product-card {
     max-width: 100%; 
     width: 100%;
     min-height: 430px;
-    margin-top: 45px; /* Şəkil üçün yer */
+    margin-top: 45px;
     margin-bottom: 10px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
   }
@@ -939,7 +860,6 @@
     position: relative;
   }
   
-  /* Mətn və qiymət ölçülərini böyütmək */
   .product-card__title {
     font-size: 16px;
     min-height: 38px;
@@ -962,8 +882,6 @@
     font-size: 16px;
   }
   
-  
-  /* Düymələr */
   .product-card__actions {
     margin-top: 5px;
   }
@@ -978,7 +896,6 @@
     height: 45px;
   }
   
-  /* İkonlar */
   .product-card__button-icon-left svg {
     width: 16px;
     height: 16px;
@@ -989,7 +906,6 @@
     height: 18px;
   }
   
-  /* Discount və Compare */
   .product-card__discount {
     top: -23px !important;
     left: 30px !important;
@@ -1004,12 +920,13 @@
     right: 10px;
   }
 }
+
 @media (max-width: 1240px) {
   .products-section__filters {
     width: max-content;
-    /* Sağda qalmağa davam edir */
   }
 }
+
 @media (max-width: 1087px) {
   .products-section__header {
     flex-direction: column;
@@ -1024,16 +941,16 @@
   }
   
   .products-section__filters {
-    margin: 0 auto; /* Horizontal mərkəzləşdirmə */
-    width: auto; /* Konteyner genişliyinə görə adaptiv */
+    margin: 0 auto;
+    width: auto;
     justify-content: center;
     box-sizing: border-box;
   }
 }
+
 @media only screen and (min-width: 768px) and (max-width: 834px) and (orientation: landscape) {
   .products-grid {
-    gap: 25px !important; /* Yatay rejimdə daha çox ara məsafəsi */
-    
+    gap: 25px !important;
   }
   
   .product-card {
@@ -1043,7 +960,7 @@
   }
   
   .product-card__image-container {
-    height: 220px; /* Daha böyük şəkil */
+    height: 220px;
     margin: 8px 0 !important;
   }
   
@@ -1055,6 +972,7 @@
     padding: 15px !important;
     gap: 10px !important;
   }
+
   .product-card__price-wrapper {
     padding-right: 8px !important;
     margin-right: 0 !important;
@@ -1098,15 +1016,12 @@
   [data-theme="dark"] .installment__period {
     color: rgba(255, 255, 255, 0.5) !important;
   }
-
-  
 }
 
 [data-theme="dark"] .product-card__image-container {
-  background-color: #FFFFFF !important; /* Ağ rəng */
+  background-color: #FFFFFF !important;
   border-color: rgba(237, 237, 237, 1) !important;
 }
-
 @media only screen and (min-width: 768px) and (max-width: 834px) {
   .products-section .container {
     max-width: 100%;
@@ -1115,7 +1030,7 @@
   
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px !important; /* Ara məsafəsini artırdıq - !important əlavə etdik */
+    gap: 20px !important; 
     width: 100%;
     padding-bottom: 20px;
   }
@@ -1142,11 +1057,11 @@
   }
 
   .product-card__title {
-    font-size: 18px; /* Font ölçüsünü artırdıq */
-    min-height: 44px; /* Minimum hündürlüyü artırdıq */
-    line-height: 1.3; /* Sətirlər arası məsafəni artırdıq */
-    margin-top: 15px; /* Yuxarıdan daha çox məsafə */
-    margin-bottom: 12px; /* Aşağıdan məsafə */
+    font-size: 18px; 
+    min-height: 44px; 
+    line-height: 1.3; 
+    margin-top: 15px; 
+    margin-bottom: 12px; 
   }
   
   .product-card__price {
@@ -1170,8 +1085,8 @@
   }
 
   .product-card__price-wrapper:not(:has(.product-card__old-price:not(:empty))) .product-card__old-price {
-    opacity: 0 !important; /* Görünməz olsun */
-    visibility: hidden !important; /* Amma yeri qalsın */
+    opacity: 0 !important; 
+    visibility: hidden !important; 
   }
   .product-card__old-price:empty {
     display: block !important;
@@ -1181,10 +1096,10 @@
   
   .product-card__pricing-container {
     display: flex !important;
-    align-items: flex-end !important; /* Aşağıdan hizalama */
-    gap: 5px !important; /* Elementlər arası boşluğu azaltmaq (əvvəlki 15px) */
-    height: 45px !important; /* Ümumi hündürlüyü azaltmaq (əvvəlki 50px) */
-    margin: 15px 0 !important; /* Margin-i azaltmaq (əvvəlki 10px) */
+    align-items: flex-end !important; 
+    gap: 5px !important; 
+    height: 45px !important; 
+    margin: 15px 0 !important; 
     padding: 0 !important;
     position: relative !important;
   }
@@ -1193,24 +1108,24 @@
     display: flex !important;
     flex-direction: column !important;
     flex: 1 !important;
-    height: 45px !important; /* Hündürlüyü azaltmaq */
-    justify-content: flex-end !important; /* Aşağıdan hizalama */
+    height: 45px !important;
+    justify-content: flex-end !important;
     position: relative !important;
     padding-left: 0 !important;
   }
 
   .product-card__price,
   .installment__price {
-    font-size: 20px !important; /* Font ölçüsünü azaltmaq (əvvəlki 22px) */
-    line-height: 24px !important; /* Line-height-i azaltmaq (əvvəlki 28px) */
-    height: 24px !important; /* Hündürlüyü azaltmaq */
+    font-size: 20px !important;
+    line-height: 24px !important;
+    height: 24px !important;
   }
 
   .product-card__old-price,
   .installment__period {
-    font-size: 12px !important; /* Font ölçüsünü azaltmaq (əvvəlki 14px) */
-    line-height: 16px !important; /* Line-height-i azaltmaq (əvvəlki 20px) */
-    height: 16px !important; /* Hündürlüyü azaltmaq */
+    font-size: 12px !important;
+    line-height: 16px !important;
+    height: 16px !important;
   }
   
  .installment__period {
@@ -1263,9 +1178,10 @@
   }
 
   .product-card__button:hover:not(.product-card__button--active) .product-card__button-icon-left path {
-  stroke: rgba(63, 63, 63, 1) !important;
-}
-[data-theme="dark"] .product-card__button .product-card__button-text::after {
+    stroke: rgba(63, 63, 63, 1) !important;
+  }
+  
+  [data-theme="dark"] .product-card__button .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
   }
 
@@ -1276,6 +1192,7 @@
   [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
   }
+  
   [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
     stroke: rgba(255, 255, 255, 1) !important;
   }
@@ -1285,29 +1202,32 @@
   [data-theme="dark"] .product-card__button--active .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
   }
+  
   .product-card__button--active {
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
   }
+  
   .product-card__button--active .product-card__button-text::after {
     color: white !important;
     content: "Səbətə keç" !important;
   }
+  
   .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
     content: "Səbətə əlavə et";
     color: var(--color-text);
   }
 
   [data-theme="dark"] .product-card__button--active .product-card__button-text::after {
-  content: "Səbətə keç" !important;
-  color: white !important;
+    content: "Səbətə keç" !important;
+    color: white !important;
   }
 
   [data-theme="dark"] .product-card__button--active .product-card__button-icon-left path {
-  stroke: white !important;
+    stroke: white !important;
   }
 
-   [data-theme="dark"] .product-card__old-price {
+  [data-theme="dark"] .product-card__old-price {
     color: rgba(255, 255, 255, 0.5) !important;
   }
   
@@ -1323,21 +1243,20 @@
     color: rgba(255, 255, 255, 0.5) !important;
   }
 
-   .product-card__wishlist {
+  .product-card__wishlist {
     width: 50px !important;
     height: 50px !important;
   }
   
-  /* Məhsul kartının ümumi hündürlüyünü artırmaq */
   .product-card {
-    min-height: 415px !important; /* Əvvəlkindən (450px) daha az */
-    padding-bottom: 5px !important; /* Aşağıdan çox az bir boşluq */
+    min-height: 415px !important;
+    padding-bottom: 5px !important;
     box-sizing: border-box;
   }
 
   .product-card__actions {
-    margin-top: auto !important; /* Content içində ən aşağıda yerləşdirmək */
-    margin-bottom: 5px !important; /* Aşağıdan az boşluq */
+    margin-top: auto !important;
+    margin-bottom: 5px !important;
     position: relative;
   }
   
@@ -1345,8 +1264,8 @@
     padding-bottom: 5px !important;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Elementləri bərabər paylamaq */
-    height: calc(100% - 180px); /* Şəkil konteyneri hissəsini çıxmaq */
+    justify-content: space-between;
+    height: calc(100% - 180px);
     box-sizing: border-box;
   }
 
@@ -1354,9 +1273,9 @@
     display: flex !important;
     flex-direction: column !important;
     flex: 1 !important;
-    justify-content: flex-end !important; /* Aşağıdan hizalama */
+    justify-content: flex-end !important;
     position: relative !important;
-    height: 45px !important; /* Hündürlüyü azaltmaq */
+    height: 45px !important;
   }
 
   .product-card__button-icon-left svg {
@@ -1370,13 +1289,12 @@
   }
 
   .product-card__discount {
-        top: 2px !important;
-        left: 40px !important;
-        padding: 7px 8px !important;
-        font-size: 12px !important;
-        border-radius: 12px !important;
+    top: 2px !important;
+    left: 40px !important;
+    padding: 7px 8px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
   }
-
 }
 
 @media (max-width: 834px) {
@@ -1385,50 +1303,50 @@
     color: var(--color-text) !important;
   }
 
- .product-card__pricing-container {
+  .product-card__pricing-container {
     display: flex !important;
-    flex-direction: row !important; /* Yan-yana */
+    flex-direction: row !important;
     align-items: center !important;
-    justify-content: flex-start !important; /* Sol tərəfdən başlayaraq */
+    justify-content: flex-start !important;
     width: 100% !important;
-    gap: 0 !important; /* Elementlər arası boşluq ləğv edilir */
+    gap: 0 !important;
     padding: 0 !important;
     padding-top: 10px !important;
     position: relative !important;
   }
   
-  /* Qiymət qrupu strukturu */
   .product-card__price-wrapper {
     display: flex !important;
-    flex-direction: column !important; /* Şaquli istiqamət */
-    flex: 0 1 auto !important; /* Sıxıla bilər, böyüməz */
-    min-width: 0 !important; /* Overflow qarşısını almaq üçün */
-    padding-right: 6px !important; /* Kredit hissəsi ilə arasında kiçik boşluq */
-    margin-right: 6px !important; /* Sağ tərəfdən əlavə margin */
+    flex-direction: column !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    padding-right: 6px !important;
+    margin-right: 6px !important;
     position: relative !important;
   }
 
-
-  /* Kredit hissəsi strukturu */
   .installment-wrapper {
     display: flex !important;
-    flex-direction: column !important; /* Şaquli istiqamət */
-    flex: 0 1 auto !important; /* Sıxıla bilər, böyüməz */
-    min-width: 0 !important; /* Overflow qarşısını almaq üçün */
+    flex-direction: column !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
     padding-left: 7px !important;
     margin-left: -6px !important;
-    border-left: 1px solid #dedede !important; /* Ayırıcı xətt */
+    border-left: 1px solid #dedede !important;
     position: relative !important;
   }
 
   .installment__period { 
-    font-size: 14px !important; line-height: 1.5 !important; margin: 0 0 4px 0 !important; 
+    font-size: 14px !important; 
+    line-height: 1.5 !important; 
+    margin: 0 0 4px 0 !important; 
   }
   
   .product-card__wishlist--active {
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
   }
+  
   [data-theme="dark"] .product-card__button:hover:not(.product-card__button--active) {
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
@@ -1441,16 +1359,16 @@
   [data-theme="dark"] .product-card__button:hover:not(.product-card__button--active) .product-card__button-icon-left path {
     stroke: white !important;
   }
+  
   .product-card__wishlist:not(.product-card__wishlist--active):hover {
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
   }
 }
 
-
 @media (min-width: 600px) and (max-width: 767px) {
   .products-grid {
-    grid-template-columns: repeat(2, 1fr); /* 2 sütun */
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
   }
   
@@ -1490,59 +1408,53 @@
 }
 
 @media (min-width: 768px) and (max-width: 834px) {
-  /* Qiymət bölməsi strukturu */
   .product-card__pricing-container {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important; 
-    justify-content: flex-start !important; /* Element arası böyük boşluğu aradan qaldırır */
-    gap: 0 !important; /* Gap-i sıfırlayır */
+    justify-content: flex-start !important;
+    gap: 0 !important;
     width: 100% !important;
     margin: 15px 0 !important;
     padding: 0 !important;
     position: relative !important;
-    height: auto !important; /* Sabit hündürlüyü aradan qaldırır */
+    height: auto !important;
   }
   
-  /* Qiymət bloku */
   .product-card__price-wrapper {
     display: flex !important;
     flex-direction: column !important;
-    flex: 0 1 auto !important; /* 1 yerinə 0 1 auto - böyümür, sıxıla bilir */
+    flex: 0 1 auto !important;
     min-width: 0 !important;
-    padding-right: 8px !important; /* Ayırıcı xəttlə arada məsafə */
-    margin: 0 !important; /* Margin sıfırlanır */
+    padding-right: 8px !important;
+    margin: 0 !important;
     position: relative !important;
   }
   
-  /* Kredit bloku */
   .installment-wrapper {
     display: flex !important;
     flex-direction: column !important;
-    flex: 0 1 auto !important; /* 1 yerinə 0 1 auto - böyümür, sıxıla bilir */
+    flex: 0 1 auto !important;
     min-width: 0 !important;
-    padding-left: 8px !important; /* Ayırıcı xəttlə arada məsafə */
-    margin: 0 !important; /* Margin sıfırlanır */
-    border-left: 1px solid #dedede !important; /* Ayırıcı xətt əlavə edilir */
+    padding-left: 8px !important;
+    margin: 0 !important;
+    border-left: 1px solid #dedede !important;
     position: relative !important;
-    height: auto !important; /* Sabit hündürlüyü aradan qaldırır */
+    height: auto !important;
   }
 }
 
 @media only screen and (min-device-width: 768px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) {
-  /* Ana container-in daha yaxşı yerləşdirilməsi */
   .products-section .container {
     max-width: 740px !important; 
     padding: 0 15px !important;
     margin: 0 auto !important;
   }
 
-  /* 2 sütunlu görünüş */
   .products-grid {
     gap: 20px !important;
   }
   
-  /* Məhsul kartlarının böyüdülməsi */
   .product-card {
     max-width: 100% !important;
     min-height: 420px !important;
@@ -1550,7 +1462,7 @@
   }
 
   .product-card__pricing-container {
-    justify-content: flex-start !important; /* space-between əvəzinə */
+    justify-content: flex-start !important;
     gap: 0 !important;
     margin: 16px 0 !important;
     padding: 0 !important;
@@ -1558,8 +1470,8 @@
 
   .product-card__price-wrapper {
     display: flex !important;
-    flex-direction: column-reverse !important; /* Əvvəl köhnə qiymət, sonra yeni qiymət */
-    flex: 0 1 auto !important; /* 1 yerinə 0 1 auto */
+    flex-direction: column-reverse !important;
+    flex: 0 1 auto !important;
     min-width: 0 !important;
     padding-right: 8px !important;
     margin: 0 !important;
@@ -1583,7 +1495,6 @@
     color: #3F3F3F !important;
     margin: 0 !important;
   }
-
   
   .installment-wrapper {
     display: flex !important;
@@ -1610,13 +1521,12 @@
   .installment__price,
   .product-card__old-price,
   .installment__period {
-    position: static !important; /* absolute əvəzinə */
+    position: static !important;
     left: auto !important;
     bottom: auto !important;
     top: auto !important;
   }
   
-  /* Düymələrin böyüdülməsi */
   .product-card__actions {
     margin-top: auto !important;
     margin-bottom: -4px !important;
@@ -1639,7 +1549,6 @@
     font-weight: 600 !important;
   }
   
-  /* İkon ölçüləri */
   .product-card__button-icon-left svg {
     width: 18px !important;
     height: 18px !important;
@@ -1650,7 +1559,6 @@
     height: 22px !important;
   }
   
-  /* Discount və Compare */
   .product-card__discount {
     top: -15px !important;
     left: 20px !important;
@@ -1694,7 +1602,6 @@
     color: rgba(255, 255, 255, 0.5) !important;
   }
 }
-
 @media only screen and (min-device-width: 768px) and (max-device-width: 834px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -1757,17 +1664,17 @@
     width: auto;
     max-width: calc(100% - 20px);
     margin: 0 auto; 
-    padding-left: 20px !important; /* Sol tərəfdən boşluq əlavə edirik */
+    padding-left: 20px !important;
     border-radius: 20px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     position: relative;
-    scroll-padding-left: 20px; /* Scroll snap üçün boşluq */
-    justify-content: flex-start !important; /* Mərkəzləşdirmə əvəzinə soldan başlayır */
+    scroll-padding-left: 20px;
+    justify-content: flex-start !important;
   }
 
   .products-section__filters .category-button:first-child {
-    margin-left: 0 !important; /* İlk düymənin sol margin-i sıfırlanır */
+    margin-left: 0 !important;
   }
 
   .products-section__filters::after {
@@ -1784,7 +1691,7 @@
     z-index: 2;
   }
   .category-button:first-child {
-    margin-left: 0; /* Ensure first button has no left margin */
+    margin-left: 0;
   }
 
   .products-section__filters::after {
@@ -1817,8 +1724,8 @@
   display: flex;
   flex-direction: column-reverse;
   gap: 4px;
-  flex: 0 1 auto; /* Allow to shrink but not grow beyond content */
-  min-width: 0; /* Prevent overflow issues */
+  flex: 0 1 auto;
+  min-width: 0;
 }
   
   .product-card {
@@ -1856,44 +1763,38 @@
   }
 }
 
-
 @media (min-width: 377px) and (max-width: 480px) {
-  /* Bütün kart elementlərinin eyni ölçüdə olmasını təmin edir */
   .products-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important; /* Kartlar arası məsafəni azaldırıq */
+    gap: 8px !important;
   }
   
-  /* Product kartların tam identik olması üçün */
   .product-card {
-    max-width: 100% !important; /* Tam genişlik */
+    max-width: 100% !important;
     width: 100% !important;
-    min-height: 270px !important; /* Bütün kartlar üçün eyni hündürlük */
-    margin: 24px auto 8px !important; /* Yuxarıdan və aşağıdan eyni margin */
+    min-height: 270px !important;
+    margin: 24px auto 8px !important;
     border-radius: 10px !important;
-    padding: 12px 8px 8px !important; /* Padding-ləri bərabərləşdiririk */
+    padding: 12px 8px 8px !important;
     box-sizing: border-box !important;
   }
   
-  /* Şəkil konteynerləri eyni ölçüdə olmalıdır */
   .product-card__image-container {
-    width: calc(100% - 20px) !important; /* Bütün şəkil konteynerləri eyni ölçüdə */
-    max-width: none !important; /* max-width məhdudiyyətini ləğv edirik */
-    height: 130px !important; /* Eyni hündürlük */
+    width: calc(100% - 20px) !important;
+    max-width: none !important;
+    height: 130px !important;
     top: -20px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
   }
   
-  /* Məzmun hissəsinin yuxarı margin-i şəkilin hündürlüyü + top dəyərinə görə hesablanır */
   .product-card__content {
-    margin-top: 120px !important; /* Şəkil konteyneri hündürlüyü + məsafə */
+    margin-top: 120px !important;
     padding: 8px !important;
     gap: 4px !important;
   }
   
-  /* Title standartlaşdırılır */
   .product-card__title {
     font-size: 12px !important;
     min-height: 28px !important;
@@ -1901,7 +1802,6 @@
     margin: 4px 0 !important;
   }
   
-  /* Qiymət container-i standartlaşdırılır */
   .product-card__pricing-container {
     display: flex !important;
     flex-direction: row !important;
@@ -1913,7 +1813,6 @@
     height: auto !important;
   }
   
-  /* Qiymət və kredit bloklarının standart format */
   .product-card__price-wrapper, 
   .installment-wrapper {
     display: flex !important;
@@ -1923,7 +1822,6 @@
     position: relative !important;
   }
   
-  /* Qiymət və kredit arasında border */
   .product-card__price-wrapper {
     padding-right: 8px !important;
     margin-right: 4px !important;
@@ -1935,7 +1833,6 @@
     border-left: 1px solid #dedede !important;
   }
   
-  /* Qiymət və kredit mətnlərinin standart ölçüləri */
   .product-card__price,
   .installment__price {
     font-size: 14px !important;
@@ -1948,7 +1845,6 @@
     line-height: 14px !important;
   }
   
-  /* Düymələr container-ini standartlaşdırma */
   .product-card__actions {
     display: flex !important;
     justify-content: space-between !important;
@@ -1959,7 +1855,6 @@
     width: 100% !important;
   }
   
-  /* Düymələrin standart ölçüləri */
   .product-card__button {
     height: 35px !important;
     font-size: 11px !important;
@@ -1974,7 +1869,6 @@
     border-radius: 8px !important;
   }
   
-  /* İkonların standart ölçüləri */
   .product-card__button-icon-left svg {
     width: 14px !important;
     height: 14px !important;
@@ -1985,7 +1879,6 @@
     height: 17px !important;
   }
   
-  /* Düymə mətnlərinin standartlaşdırılması */
   .product-card__button-text::after {
     content: "Səbətə at" !important;
     font-size: 11px !important;
@@ -1997,7 +1890,6 @@
     font-size: 11px !important;
   }
   
-  /* Discount və Compare düymələrinin standartlaşdırılması */
   .product-card__discount {
     top: -12px !important;
     left: 10px !important;
@@ -2014,8 +1906,6 @@
   }
 }
 
-
-
 @media (max-width: 600px) {
   .products-section {
     padding: 30px 0;
@@ -2025,7 +1915,6 @@
     padding: 10px 16px;
     gap: 5px;
     border-radius: 18px;
-    /* Horizontal mərkəzləşdirmə saxlanılır */
     margin: 0 auto;
     max-width: calc(100% - 10px);
     justify-content: center !important;
@@ -2036,7 +1925,7 @@
   }
 
   .category-button {
-    scroll-snap-align: center; /* Başlanğıc əvəzinə mərkəzləşdiririk */
+    scroll-snap-align: center;
     font-size: 12px;
     padding: 6px 10px;
   }
@@ -2052,18 +1941,18 @@
   }
   
   .product-card {
-    max-width: 160px; /* Figma dizaynından mobil üçün */
+    max-width: 160px;
     min-height: 370px !important;
     margin-top: 20px;
     margin-bottom: 10px;
-    border-radius: 10px !important; /* Figma dizaynından mobil üçün */
+    border-radius: 10px !important;
   }
   
   .product-card__image-container {
     width: 85% !important;
     max-width: 220px !important;
-    height: 180px !important; /* 180px-dən 130px-ə azaldılıb */
-    top: -20px !important; /* -25px-dən -20px-ə dəyişdirilib */
+    height: 180px !important;
+    top: -20px !important;
   }
   
   .product-card__content {
@@ -2078,13 +1967,11 @@
   }
   
   .product-card__pricing-container {
-    flex-direction: row; /* column əvəzinə row saxlamaq */
-    align-items: center; /* mərkəzləşdirmə saxlamaq */
-    gap: 8px; /* daha kiçik gap */
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
     padding: 4px 0;
   }
-  
-  
   
   .product-card__price {
     font-size: 20px;
@@ -2106,9 +1993,9 @@
 
   .product-card__price-wrapper,
   .installment-wrapper {
-    flex: 0 1 auto; /* Sıxıla bilər, ancaq boyuməz */
-    min-width: 0; /* Taşma problemini önləmək */
-    gap: 0px; /* Daha kiçik iç məsafə */
+    flex: 0 1 auto;
+    min-width: 0;
+    gap: 0px;
   }
   
   .product-card__button {
@@ -2125,24 +2012,24 @@
   }
 
   .product-card__button-icon-left svg {
-    width: 15px; /* Kiçik ekranlarda ikonu bir az kiçildirik */
+    width: 15px;
     height: 15px;
   }
   
   .product-card__button-text {
-    margin-left: 0; /* kiçik ekranda margin silin */
-    display: inline-flex; /* düzgün hizalama üçün */
-    align-items: center; /* şaquli mərkəzləşdirmə */
-    justify-content: center; /* üfüqi mərkəzləşdirmə */
+    margin-left: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   
    .product-card__button-icon-left {
-    position: relative; /* mütləq mövqe əvəzinə nisbi mövqe */
-    left: -5px; /* kiçik soldan offset */
+    position: relative;
+    left: -5px;
     top: 0;
-    transform: none; /* şaquli mərkəzləşdirməni kənarlaşdır */
-    display: inline-block; /* blok olaraq göstər */
-    vertical-align: middle; /* şaquli mərkəzləşdir */
+    transform: none;
+    display: inline-block;
+    vertical-align: middle;
   }
   .product-card__rating {
     display: none;
@@ -2157,7 +2044,6 @@
     font-size: 9px;
   }
   
-  /* Compare button stilləri */
   .product-card__compare {
     width: 30px;
     height: 24px;
@@ -2165,7 +2051,6 @@
     right: 8px;
   }
   
-  /* Discount stil */
   .product-card__discount {
     top: -10px !important;
     left: 34px !important;
@@ -2186,17 +2071,17 @@
 @media (max-width: 601px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px; /* Daha kiçik gap ölçüsü */
+    gap: 10px;
   }
   
   .product-card {
-    max-width: 100%; /* Width 100% edir ki, konteynerə görə uyğunlaşsın */
-    min-height: 240px; /* Minimum hündürlük uyğunlaşdırılır */
+    max-width: 100%;
+    min-height: 240px;
     margin-top: 20px;
   }
   
   .product-card__image-container {
-    width: calc(100% - 20px); /* Konteyner genişliyinə uyğunlaşır */
+    width: calc(100% - 20px);
     height: 110px;
     top: -15px;
   }
@@ -2230,7 +2115,6 @@
 }
 
 @media (max-width: 1366px) and (min-width: 1201px) {
-  /* Container mərkəzləşdirmə */
   .products-section .container {
     max-width: var(--breakpoint-xxl);
     margin: 0 auto;
@@ -2241,7 +2125,6 @@
     align-items: center;
   }
   
-  /* Grid mərkəzləşdirmə */
   .products-grid {
     grid-template-columns: repeat(4, 1fr) !important;
     gap: 24px !important;
@@ -2252,7 +2135,6 @@
     justify-content: center;
   }
   
-  /* Kard ölçüləri saxlanılır lakin taşma aradan qaldırılır */
   .product-card {
     max-width: 288px !important;
     min-height: 419px !important;
@@ -2262,7 +2144,6 @@
     margin-bottom: 20px;
   }
   
-  /* Header mərkəzləşdirmə */
   .products-section__header {
     width: 100%;
     max-width: 1200px;
@@ -2271,7 +2152,6 @@
     margin-right: auto;
   }
 
-  /* Əlavə konteyner padding düzəlişi kiçik ekranlarda */
   @media (max-width: 1300px) {
     .products-section .container {
       padding: 0 30px;
@@ -2282,7 +2162,6 @@
     }
   }
   
-  /* Əlavə container padding düzəlişi daha kiçik ekranlarda */
   @media (max-width: 1250px) {
     .products-section .container {
       padding: 0 40px;
@@ -2293,41 +2172,35 @@
     }
   }
 }
-
 @media (max-width: 576px) {
-  /* Grid strukturunu daha kiçik və kompakt edir */
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px !important; /* Daha az boşluq */
+    gap: 8px !important;
     padding: 0 5px;
   }
   
-  /* Product kartlarının daha kompakt halını təmin edir - istədiyiniz ölçüyə daha yaxın */
   .product-card {
-    max-width: 210px !important; /* Daha kompakt ölçü */
-    min-height: 260px !important; /* Hündürlük azaldılır */
+    max-width: 210px !important;
+    min-height: 260px !important;
     margin: 0 auto;
-    margin-top: 30px; /* Şəkil üçün yer */
+    margin-top: 30px;
     border-radius: 10px !important; 
-    padding: 35px 3px 3px !important; /* Sizin istədiyiniz padding strukturu */
+    padding: 35px 3px 3px !important;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.04);
   }
   
-  /* Şəkil konteyneri daha kiçilir */
   .product-card__image-container {
     width: calc(100% - 20px) !important;
-    height: 125px !important; /* Daha kiçik şəkil konteyner yüksəkliyi */
+    height: 125px !important;
     top: -18px !important;
   }
   
-  /* Content margin və padding-i optimizasiya edilir */
   .product-card__content {
-    margin-top: 90px !important; /* Şəkil konteyneri ölçüsünə görə düzəlir */
+    margin-top: 90px !important;
     padding: 8px !important;
     gap: 0px;
   }
   
-  /* Font ölçüləri daha da kiçilir */
   .product-card__title {
     font-size: 11px !important;
     min-height: 26px !important;
@@ -2336,7 +2209,6 @@
     margin-bottom: 4px !important;
   }
   
-  /* Qiymət bölməsi daha kompakt hala gəlir */
   .product-card__pricing-container {
     flex-direction: row !important;
     align-items: center !important;
@@ -2345,7 +2217,6 @@
     height: auto !important;
   }
   
-  /* Qiymət və kredit qutularının içərisində elementlər kiçilir */
   .product-card__price {
     font-size: 14px !important;
     line-height: 18px !important;
@@ -2362,13 +2233,11 @@
     line-height: 18px !important;
   }
   
-  /* Düymə bölməsi kompakt olur */
   .product-card__actions {
     gap: 6px !important;
     margin-top: 12px !important;
   }
   
-  /* Düymələr kiçilir */
   .product-card__button {
     height: 36px !important;
     font-size: 11px !important;
@@ -2383,9 +2252,8 @@
     border-radius: 8px !important;
   }
   
-  /* Düymə içindəki mətn kiçilir */
   .product-card__button-text::after {
-    content: "Səbətə at" !important; /* Daha qısa mətn */
+    content: "Səbətə at" !important;
     font-size: 11px !important;
   }
   
@@ -2394,7 +2262,6 @@
     font-size: 11px !important;
   }
   
-  /* İkonlar kiçilir */
   .product-card__button-icon-left {
     left: 8px !important;
   }
@@ -2409,7 +2276,6 @@
     height: 16px !important;
   }
   
-  /* Compare və discount elementləri kiçilir */
   .product-card__discount {
     top: -7px !important;
     left: 19px !important;
@@ -2430,7 +2296,6 @@
     height: 14px !important;
   }
   
-  /* Rating bölməsi gizlədilir, cihaza görə */
   .product-card__rating {
     display: none !important;
   }
@@ -2452,12 +2317,12 @@
   }
   
   .product-card {
-    max-width: 210px !important; /* Daha kompakt ölçü */
-    min-height: 260px !important; /* Hündürlük azaldılır */
+    max-width: 210px !important;
+    min-height: 260px !important;
     margin: 0 auto;
-    margin-top: 30px; /* Şəkil üçün yer */
+    margin-top: 30px;
     border-radius: 10px !important; 
-    padding: 11px 3px 3px !important; /* Sizin istədiyiniz padding strukturu */
+    padding: 11px 3px 3px !important;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.04);
   }
   
@@ -2550,6 +2415,7 @@
     padding: 5px 9px !important;
   }
 }
+
 @media (max-width: 376px) {
   .products-section__filters {
     padding: 7px 12px !important;
@@ -2563,8 +2429,8 @@
     padding: 5px 8px !important;
   }
 }
+
 @media (min-width: 1201px) and (max-width: 1366px) {
-  /* Container mərkəzləşdirmə */
   .products-section .container {
     max-width: var(--breakpoint-xxl);
     margin: 0 auto;
@@ -2575,52 +2441,46 @@
     align-items: center;
   }
   
-  /* Grid mərkəzləşdirmə və ölçü düzəlişi */
   .products-grid {
     grid-template-columns: repeat(4, 1fr) !important;
-    gap: 20px !important; /* Gap azaldılıb */
+    gap: 20px !important;
     width: 100%;
-    max-width: 1160px; /* Grid genişliyi azaldılıb */
+    max-width: 1160px;
     margin: 0 auto;
     padding-bottom: 20px;
     justify-content: center;
   }
   
-  /* Card ölçüləri kiçildilib */
   .product-card {
-    max-width: 260px !important; /* Genişlik azaldılıb (əvvəl 288px idi) */
-    min-height: 400px !important; /* Hündürlük azaldılıb (əvvəl 419px idi) */
+    max-width: 260px !important;
+    min-height: 400px !important;
     margin: 0 auto;
     margin-top: 40px !important;
     margin-bottom: 15px !important;
     border-radius: var(--border-radius-card) !important;
   }
   
-  /* Şəkil konteyneri ölçüləri kiçildilib */
   .product-card__image-container {
-    width: 230px !important; /* Genişlik azaldılıb (əvvəl 248px idi) */
-    height: 200px !important; /* Hündürlük azaldılıb (əvvəl 218px idi) */
+    width: 230px !important;
+    height: 200px !important;
     top: -35px !important;
     border-radius: 20px !important;
   }
   
-  /* Content margin düzəlişi */
   .product-card__content {
-    margin-top: 175px !important; /* Margin azaldılıb (əvvəl 190px idi) */
+    margin-top: 175px !important;
     padding: 16px !important;
     gap: 8px !important;
   }
   
-  /* Header mərkəzləşdirmə */
   .products-section__header {
     width: 100%;
-    max-width: 1160px; /* Grid genişliyinə uyğunlaşdırılıb */
+    max-width: 1160px;
     margin-bottom: 32px;
     margin-left: auto;
     margin-right: auto;
   }
   
-  /* Qiymət konteyneri */
   .product-card__pricing-container {
     display: flex !important;
     align-items: flex-end !important;
@@ -2628,7 +2488,6 @@
     margin-top: auto !important;
   }
   
-  /* Sol qiymət bölməsi */
   .product-card__price-wrapper {
     display: flex !important;
     flex-direction: column !important;
@@ -2637,7 +2496,6 @@
     min-width: 0 !important;
   }
   
-  /* Kredit hissəsi */
   .installment-wrapper {
     display: flex !important;
     flex-direction: column !important;
@@ -2647,17 +2505,14 @@
     min-width: 0 !important;
   }
   
-  /* Dark Mode Stilləri */
   [data-theme="dark"] .product-card {
     background-color: rgba(43, 43, 43, 1) !important;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15) !important;
   }
   
   [data-theme="dark"] .product-card__compare {
-  background-color: rgba(255, 255, 255, 1) !important;
-}
-  
-  
+    background-color: rgba(255, 255, 255, 1) !important;
+  }
   
   [data-theme="dark"] .product-card__button,
   [data-theme="dark"] .product-card__wishlist {
@@ -2683,8 +2538,6 @@
     height: 105px !important;
     top: -14px !important;
   }
-
-
   
   .product-card__content {
     margin-top: 90px !important;
@@ -2743,6 +2596,7 @@
     color: var(--color-text) !important;
     font-size: 9px !important;
   }
+  
   [data-theme="dark"] .product-card__button .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
   }
@@ -2755,7 +2609,6 @@
     stroke: rgba(255, 255, 255, 1) !important;
   }
   
-  /* Həmçinin hover və active vəziyyətlər üçün də təmin edirik */
   [data-theme="dark"] .product-card__button:hover .product-card__button-text::after,
   [data-theme="dark"] .product-card__button:active .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
@@ -2776,9 +2629,11 @@
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
   }
+  
   .product-card__button:hover:not(.product-card__button--active) {
-       color: rgba(63, 63, 63, 1) !important;
+    color: rgba(63, 63, 63, 1) !important;
   }
+  
   .product-card__button:hover:not(.product-card__button--active) .product-card__button-icon-left path {
     stroke: rgba(63, 63, 63, 1) !important;
   }
@@ -2795,17 +2650,20 @@
   .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
     stroke: rgba(63, 63, 63, 1) !important;
   }
+  
   .product-card__wishlist {
     width: 28px;
     height: 28px;
     padding: 6px;
     min-height: 28px;
   }
-  .product-card__button-icon-left {
-    width: 12px;
-    height: 12px;
-    margin-left: 10px;
-  }
+  
+      .product-card__button-icon-left {
+        width: 12px;
+        height: 12px;
+        margin-right: 5px;
+    }
+  
   .product-card__button-icon-left svg {
     width: 12px !important;
     height: 12px !important;
@@ -2815,13 +2673,14 @@
     width: 14px !important;
     height: 14px !important;
   }
+  
   .product-card__button-text {
-    margin-left: 0 !important; /* Sol tərəfdən margin ləğv et */
-    text-align: center !important; /* Mətnin mərkəzləşdirilməsi */
+    margin-left: 0 !important;
+    text-align: center !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 100% !important; /* Tam genişlik */
+    width: 100% !important;
   }
 
   .products-section__filters {
@@ -2886,25 +2745,25 @@
   }
   
   .product-card__image-container {
-    width: calc(100% - 18px); /* Daha da kiçik ekranlar üçün daha az margin */
-    height: 115px; /* Bir az kiçildirik amma çox deyil */
+    width: calc(100% - 18px);
+    height: 115px;
   }
   
   .product-card__content {
-    margin-top: 100px; /* Şəkil konteyneri + minimal məsafə */
+    margin-top: 100px;
   }
 
-   .category-button:first-child {
+  .category-button:first-child {
     padding-left: 6px !important;
   }
 
   .product-card__image {
-  will-change: transform;
-  backface-visibility: hidden;
-  transform: translateZ(0); /* Hardware acceleration üçün */
-  image-rendering: -webkit-optimize-contrast; /* Safari/Chrome-da şəkil nettliyi */
-  image-rendering: crisp-edges; /* Modern brauzerlər üçün */
-}
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
   
   .product-card__title {
     font-size: 9px;
@@ -2928,6 +2787,7 @@
     width: 26px;
     padding: 4px;
   }
+  
   .product-card__button-text::after {
     content: "Səbətə at";
     color: var(--color-text) !important;
@@ -2956,7 +2816,7 @@
     stroke: white !important;
   }
 
-   [data-theme="dark"] .product-card__button .product-card__button-text::after {
+  [data-theme="dark"] .product-card__button .product-card__button-text::after {
     color: rgba(255, 255, 255, 1) !important;
   }
   
@@ -2966,8 +2826,7 @@
 }
 
 @media only screen and (min-width: 1024px) and (max-width: 1366px) {  
-  /* Məhsul kartlarının ölçüsünün böyüdülməsi */
-    .product-card__price {
+  .product-card__price {
     font-size: 20px;
     line-height: 22px;
     font-weight: 700;
@@ -2976,7 +2835,6 @@
     margin: 0;
   }
   
-  /* Şəkil konteyneri */
   .product-card__image-container {
     width: calc(100% - 40px) !important;
     max-width: 380px !important;
@@ -2986,9 +2844,8 @@
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05) !important;
   }
   
-  /* Məhsul başlığı */
   .product-card__title {
-  font-weight: 400;
+    font-weight: 400;
     font-size: 14px !important;
     line-height: 19px !important;
     color:#333;
@@ -3001,13 +2858,11 @@
     overflow-wrap: anywhere;
   }
   
-  /* Məhsul kontenti */
   .product-card__content {
     margin-top: 215px !important;
     padding: 20px !important;
   }
   
-  /* Qiymətləndirmə bölməsi */
   .product-card__rating {
     display: flex !important;
   }
@@ -3023,26 +2878,26 @@
     font-size: 14px !important;
   }
   
-  /* Qiymət bölməsi */
-   .product-card__pricing-container {
+  .product-card__pricing-container {
     display: flex !important;
     align-items: flex-end !important;
-    justify-content: flex-start !important; /* flex-start istifadə edin ki, elementlər sola doğru yığılsın */
+    justify-content: flex-start !important;
     width: 100% !important;
     position: relative !important;
-    gap: 0 !important; /* elementlər arası boşluğu aradan qaldırın */
+    gap: 0 !important;
     height: auto !important;
   }
-   .product-card__price-wrapper {
-    flex: 0 0 auto !important; /* flex-grow: 0, flex-shrink: 0, flex-basis: auto */
+  
+  .product-card__price-wrapper {
+    flex: 0 0 auto !important;
     margin-left: 5px !important;
   }
 
   .installment-wrapper {
-    flex: 0 0 auto !important; /* flex-grow: 0, flex-shrink: 0, flex-basis: auto */
-    padding-left: 6px !important; /* sol tərəfdən padding azaldın */
-    border-left: 1px solid #dedede !important; /* border saxlayın */
-    margin-left: 0 !important; /* sol margin sıfırlayın */
+    flex: 0 0 auto !important;
+    padding-left: 6px !important;
+    border-left: 1px solid #dedede !important;
+    margin-left: 0 !important;
   }
   
   .product-card__price {
@@ -3054,7 +2909,6 @@
     margin: 0;
   }
   
-  /* Köhnə qiymət yazısı */
   .product-card__old-price {
     font-size: 14px;
     line-height: 19px;
@@ -3084,7 +2938,6 @@
     margin: 0;
   }
   
-  /* Düymələr bölməsi */
   .product-card__actions {
     margin-top: 20px !important;
     gap: 15px !important;
@@ -3111,7 +2964,6 @@
     height: 26px !important;
   }
   
-  /* Endirim göstərici */
   .product-card__discount {
     top: -19px !important;
     left: 36px !important;
@@ -3120,7 +2972,6 @@
     border-radius: 12px !important;
   }
   
-  /* Müqayisə düyməsi */
   .product-card__compare {
     width: 46px !important;
     height: 34px !important;
@@ -3133,10 +2984,7 @@
     height: 20px !important;
   }
 }
-
-/* iPad Mini və yaxın ekran ölçüləri üçün (768px-dən 1023px-ə qədər) */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
-  /* 2 sütunlu grid layout */
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 25px !important;
@@ -3146,7 +2994,6 @@
     margin: 0 auto !important;
   }
   
-  /* Məhsul kartlarının ölçüsünün böyüdülməsi */
   .product-card {
     max-width: 100% !important;
     min-height: 450px !important;
@@ -3155,7 +3002,6 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06) !important;
   }
   
-  /* Şəkil konteyneri */
   .product-card__image-container {
     width: calc(100% - 36px) !important;
     max-width: 340px !important;
@@ -3164,26 +3010,22 @@
     border-radius: 22px !important;
   }
   
-  /* Məhsul başlığı */
   .product-card__title {
     font-size: 16px !important;
     min-height: 40px !important;
     line-height: 1.25 !important;
   }
   
-  /* Məhsul kontenti */
   .product-card__content {
     margin-top: 200px !important;
     padding: 18px !important;
   }
   
-  /* Qiymətləndirmə bölməsi */
   .product-card__rating {
     display: flex !important;
     margin-bottom: 8px !important;
   }
   
-  /* Qiymət bölməsi */
   .product-card__pricing-container {
     display: flex !important;
     align-items: center !important;
@@ -3228,7 +3070,7 @@
   
   .installment__period {
     font-size: 14px !important;
-    line-height: 1.5 !important; /* 25px əvəzinə 1.5 əmsal */
+    line-height: 1.5 !important;
     margin: 0 0 4px 0 !important;
   }
   
@@ -3238,7 +3080,6 @@
     margin: 0 !important;
   }
   
-  /* Düymələr bölməsi */
   .product-card__actions {
     gap: 12px !important;
   }
@@ -3249,13 +3090,13 @@
     border-radius: 13px !important;
   }
 
-      .product-card__discount {
-        top: -19px !important;
-        left: 32px !important;
-        padding: 7px 8px !important;
-        font-size: 12px !important;
-        border-radius: 12px !important;
-    }
+  .product-card__discount {
+    top: -19px !important;
+    left: 32px !important;
+    padding: 7px 8px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
+  }
   
   .product-card__wishlist {
     width: 50px !important;
@@ -3286,8 +3127,8 @@
   
   .installment-wrapper {
     padding-left: 8px;
-
   }
+  
   .product-card__pricing-container {
     justify-content: flex-start;
     gap: 0;
@@ -3295,18 +3136,18 @@
   }
 
   .product-card__button-text {
-  font-family: 'SF Pro Display' sans-serif;
+    font-family: 'SF Pro Display' sans-serif;
     font-size: 13px;
     font-weight: 700;
     line-height: 19px;
     margin-left: 15px !important;
   }
 
-      .product-card__wishlist {
-        width: 45px !important;
-        height: 45px !important;
-        border-radius: 14px !important;
-    }
+  .product-card__wishlist {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 14px !important;
+  }
 }
 
 @media only screen and (min-width: 933px) and (max-width: 1023px) {
@@ -3473,8 +3314,6 @@
   }
 }
 
-
-
 @media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 450px) {
   body .products-grid,
   body .products-section .products-grid {
@@ -3493,19 +3332,18 @@
   }
 }
 
-
-
 @media only screen and (min-width: 736px) and (max-width: 932px) and (orientation: landscape) {
   .products-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 15px !important;
   }
+  
   .product-card__price-wrapper {
-  display: flex;
-  flex-direction: column-reverse;
-  flex: 0 1 auto; /* Allow to shrink but not grow beyond content */
-  min-width: 0; /* Prevent overflow issues */
-}
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
   
   .product-card {
     min-height: 370px !important;
@@ -3516,6 +3354,7 @@
     height: 165px !important;
     top: -20px !important;
   }
+  
   .product-card__content {
     margin-top: 150px !important;
     padding: 12px !important;
@@ -3538,20 +3377,21 @@
     width: 20px !important;
     height: 20px !important;
   }
+  
   .product-card__button-icon-left { 
     width: 18px !important;
     height: 18px !important;
   }
+  
   .product-card__discount {
-        top: -4px !important;
-        left: 40px !important;
-        padding: 7px 8px !important;
-        font-size: 12px !important;
-        border-radius: 12px !important;
-    }
+    top: -4px !important;
+    left: 40px !important;
+    padding: 7px 8px !important;
+    font-size: 12px !important;
+    border-radius: 12px !important;
+  }
 }
 
-/* Köhnə iPad Pro qurğuları üçün */
 @media only screen and (width: 1024px) and (height: 1366px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -3584,6 +3424,7 @@
     gap: 20px !important;
   }
 }
+
 @media (max-width: 992px) and (min-width: 933px) {
   .products-grid {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -3595,14 +3436,13 @@
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 15px !important;
   }
+  
   .product-card__price-wrapper {
-  display: flex;
-  flex-direction: column-reverse;
-  flex: 0 1 auto; /* Allow to shrink but not grow beyond content */
-  min-width: 0; /* Prevent overflow issues */
-}
-
-
+    display: flex;
+    flex-direction: column-reverse;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
 }
 
 @media only screen and (min-width: 933px) and (max-width: 1024px) {
@@ -3622,8 +3462,8 @@
     height: 45px !important;
   }
 }
+
 @media screen and (min-width: 768px) {
-  /* Qiymət elementlərinin overflow problemi üçün */
   .product-card__price-wrapper,
   .installment-wrapper {
     overflow: hidden !important;
@@ -3634,52 +3474,43 @@
     padding-left: 7px !important;
   }
 
-  .product-card__price-wrapper
-  {
+  .product-card__price-wrapper {
     display: flex;
     flex-direction: column;
     padding-right: 5px !important;
   }
 }
 
-
-
 @media (min-width: 1024px) and (max-width: 1200px) {
   .product-card__price-wrapper {
-    padding-right: 6px; /* Daha da kiçik padding */
+    padding-right: 6px;
   }
   
   .installment-wrapper {
-    padding-left: 6px; /* Daha da kiçik padding */
+    padding-left: 6px;
   }
 }
 
-
-
-/* 310px-dən 200px-ə qədər ətraflı responsivlik düzəlişləri */
 @media (max-width: 310px) and (min-width: 200px) {
-  /* Ana konteyner stilini overflow-x: auto ilə təyin edirik, üfüqi scroll yaratmaq üçün */
   .products-section .container {
     padding: 0 3px;
     max-width: 100%;
-    overflow-x: auto; /* Üfüqi scroll yaradır */
-    -webkit-overflow-scrolling: touch; /* iOS cihazlarda scrollu yaxşılaşdırır */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
-  /* Grid sistemini kiçik ekranlar üçün optimalaşdırma - 2 sütunlu layout qorunur */
   .products-grid {
-    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important; /* Minimum genişliyi 150px təyin edir */
+    grid-template-columns: repeat(2, minmax(150px, 1fr)) !important;
     gap: 4px !important;
-    width: auto !important; /* Auto genişlik */
-    min-width: 310px !important; /* Minimal genişlik, üfüqi scroll yaranacaq */
+    width: auto !important;
+    min-width: 310px !important;
     padding: 0 !important;
   }
   
-  /* Kartlar üçün ölçü düzəlişləri */
   .product-card {
-    max-width: 150px !important; /* Minimum genişlik */
-    min-width: 150px !important; /* Minimum genişlik */
-    width: 150px !important; /* Fiksediləcək genişlik */
+    max-width: 150px !important;
+    min-width: 150px !important;
+    width: 150px !important;
     min-height: 170px !important;
     margin: 14px auto 4px !important;
     border-radius: 8px !important;
@@ -3687,23 +3518,20 @@
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.03);
   }
   
-  /* Şəkil konteyneri üçün daha kompakt düzəlişlər */
   .product-card__image-container {
-    width: 140px !important; /* Fiksediləcək genişlik */
+    width: 140px !important;
     height: 80px !important;
     top: -10px !important;
     border-radius: 8px !important;
     border-width: 0.5px !important;
   }
   
-  /* Kontent bölməsi kompaktlaşdırılır */
   .product-card__content {
     margin-top: 75px !important;
     padding: 2px 4px !important;
     gap: 2px !important;
   }
   
-  /* Başlıq stili kiçik ekranlara uyğunlaşdırılır */
   .product-card__title {
     font-size: 8px !important;
     min-height: 16px !important;
@@ -3713,7 +3541,6 @@
     font-weight: 400 !important;
   }
   
-  /* Qiymət bölməsi daha kompakt hala gətirilir */
   .product-card__pricing-container {
     flex-direction: row !important;
     align-items: center !important;
@@ -3723,7 +3550,6 @@
     min-height: 22px !important;
   }
   
-  /* Qiymət və kredit qutularının daha kiçik stilləri */
   .product-card__price-wrapper,
   .installment-wrapper {
     display: flex !important;
@@ -3744,7 +3570,6 @@
     border-left: 1px solid #ededed !important;
   }
   
-  /* Qiymət və kredit mətnlərinin daha kiçik ölçüləri */
   .product-card__price,
   .installment__price {
     font-size: 8px !important;
@@ -3759,7 +3584,6 @@
     margin-bottom: 1px !important;
   }
   
-  /* Düymələr daha kompakt hala gətirilir */
   .product-card__actions {
     gap: 3px !important;
     margin-top: 4px !important;
@@ -3782,9 +3606,8 @@
     border-radius: 5px !important;
   }
   
-  /* Düymələrdəki ikonların kiçilməsi */
   .product-card__button-icon-left {
-    display: none !important; /* Çox kiçik ekranlarda ikonu gizlədirik */
+    display: none !important;
   }
   
   .product-card__wishlist svg {
@@ -3792,7 +3615,6 @@
     height: 10px !important;
   }
   
-  /* Düymə mətnlərinin kiçilməsi */
   .product-card__button-text::after {
     content: "Səbətə at" !important;
     font-size: 7px !important;
@@ -3806,7 +3628,6 @@
     color: white !important;
   }
   
-  /* Endirim və müqayisə düymələrinin kiçilməsi */
   .product-card__discount {
     top: -8px !important;
     left: 5px !important;
@@ -3828,12 +3649,10 @@
     height: 10px !important;
   }
   
-  /* Rating bölməsi gizlədilir */
   .product-card__rating {
     display: none !important;
   }
 
-  /* Şəkil üçün miqyaslandırma effektinin kiçik cihazlarda daha yüngül olması */
   .product-card:hover .product-card__image {
     transform: scale(1.03) !important;
     transition: transform 0.3s ease !important;
@@ -3845,9 +3664,10 @@
   }
   
   [data-theme="dark"] .product-card__image-container {
-  background-color: #FFFFFF !important; /* Ağ rəng */
-  border-color: rgba(237, 237, 237, 1) !important;
-}
+    background-color: #FFFFFF !important;
+    border-color: rgba(237, 237, 237, 1) !important;
+  }
+  
   
   [data-theme="dark"] .product-card__button,
   [data-theme="dark"] .product-card__wishlist {
@@ -3855,37 +3675,35 @@
     color: #E0E0E0 !important;
   }
   
-  /* Performans optimallaşdırması üçün əlavə */
   .product-card, 
   .product-card__image-container, 
   .product-card__button, 
   .product-card__wishlist {
-    will-change: transform; /* Hardware akselerasiya */
+    will-change: transform;
   }
 }
 
-/* 250px-dən aşağı ekranlarda əlavə optimallaşdırma */
 @media (max-width: 250px) {
   .products-grid {
-    min-width: 300px !important; /* Scroll yaranması üçün minimum eni */
+    min-width: 300px !important;
   }
 
   .products-section .container {
-    scrollbar-width: thin; /* Firefox üçün kiçik scrollbar */
-    scrollbar-color: #ccc transparent; /* Firefox üçün scrollbar rəngi */
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
   }
 
   .products-section .container::-webkit-scrollbar {
-    height: 3px; /* Scroll höndürlüyü */
+    height: 3px;
   }
   
   .products-section .container::-webkit-scrollbar-track {
-    background: transparent; /* Scroll track şəffaf */
+    background: transparent;
   }
   
   .products-section .container::-webkit-scrollbar-thumb {
-    background-color: #ccc; /* Scroll thumb rəngi */
-    border-radius: 20px; /* Dairəvi scroll thumb */
+    background-color: #ccc;
+    border-radius: 20px;
   }
 
   .products-section__filters {
@@ -3939,10 +3757,9 @@
   }
 }
 
-/* 200px-ə qədər olan çox kiçik eksotik ekranlar üçün (nadir, amma mümkündür) */
 @media (max-width: 220px) {
   .products-grid {
-    min-width: 290px !important; /* Daha da kiçik ekranlarda da scroll yaranması üçün */
+    min-width: 290px !important;
   }
   
   .product-card {
@@ -3960,7 +3777,6 @@
     margin-top: 65px !important;
   }
   
-  /* Qiymət və həftəlik ödəniş dəyərlərinin ölçülərini daha da kiçildirik */
   .product-card__price,
   .installment__price {
     font-size: 7px !important;
@@ -3983,55 +3799,73 @@
   }
 }
 
-/* Düyməyə basılma zamanı görünüşün bütün mobil ekranlarda optimallaşdırılması */
 @media (max-width: 310px) {
-  .product-card__button:active,
-  .product-card__wishlist:active {
-    transform: scale(0.98) !important;
-    transition: transform 0.1s ease !important;
-  }
-  
-  .product-card__button:hover .product-card__button-text::after,
-  .product-card__button:active .product-card__button-text::after {
-    transform: translateY(0) !important; /* Hover animasiyasını sadələşdirir */
-  }
-  
-  /* Hover əvəzinə active üçün düzəlişlər (toxunmatik ekranlar üçün) */
-  .product-card__button:active:not(.product-card__button--active) {
-    background-color: rgba(234, 36, 39, 0.8) !important;
-    color: white !important;
-  }
-  
-  .product-card__button:active:not(.product-card__button--active) .product-card__button-text::after {
-    color: white !important;
-  }
-  
   .product-card__button--active {
     background-color: rgba(234, 36, 39, 1) !important;
-  }
-
-  [data-theme="dark"] .product-card__button .product-card__button-text::after {
-    color: rgba(255, 255, 255, 1) !important;
+    color: white !important;
   }
   
-  [data-theme="dark"] .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
-    color: rgba(255, 255, 255, 1) !important;
+  .product-card__button--active .product-card__button-text::after {
+    color: white !important;
   }
   
-  [data-theme="dark"] .product-card__button:active:not(.product-card__button--active) .product-card__button-text::after {
-    color: rgba(255, 255, 255, 1) !important;
-  }
-
-  .products-section__filters {
-    padding: 6px 10px !important;
-    padding-left: 10px !important;
-    gap: 2px !important;
-    border-radius: 12px !important;
+  .product-card__button--active:hover,
+  .product-card__button--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
   }
   
-  .category-button {
-    font-size: 9px !important;
-    padding: 4px 6px !important;
+  .product-card__button--active:hover .product-card__button-text::after,
+  .product-card__button--active:active .product-card__button-text::after {
+    color: white !important;
+  }
+  
+  .product-card__button {
+    transition: background-color 0.2s ease, color 0.2s ease !important;
+  }
+  
+  .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active:hover,
+  .product-card__wishlist--active:active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active svg {
+    color: white !important;
+  }
+  
+  
+  [data-theme="dark"] .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__button--active .product-card__button-text::after {
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist--active svg {
+    color: white !important;
+  }
+  
+  .products-section .product-card .product-card__actions .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .products-section .product-card .product-card__actions .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
   }
 }
 
@@ -4050,12 +3884,10 @@
 }
 
 @media (max-width: 310px) {
-  /* Scroll izləri gizlədilir (touch cihazlarda maneə yaratmamaq üçün) */
   .products-section .container::-webkit-scrollbar {
-    height: 2px; /* Kiçik hündürlük */
+    height: 2px;
   }
   
-  /* Scroll göstəricisini göstərən görsel əlavə edirik (opsionaldır) */
   .products-section::after {
     content: "";
     display: block;
@@ -4066,7 +3898,6 @@
     height: 15px;
     background: rgba(240, 240, 240, 0.6);
     border-radius: 50%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18l6-6-6-6'/%3E%3C/svg%3E");
     background-size: 12px;
     background-repeat: no-repeat;
     background-position: center;
@@ -4085,12 +3916,12 @@
   .products-section .container {
     padding: 0 3px;
     max-width: 100%;
-    overflow-x: auto; /* Üfüqi scroll əlavə edirik */
-    -webkit-overflow-scrolling: touch; /* iOS-da daha yaxşı scroll təcrübəsi */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .products-section__filters {
-    min-width: 305px; /* Minimum genişlik təyin edirik */
+    min-width: 305px;
     padding: 8px 10px !important;
     padding-left: 10px !important;
     gap: 2px !important;
@@ -4101,7 +3932,7 @@
   }
   
   .products-section .container::-webkit-scrollbar {
-    height: 2px; /* Scroll göstəricisini kiçildirik */
+    height: 2px;
   }
   
   .products-section .container::-webkit-scrollbar-thumb {
@@ -4109,32 +3940,30 @@
     border-radius: 2px;
   }
 
-  /* Dark mode üçün scroll rəngini tənzimləyirik */
   [data-theme="dark"] .products-section .container::-webkit-scrollbar-thumb {
     background-color: rgba(80, 80, 80, 0.5);
   }
 }
 
 @media (max-width: 200px) {
-  .products-section .container {
-    min-width: 305px; /* Container üçün minimum genişlik */
-    overflow-x: auto;
+  .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
   }
   
-  .products-section__filters {
-    min-width: 305px; /* Filtr bölməsi üçün minimum genişlik */
+  .product-card__button--active .product-card__button-text::after {
+    color: white !important;
   }
   
-  .products-grid {
-    min-width: 305px; /* Grid üçün minimum genişlik */
+  .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
   }
   
-  /* Məcburi üfüqi scroll göstəricisini yaxşılaşdırırıq */
-  .products-section::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: transparent;
+  .product-card__wishlist--active svg {
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active svg path {
   }
 }

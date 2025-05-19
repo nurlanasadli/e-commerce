@@ -3,10 +3,9 @@
   --foreground: #171717;
 }
 
-/* We still keep this for fallback, but our theme system will override it */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a1a1a; /* Updated to #1a1a1a */
+    --background: #1a1a1a; 
     --foreground: #ededed;
   }
 }
@@ -25,7 +24,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Add this to ensure our CSS variables are properly applied */
 [data-theme="dark"] {
   --background: #1a1a1a;
   --foreground: #ededed;

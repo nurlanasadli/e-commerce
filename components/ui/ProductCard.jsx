@@ -1,5 +1,3 @@
-// components/ui/ProductCard.jsx
-
 import React from 'react';
 import { HeartIcon, CartAddIcon, CommentIcon, StarIcon, CompareIcon } from './icons';
 import { useProductContext } from '../../contexts/ProductContext';
@@ -8,7 +6,7 @@ import { useProductContext } from '../../contexts/ProductContext';
 const PLACEHOLDER_IMAGE = '/product-placeholder.svg';
 const REVIEW_TEXT = 'Rəy';
 
-// Memoized icon components for better performance
+// Memoized icon components
 const MemoizedHeartIcon = React.memo(HeartIcon);
 const MemoizedCartAddIcon = React.memo(CartAddIcon);
 const MemoizedCommentIcon = React.memo(CommentIcon);
@@ -18,7 +16,6 @@ const MemoizedCompareIcon = React.memo(CompareIcon);
 const ProductCard = ({ product }) => {
   if (!product) return null;
   
-  // Get functions from context
   const { toggleFavorite, toggleCart, toggleComparison, formatPrice } = useProductContext();
 
   const {
@@ -36,7 +33,6 @@ const ProductCard = ({ product }) => {
     isInComparison
   } = product;
 
-  // Event handlers
   const handleToggleFavorite = React.useCallback((e) => {
     toggleFavorite(id, e);
   }, [id, toggleFavorite]);
@@ -61,7 +57,6 @@ const ProductCard = ({ product }) => {
       )}
       
       <div className="product-card__image-container">
-        {/* Compare button */}
         <button 
           className={`product-card__compare ${isInComparison ? 'product-card__compare--active' : ''}`}
           onClick={handleToggleComparison}

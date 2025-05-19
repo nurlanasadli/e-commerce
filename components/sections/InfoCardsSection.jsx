@@ -7,9 +7,9 @@ const InfoCard = memo(({ icon, title, description }) => (
     <div className="info-card__icon">
       <img 
         src={icon} 
-        alt=""  // Decorative icons don't need alt text
+        alt=""  
         className="info-card__icon-img" 
-        loading="lazy" // Performance optimization
+        loading="lazy" 
         width={24} 
         height={24}
       />
@@ -21,7 +21,7 @@ const InfoCard = memo(({ icon, title, description }) => (
   </Card>
 ));
 
-InfoCard.displayName = 'InfoCard'; // For better React DevTools experience
+InfoCard.displayName = 'InfoCard'; 
 
 const InfoCardsSection = ({ features = [] }) => {
   if (!features.length) {
@@ -29,7 +29,6 @@ const InfoCardsSection = ({ features = [] }) => {
       <section className="info-cards-section info-cards-section--empty" aria-hidden="true">
         <div className="container">
           <div className="info-cards-grid">
-            {/* Skeleton loaders for better UX during loading */}
             {[...Array(4)].map((_, index) => (
               <Card key={index} className="info-card info-card--skeleton">
                 <div className="info-card__icon info-card__icon--skeleton" />

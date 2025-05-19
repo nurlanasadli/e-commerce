@@ -9,7 +9,6 @@
     overflow: hidden;
 }
 
-/* Dark mode üçün */
 [data-theme="dark"] .card {
   background-color: rgba(43, 43, 43, 1);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);

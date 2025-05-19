@@ -1,26 +1,17 @@
-// contexts/ProductContext.js
-
 import React, { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react';
 
-// Context yaratmaq
 const ProductContext = createContext(null);
 
-// Constants
 const PLACEHOLDER_IMAGE = '/product-placeholder.svg';
 const DEFAULT_REVIEW_COUNT = 6;
 
-// Debug helper
 const debug = (message, data) => {
   if (process.env.NODE_ENV === 'development') {
     console.log(`[ProductContext] ${message}`, data);
   }
 };
 
-/**
- * Map formatında localStorage-a məlumat yazmaq və oxumaq üçün yardımçı funksiya
- * @param {string} key - localStorage key
- * @param {function} setter - React state setter
- */
+
 const loadMapFromStorage = (key, setter) => {
   if (typeof window === 'undefined') return;
   
@@ -39,11 +30,7 @@ const loadMapFromStorage = (key, setter) => {
   }
 };
 
-/**
- * Map formatından array formatına çevirmək və localStorage-a yazmaq
- * @param {string} key - localStorage key
- * @param {object} map - ID map obyekti
- */
+
 const saveMapToStorage = (key, map) => {
   if (typeof window === 'undefined') return;
   
@@ -55,23 +42,17 @@ const saveMapToStorage = (key, map) => {
   }
 };
 
-/**
- * ProductProvider - layihə üçün ProductContext provider komponenti
- */
+
 export const ProductProvider = ({ children }) => {
-  // State for active category filter
   const [activeCategory, setActiveCategory] = useState('all');
   const [isLoading, setIsLoading] = useState(true);
   
-  // State for product interactions
   const [favoriteMap, setFavoriteMap] = useState({});
   const [cartMap, setCartMap] = useState({});
   const [comparisonMap, setComparisonMap] = useState({});
   
-  // Products state
   const [products, setProducts] = useState([]);
   
-  // Initialize state from localStorage on mount
   useEffect(() => {
     if (typeof window !== 'undefined') {
       loadMapFromStorage('favorites', setFavoriteMap);
@@ -80,7 +61,7 @@ export const ProductProvider = ({ children }) => {
     }
   }, []);
   
-  // Cross-tab localStorage sync
+  // Cross-tab sync
   useEffect(() => {
     const handleStorageChange = (e) => {
       const updateStateFromStorage = (key, setter) => {
@@ -100,7 +81,6 @@ export const ProductProvider = ({ children }) => {
     }
   }, []);
   
-  // Toggle functions
   const toggleFavorite = useCallback((productId, event) => {
     if (event) {
       event.preventDefault();
@@ -195,7 +175,6 @@ export const ProductProvider = ({ children }) => {
     };
   }, []);
   
-  // Derived state
   const categoryProductsMap = useMemo(() => {
     if (!Array.isArray(products) || products.length === 0) {
       return { all: [] };
@@ -261,34 +240,28 @@ export const ProductProvider = ({ children }) => {
     getInstallmentPrice
   ]);
   
-  // API ilə məlumatların yüklənməsi
   const setProductsData = useCallback((data) => {
     setProducts(data);
     setIsLoading(false);
   }, []);
   
-  // Category dəyişimi
   const changeCategory = useCallback((category) => {
     setActiveCategory(category);
   }, []);
   
-  // Context value - bütün lazımi funksiyalar və state dəyişənləri
   const contextValue = useMemo(() => ({
-    // State
     products,
     isLoading,
     activeCategory,
     categories,
     normalizedProducts,
     
-    // Actions
     setProductsData,
     changeCategory,
     toggleFavorite,
     toggleCart,
     toggleComparison,
     
-    // Helpers
     formatPrice,
     getProductImageUrl
   }), [
@@ -313,7 +286,6 @@ export const ProductProvider = ({ children }) => {
   );
 };
 
-// Context-i istifadə etmək üçün xüsusi hook
 export const useProductContext = () => {
   const context = useContext(ProductContext);
   if (!context) {

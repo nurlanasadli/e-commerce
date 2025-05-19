@@ -1,17 +1,15 @@
-/* Keep most of your CSS the same, but update these key parts: */
-
 .bannerSection {
   width: 100%;
   max-width: 1240px;
   margin: 20px auto 40px;
   padding: 0;
   position: relative;
+  box-sizing: border-box; 
 }
 
 .sliderWrapper {
   position: relative;
   width: 100%;
-  /* No overflow: hidden here to allow nav buttons to extend outside */
 }
 
 .sliderContainer {
@@ -20,7 +18,6 @@
   overflow: hidden;
   user-select: none;
   border-radius: 33px;
-  /* On desktop, we need to adjust border radius to account for partial second slide */
   border-top-right-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
 }
@@ -31,9 +28,7 @@
   transition: transform 500ms ease;
 }
 
-/* CRITICAL: Slide item width for desktop/mobile views */
 .slideItem {
-  /* Desktop default - 80% width for main slide, allowing 20% of next slide to be visible */
   flex: 0 0 80%;
   width: 80%;
   max-width: 80%;
@@ -127,7 +122,6 @@
   background: #c62828;
 }
 
-/* Active slide animations */
 .activeSlide .slideTitle,
 .activeSlide .slideDescription,
 .activeSlide .slideButton {
@@ -135,7 +129,6 @@
   transform: translateY(0);
 }
 
-/* Navigation buttons styling - UPDATED POSITIONING */
 .navButton {
   position: absolute;
   top: 50%;
@@ -152,7 +145,6 @@
   z-index: 20;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
-  /* Improve touch targets on mobile */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -170,13 +162,12 @@
   cursor: not-allowed;
 }
 
-/* Move buttons outside of container */
 .prevButton {
-  left: -25px; /* Negative value to move outside */
+  left: -25px;
 }
 
 .nextButton {
-  right: -25px; /* Negative value to move outside */
+  right: -25px;
 }
 
 .navButton svg {
@@ -184,7 +175,6 @@
   height: 25px;
 }
 
-/* Dark mode styles */
 [data-theme="dark"] .navButton {
   background-color: #fff;
 }
@@ -197,12 +187,12 @@
   stroke: #EA2427;
 }
 
-/* Responsive adjustments - TOTALLY REVISED FOR ALL DEVICES */
 @media (max-width: 1280px) {
   .bannerSection {
-    padding: 0;
+    padding: 0 20px; 
     max-width: 100%;
-    margin: 20px 20px 40px;
+    margin: 20px auto 40px; 
+    box-sizing: border-box;
   }
   
   .slide {
@@ -248,11 +238,10 @@
   }
 }
 
-/* TABLET & MOBILE SETTINGS - Full Width Slider Below 992px */
 @media (max-width: 992px) {
   .bannerSection {
-    margin: 15px auto 35px;
-    padding: 0 20px; /* Increased padding to allow space for arrow nav buttons */
+    margin: 35px auto 35px;
+    padding: 0 20px;
   }
   
   .slide {
@@ -266,18 +255,16 @@
     box-sizing: border-box;
   }
   
-  /* Since we're now showing only one slide, we need to reset the gap */
   .slidesTrack {
-    gap: 0 !important; /* Added !important to ensure gap is removed */
+    gap: 0 !important;
   }
 
   .sliderContainer {
     border-radius: 20px;
-    border-top-right-radius: 20px !important; /* Override any previous !important */
-    border-bottom-right-radius: 20px !important; /* Override any previous !important */
+    border-top-right-radius: 20px !important;
+    border-bottom-right-radius: 20px !important;
   }
   
-  /* Since we're showing full width slides, border radius can be smaller */
   .sliderContainer,
   .imageContainer,
   .slideContent,
@@ -295,7 +282,6 @@
     max-width: 80%;
   }
   
-  /* Adjusted button sizes for better touch targets */
   .navButton {
     width: 45px;
     height: 45px;
@@ -307,26 +293,23 @@
     height: 22px;
   }
   
-  /* UPDATED: Keep buttons partially outside on smaller screens */
   .prevButton {
-    left: -22px; /* Still keeping a portion outside */
+    left: -22px;
   }
   
   .nextButton {
-    right: -22px; /* Still keeping a portion outside */
+    right: -22px;
   }
   
-  /* Add contrast to buttons to make them more visible */
   .navButton {
     background-color: rgba(255, 255, 255, 0.9);
   }
 }
 
-/* Adjust for smaller tablets */
 @media (max-width: 768px) {
   .bannerSection {
     margin: 10px auto 30px;
-    padding: 0 18px; /* Adjusted padding to allow for buttons */
+    padding: 0 18px;
   }
   
   .slide {
@@ -335,7 +318,6 @@
   
   .slideContent {
     padding: 0 8%;
-    /* Enhance gradient for better text readability on smaller screens */
     background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
   }
   
@@ -356,7 +338,6 @@
     font-size: 0.9rem;
   }
   
-  /* Smaller buttons with better positioning */
   .navButton {
     width: 40px;
     height: 40px;
@@ -368,7 +349,6 @@
     height: 20px;
   }
   
-  /* UPDATED: Keep buttons partially outside */
   .prevButton {
     left: -20px;
   }
@@ -378,18 +358,16 @@
   }
 }
 
-/* Mobile landscape and larger phones */
 @media (max-width: 576px) {
   .bannerSection {
     margin: 10px auto 25px;
-    padding: 0 15px; /* Adjusted padding to allow for buttons */
+    padding: 0 15px;
   }
   
   .slide {
     height: 320px;
   }
   
-  /* All borders more subtle on small screens */
   .sliderContainer, 
   .slide,
   .imageContainer,
@@ -401,7 +379,6 @@
     font-size: 1.25rem;
     margin-bottom: 0.5rem;
     max-width: 95%;
-    /* Text shadow for better readability on small screens */
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
   
@@ -418,7 +395,6 @@
     border-radius: 20px;
   }
   
-  /* Even smaller buttons for mobile but still easily tappable */
   .navButton {
     width: 36px;
     height: 36px;
@@ -430,7 +406,6 @@
     height: 18px;
   }
   
-  /* UPDATED: Keep buttons partially outside */
   .prevButton {
     left: -18px;
   }
@@ -440,17 +415,15 @@
   }
 }
 
-/* Small mobile devices */
 @media (max-width: 480px) {
   .bannerSection {
-    padding: 0 12px; /* Adjusted padding to allow for buttons */
+    padding: 0 12px;
   }
   
   .slide {
     height: 280px;
   }
   
-  /* Even more compact UI for very small screens */
   .sliderContainer, 
   .slide,
   .imageContainer,
@@ -491,7 +464,6 @@
     height: 16px;
   }
   
-  /* UPDATED: Keep buttons partially outside */
   .prevButton {
     left: -16px;
   }
@@ -501,10 +473,9 @@
   }
 }
 
-/* Very small mobile devices */
 @media (max-width: 375px) {
   .bannerSection {
-    padding: 0 10px; /* Adjusted padding to allow for buttons */
+    padding: 0 10px;
     margin: 8px auto 20px;
   }
   
@@ -545,7 +516,6 @@
     height: 14px;
   }
   
-  /* UPDATED: Keep buttons partially outside */
   .prevButton {
     left: -14px;
   }
