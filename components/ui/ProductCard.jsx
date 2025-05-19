@@ -1,14 +1,11 @@
-// components/ui/ProductCard.jsx
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import { HeartIcon, CartAddIcon, CommentIcon, StarIcon, CompareIcon } from './icons';
 import { useProductContext } from '../../contexts/ProductContext';
 import { useToggleAnimation } from '../../hooks/useToggleAnimation';
 
-// Constants
 const PLACEHOLDER_IMAGE = '/product-placeholder.svg';
 const REVIEW_TEXT = 'Rəy';
 
-// Memoized icon components
 const MemoizedHeartIcon = React.memo(HeartIcon);
 const MemoizedCartAddIcon = React.memo(CartAddIcon);
 const MemoizedCommentIcon = React.memo(CommentIcon);
@@ -20,11 +17,9 @@ const ProductCard = ({ product }) => {
   
   const { toggleFavorite, toggleCart, toggleComparison, formatPrice } = useProductContext();
   
-  // Animate toggle hooks
   const { elementRef: cartButtonRef, animateToggle: animateCartToggle } = useToggleAnimation();
   const { elementRef: wishlistButtonRef, animateToggle: animateWishlistToggle } = useToggleAnimation();
   
-  // Destructure product properties
   const {
     id,
     title,
@@ -41,75 +36,97 @@ const ProductCard = ({ product }) => {
   } = product;
   
   
-  // Local states for immediate UI updates
   const [localIsFavorite, setLocalIsFavorite] = useState(isFavorite);
   const [localIsInCart, setLocalIsInCart] = useState(isInCart);
   const [localIsInComparison, setLocalIsInComparison] = useState(isInComparison);
   
-  // Sync with context state when it changes
   useEffect(() => {
     if (isFavorite !== localIsFavorite) setLocalIsFavorite(isFavorite);
     if (isInCart !== localIsInCart) setLocalIsInCart(isInCart);
     if (isInComparison !== localIsInComparison) setLocalIsInComparison(isInComparison);
   }, [isFavorite, isInCart, isInComparison]);
   
-  // Prevent repeated renders on same state
   const lastFavoriteState = useRef(localIsFavorite);
   const lastCartState = useRef(localIsInCart);
   
-  // Handle Wishlist toggle with optimized animation
   const handleToggleFavorite = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     
     const newState = !localIsFavorite;
     
-    // Only update and animate if state actually changes
     if (lastFavoriteState.current !== newState) {
       setLocalIsFavorite(newState);
       lastFavoriteState.current = newState;
       animateWishlistToggle(newState);
       
-      // Use requestAnimationFrame for smoother transition
       requestAnimationFrame(() => {
         toggleFavorite(id);
       });
     }
   }, [id, toggleFavorite, localIsFavorite, animateWishlistToggle]);
 
-  // Handle Cart toggle with optimized animation
+  // ProductCard komponentinə əlavə et
+useEffect(() => {
+  const handleOutsideClick = (e) => {
+    // Əgər klik compare butonunun xaricində baş verirsə, 
+    // amma məhsul kartının daxilindədirsə, heç bir şey etməyək
+    if (e.target.closest('.product-card') && 
+        !e.target.closest('.product-card__compare')) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  };
+
+  document.addEventListener('click', handleOutsideClick);
+  
+  return () => {
+    document.removeEventListener('click', handleOutsideClick);
+  };
+}, []);
+
   const handleToggleCart = useCallback((e) => {
     e.preventDefault();
     e.stopPropagation();
     
     const newState = !localIsInCart;
     
-    // Only update and animate if state actually changes
     if (lastCartState.current !== newState) {
       setLocalIsInCart(newState);
       lastCartState.current = newState;
       animateCartToggle(newState);
       
-      // Use requestAnimationFrame for smoother transition
       requestAnimationFrame(() => {
         toggleCart(id);
       });
     }
   }, [id, toggleCart, localIsInCart, animateCartToggle]);
 
-  // Handle Comparison toggle
-  const handleToggleComparison = useCallback((e) => {
+
+const handleToggleComparison = useCallback((e) => {
   e.preventDefault();
   e.stopPropagation();
   
-  setLocalIsInComparison(!localIsInComparison);
+  const button = e.currentTarget;
+  const wasActive = localIsInComparison;
   
-  requestAnimationFrame(() => {
+  setLocalIsInComparison(!wasActive);
+    if (wasActive) {
+    button.classList.remove('product-card__compare--active');
+    button.classList.add('product-card__compare--deactivating');
+    
+    setTimeout(() => {
+      button.classList.remove('product-card__compare--deactivating');
+    }, 500);
+  } else {
+    button.classList.add('product-card__compare--active');
+  }
+    requestAnimationFrame(() => {
     toggleComparison(id);
   });
 }, [id, toggleComparison, localIsInComparison]);
+   
 
-  // Optimize image error handling
   const handleImageError = useCallback((e) => {
     e.target.onerror = null;
     e.target.src = PLACEHOLDER_IMAGE;
@@ -128,6 +145,7 @@ const ProductCard = ({ product }) => {
   aria-label="Müqayisə et"
   type="button"
   data-product-id={id}
+  data-prevent-propagation="true"
 >
   <MemoizedCompareIcon 
     size={18} 

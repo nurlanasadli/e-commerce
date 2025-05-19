@@ -45,7 +45,7 @@ const ProductsSection = ({ products = [] }) => {
       }
     }
   };
-
+  
   const initialScrollTimeout = setTimeout(scrollToActiveCategory, 100);
   const forceScrollReset = setTimeout(() => {
     const filtersContainer = document.querySelector('.products-section__filters');
