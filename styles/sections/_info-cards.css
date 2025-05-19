@@ -1,0 +1,494 @@
+.info-cards-section {
+  width: 100%;
+  padding: clamp(32px, 5vw, 60px) 0; /* Fluid padding */
+  position: relative; /* Added for scroll indicator positioning */
+}
+
+.info-cards-section .container {
+  width: 100%;
+  max-width: var(--container-max-width, 1240px);
+  margin: 0 auto;
+  padding: 0 var(--container-padding, 15px);
+}
+
+/* Modern grid layout - More flexible than flexbox for card layouts */
+.info-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 288px), 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  width: 100%;
+}
+
+/* Card base styles */
+.info-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 186px; /* Fixed height as per design */
+  padding: 24px;
+  border-radius: 24px;
+  background-color: rgba(245, 245, 245, 1);
+  overflow: hidden;
+}
+
+.info-card__icon {
+  position: absolute;
+  top: 24px;
+  cursor: pointer;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 15.8px;
+  background-color: rgba(225, 225, 225, 1);
+}
+
+.info-card__icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.info-card__content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 66px; /* Icon (50px) + spacing (16px) */
+  height: 100%;
+}
+
+.info-card__title {
+  margin-bottom: 8px;
+  font-family: 'SF Pro Display', var(--font-family-primary, sans-serif);
+  font-weight: 700;
+  font-size: clamp(20px, 1.5vw, 24px); /* Fluid typography */
+  line-height: 1.1;
+  font-size: 24px;
+  color: var(--color-text, rgba(51, 51, 51, 1));
+}
+
+.info-card__description {
+  font-family: 'SF Pro Display', var(--font-family-primary, sans-serif);
+  font-weight: 400;
+  font-size: clamp(14px, 1vw, 16px); /* Fluid typography */
+  line-height: 1.4;
+  font-size: 16px;
+  color: var(--color-text-secondary, rgba(51, 51, 51, 0.7));
+  /* Multi-line text truncation */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .info-card {
+  background-color: rgba(43, 43, 43, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .info-card__title {
+  color: rgba(255, 255, 255, 1);
+}
+
+[data-theme="dark"] .info-card__description {
+  color: rgba(156, 163, 175, 1);
+}
+
+[data-theme="dark"] .info-card__icon {
+  background-color: rgba(60, 60, 60, 1);
+}
+
+[data-theme="dark"] .info-card__icon-img {
+  filter: brightness(0) invert(1);
+}
+
+/* ----------------------------------------
+   RESPONSIVE ADJUSTMENTS
+---------------------------------------- */
+
+/* Large Desktops (1200px and up) */
+@media screen and (min-width: 1201px) {
+  .info-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktops & Laptops (992px - 1200px) */
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .info-cards-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  .info-card {
+    height: 180px; /* Slightly reduced height */
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .info-card {
+    max-width: none; /* Remove max-width constraint */
+    height: 200px; /* Slightly increased height for better content visibility */
+  }
+  
+  .info-card__icon {
+    width: 60px; /* Larger icon for better visibility */
+    height: 60px;
+    border-radius: 18px; /* Adjusted radius for larger icon */
+  }
+  
+  .info-card__icon-img {
+    width: 30px; /* Larger icon image */
+    height: 30px;
+  }
+  
+  .info-card__content {
+    padding-top: 75px; /* Adjusted for larger icon */
+  }
+  
+  .info-card__title {
+    font-size: 22px; /* Larger title */
+    font-weight: 700;
+    line-height: 28px;
+    margin-bottom: 10px; /* More space between title and description */
+  }
+  
+  .info-card__description {
+    font-size: 16px; /* Larger description */
+    font-weight: 400;
+    line-height: 22px;
+    -webkit-line-clamp: 3; /* Limit to 3 lines */
+  }
+}
+
+/* Updated styles for 576px-767px (Large Mobile) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .info-cards-section .container {
+    padding: 0 20px; /* Increased side padding */
+  }
+  
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .info-card {
+    height: 180px; /* Increased from 170px */
+    padding: 20px; /* Slightly more padding */
+  }
+  
+  .info-card__icon {
+    width: 50px; /* Increased from 45px */
+    height: 50px;
+    border-radius: 16px; /* Adjusted for larger size */
+  }
+  
+  .info-card__icon-img {
+    width: 25px; /* Increased from previous size */
+    height: 25px;
+  }
+  
+  .info-card__content {
+    padding-top: 62px; /* Adjusted for larger icon */
+  }
+  
+  .info-card__title {
+    font-size: 18px; /* Increased from default */
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .info-card__description {
+    font-size: 14px; /* Optimized for readability */
+    font-weight: 400;
+    line-height: 20px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Large Mobile (576px - 767px) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .info-cards-section .container {
+    padding: 0 20px; /* Increased side padding */
+  }
+  
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .info-card {
+    height: 170px; /* Slightly reduced height */
+  }
+  
+  .info-card__icon {
+    width: 45px; /* Slightly smaller icon */
+    height: 45px;
+  }
+  
+  .info-card__content {
+    padding-top: 57px; /* Adjusted for smaller icon */
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .info-cards-section {
+    padding: 24px 0; /* Reduced section padding */
+  }
+  
+  .info-cards-section .container {
+    padding: 0 16px;
+  }
+  
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns layout */
+    gap: 12px; /* Reduced gap for smaller screens */
+  }
+  
+  .info-card {
+    height: auto; /* Allow height to adjust based on content */
+    min-height: 126px; /* Ensure minimum height */
+    padding: 16px; /* Reduced padding */
+    border-radius: 16px; /* Slightly smaller border radius for better proportions */
+  }
+  
+  .info-card__icon {
+    top: 16px;
+    left: 16px;
+    width: 32px; /* Smaller icon */
+    height: 32px;
+    border-radius: 10px; /* Adjusted border radius to match reduction */
+    padding: 5px !important; /* Added padding for SVG icons */
+  }
+  
+  .info-card__icon-img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .info-card__content {
+    padding-top: 40px; /* Adjusted for smaller icon + padding */
+  }
+  
+  .info-card__title {
+    font-size: 14px; /* As requested */
+    font-weight: 700; /* As requested */
+    line-height: 19px; /* As requested */
+    margin-bottom: 4px;
+  }
+  
+  .info-card__description {
+    font-size: 10px; /* As requested */
+    font-weight: 400; /* As requested */
+    line-height: 14px; /* As requested */
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Very Small Mobile (under 375px but above 305px) - Additional tweaks for extreme small screens */
+@media screen and (max-width: 374px) and (min-width: 306px) {
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr); /* Maintain 2 columns */
+    gap: 8px; /* Further reduced gap */
+  }
+  
+  .info-card {
+    min-height: 140px; /* Further reduced height */
+    padding: 14px; /* Less padding */
+  }
+  
+  .info-card__icon {
+    width: 32px; /* Even smaller icon */
+    height: 32px;
+  }
+  
+  .info-card__content {
+    padding-top: 40px; /* Adjusted for smaller icon */
+  }
+  
+  .info-card__title {
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  
+  .info-card__description {
+    font-size: 12px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+/* Ultra-Small Mobile (305px and below) - Completely new approach with horizontal scroll */
+@media screen and (max-width: 305px) {
+  .info-cards-section {
+    padding: 20px 0;
+    width: 100%;
+    overflow: visible;
+  }
+  
+  .info-cards-section .container {
+    padding: 0 8px; /* Reduced padding */
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns */
+    gap: 8px; /* Minimal gap */
+    width: 100%;
+  }
+  
+  .info-card {
+    width: 100%; /* Take full width of the column */
+    min-height: 120px; /* Shorter cards */
+    height: auto;
+    padding: 10px; /* Minimal padding */
+    border-radius: 12px; /* Smaller radius */
+    box-sizing: border-box;
+  }
+  
+  .info-card__icon {
+    top: 10px;
+    left: 10px;
+    width: 28px; /* Even smaller icon */
+    height: 28px;
+    border-radius: 8px;
+  }
+  
+  .info-card__icon-img {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .info-card__content {
+    padding-top: 32px; /* Adjusted for smaller icon */
+  }
+  
+  .info-card__title {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 2px;
+  }
+  
+  .info-card__description {
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 12px;
+    -webkit-line-clamp: 3;
+  }
+  
+  /* Remove the scroll indicator */
+  .info-cards-section::after {
+    display: none;
+  }
+}
+
+/* Device-specific optimizations */
+/* iPads Pro in portrait */
+@media screen and (min-width: 1024px) and (max-width: 1024px) and (orientation: portrait) {
+  .info-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* High DPI Screens */
+@media screen and (min-resolution: 192dpi) {
+  .info-card {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04); /* Subtler shadow for high DPI */
+  }
+}
+
+/* Print styles - for better print rendering */
+@media print {
+  .info-cards-section {
+    padding: 0;
+    break-inside: avoid;
+  }
+  
+  .info-cards-grid {
+    display: block;
+  }
+  
+  .info-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #eee;
+    margin-bottom: 10px;
+    page-break-inside: avoid;
+  }
+}
+
+@media screen and (max-width: 200px) {
+  /* Force minimum width on the entire section */
+  .info-cards-section {
+    min-width: 200px;
+    width: 200px;
+    overflow-x: auto;
+    overflow-y: visible;
+  }
+  
+  /* Ensure container takes full width */
+  .info-cards-section .container {
+    min-width: 200px;
+    width: 200px;
+    padding: 0 5px;
+  }
+  
+  /* Ensure grid maintains proper structure */
+  .info-cards-grid {
+    width: 190px;
+    min-width: 190px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  
+  /* Keep cards proporational but smaller */
+  .info-card {
+    width: 100%;
+    min-height: 110px;
+    padding: 8px;
+    border-radius: 10px;
+  }
+  
+  .info-card__icon {
+    width: 24px;
+    height: 24px;
+    top: 8px;
+    left: 8px;
+    border-radius: 6px;
+  }
+  
+  .info-card__icon-img {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .info-card__content {
+    padding-top: 28px;
+  }
+  
+  .info-card__title {
+    font-size: 10px;
+    line-height: 14px;
+    margin-bottom: 2px;
+  }
+  
+  .info-card__description {
+    font-size: 8px;
+    line-height: 10px;
+    -webkit-line-clamp: 3;
+  }
+}

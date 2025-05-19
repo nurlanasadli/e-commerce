@@ -1,0 +1,556 @@
+/* Keep most of your CSS the same, but update these key parts: */
+
+.bannerSection {
+  width: 100%;
+  max-width: 1240px;
+  margin: 20px auto 40px;
+  padding: 0;
+  position: relative;
+}
+
+.sliderWrapper {
+  position: relative;
+  width: 100%;
+  /* No overflow: hidden here to allow nav buttons to extend outside */
+}
+
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 33px;
+  /* On desktop, we need to adjust border radius to account for partial second slide */
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.slidesTrack {
+  display: flex;
+  gap: 2%;
+  transition: transform 500ms ease;
+}
+
+/* CRITICAL: Slide item width for desktop/mobile views */
+.slideItem {
+  /* Desktop default - 80% width for main slide, allowing 20% of next slide to be visible */
+  flex: 0 0 80%;
+  width: 80%;
+  max-width: 80%;
+  box-sizing: border-box;
+}
+
+.slide {
+  height: 520px;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 33px;
+  box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.1);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.slideLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 33px;
+  overflow: hidden;
+}
+
+.slideContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 10%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+  color: white;
+  pointer-events: none;
+  border-radius: 33px;
+}
+
+.slideTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  max-width: 60%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.slideDescription {
+  font-size: 1.2rem;
+  margin: 0 0 2rem;
+  max-width: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: 0.1s;
+}
+
+.slideButton {
+  background: #e53935;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+  align-self: flex-start;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(20px);
+  transition-delay: 0.2s;
+}
+
+.slideButton:hover {
+  background: #c62828;
+}
+
+/* Active slide animations */
+.activeSlide .slideTitle,
+.activeSlide .slideDescription,
+.activeSlide .slideButton {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Navigation buttons styling - UPDATED POSITIONING */
+.navButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.1);
+  /* Improve touch targets on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navButton:hover {
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.2);
+}
+
+.navButton:focus {
+  outline: none;
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Move buttons outside of container */
+.prevButton {
+  left: -25px; /* Negative value to move outside */
+}
+
+.nextButton {
+  right: -25px; /* Negative value to move outside */
+}
+
+.navButton svg {
+  width: 25px;
+  height: 25px;
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .navButton {
+  background-color: #fff;
+}
+
+[data-theme="dark"] .navButton:hover {
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .navButton svg path {
+  stroke: #EA2427;
+}
+
+/* Responsive adjustments - TOTALLY REVISED FOR ALL DEVICES */
+@media (max-width: 1280px) {
+  .bannerSection {
+    padding: 0;
+    max-width: 100%;
+    margin: 20px 20px 40px;
+  }
+  
+  .slide {
+    height: 480px;
+  }
+  
+  .slideTitle {
+    font-size: 2rem;
+    max-width: 70%;
+  }
+  
+  .slideDescription {
+    font-size: 1.1rem;
+    max-width: 60%;
+  }
+  
+  .prevButton {
+    left: -20px;
+  }
+  
+  .nextButton {
+    right: -20px;
+  }
+}
+
+@media (max-width: 993px) and (min-width: 992px) {
+  .slideItem {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .slidesTrack {
+    gap: 0;
+  }
+  
+  .sliderContainer {
+    border-radius: 20px !important;
+  }
+  
+  .slide, .imageContainer, .slideContent {
+    border-radius: 20px;
+  }
+}
+
+/* TABLET & MOBILE SETTINGS - Full Width Slider Below 992px */
+@media (max-width: 992px) {
+  .bannerSection {
+    margin: 15px auto 35px;
+    padding: 0 20px; /* Increased padding to allow space for arrow nav buttons */
+  }
+  
+  .slide {
+    height: 420px;
+  }
+  
+  .slideItem {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  /* Since we're now showing only one slide, we need to reset the gap */
+  .slidesTrack {
+    gap: 0 !important; /* Added !important to ensure gap is removed */
+  }
+
+  .sliderContainer {
+    border-radius: 20px;
+    border-top-right-radius: 20px !important; /* Override any previous !important */
+    border-bottom-right-radius: 20px !important; /* Override any previous !important */
+  }
+  
+  /* Since we're showing full width slides, border radius can be smaller */
+  .sliderContainer,
+  .imageContainer,
+  .slideContent,
+  .slide {
+    border-radius: 20px;
+  }
+  
+  .slideTitle {
+    font-size: 1.75rem;
+    max-width: 80%;
+  }
+  
+  .slideDescription {
+    font-size: 1rem;
+    max-width: 80%;
+  }
+  
+  /* Adjusted button sizes for better touch targets */
+  .navButton {
+    width: 45px;
+    height: 45px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .navButton svg {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* UPDATED: Keep buttons partially outside on smaller screens */
+  .prevButton {
+    left: -22px; /* Still keeping a portion outside */
+  }
+  
+  .nextButton {
+    right: -22px; /* Still keeping a portion outside */
+  }
+  
+  /* Add contrast to buttons to make them more visible */
+  .navButton {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+/* Adjust for smaller tablets */
+@media (max-width: 768px) {
+  .bannerSection {
+    margin: 10px auto 30px;
+    padding: 0 18px; /* Adjusted padding to allow for buttons */
+  }
+  
+  .slide {
+    height: 380px;
+  }
+  
+  .slideContent {
+    padding: 0 8%;
+    /* Enhance gradient for better text readability on smaller screens */
+    background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
+  }
+  
+  .slideTitle {
+    font-size: 1.5rem;
+    max-width: 90%;
+    margin-bottom: 0.75rem;
+  }
+  
+  .slideDescription {
+    font-size: 0.9rem;
+    max-width: 90%;
+    margin-bottom: 1.5rem;
+  }
+  
+  .slideButton {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  /* Smaller buttons with better positioning */
+  .navButton {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .navButton svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* UPDATED: Keep buttons partially outside */
+  .prevButton {
+    left: -20px;
+  }
+  
+  .nextButton {
+    right: -20px;
+  }
+}
+
+/* Mobile landscape and larger phones */
+@media (max-width: 576px) {
+  .bannerSection {
+    margin: 10px auto 25px;
+    padding: 0 15px; /* Adjusted padding to allow for buttons */
+  }
+  
+  .slide {
+    height: 320px;
+  }
+  
+  /* All borders more subtle on small screens */
+  .sliderContainer, 
+  .slide,
+  .imageContainer,
+  .slideContent {
+    border-radius: 15px;
+  }
+  
+  .slideTitle {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    max-width: 95%;
+    /* Text shadow for better readability on small screens */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .slideDescription {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    max-width: 95%;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .slideButton {
+    padding: 8px 18px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+  }
+  
+  /* Even smaller buttons for mobile but still easily tappable */
+  .navButton {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+  }
+  
+  .navButton svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* UPDATED: Keep buttons partially outside */
+  .prevButton {
+    left: -18px;
+  }
+  
+  .nextButton {
+    right: -18px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .bannerSection {
+    padding: 0 12px; /* Adjusted padding to allow for buttons */
+  }
+  
+  .slide {
+    height: 280px;
+  }
+  
+  /* Even more compact UI for very small screens */
+  .sliderContainer, 
+  .slide,
+  .imageContainer,
+  .slideContent {
+    border-radius: 12px;
+  }
+  
+  .slideContent {
+    padding: 0 6%;
+  }
+  
+  .slideTitle {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+    max-width: 100%;
+  }
+  
+  .slideDescription {
+    font-size: 0.75rem;
+    margin-bottom: 0.8rem;
+    max-width: 100%;
+    line-height: 1.4;
+  }
+  
+  .slideButton {
+    padding: 7px 16px;
+    font-size: 0.75rem;
+  }
+  
+  .navButton {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .navButton svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* UPDATED: Keep buttons partially outside */
+  .prevButton {
+    left: -16px;
+  }
+  
+  .nextButton {
+    right: -16px;
+  }
+}
+
+/* Very small mobile devices */
+@media (max-width: 375px) {
+  .bannerSection {
+    padding: 0 10px; /* Adjusted padding to allow for buttons */
+    margin: 8px auto 20px;
+  }
+  
+  .slide {
+    height: 240px;
+  }
+  
+  .sliderContainer,
+  .slide,
+  .imageContainer,
+  .slideContent {
+    border-radius: 10px;
+  }
+  
+  .slideTitle {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .slideDescription {
+    font-size: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
+  
+  .slideButton {
+    padding: 6px 14px;
+    font-size: 0.7rem;
+  }
+  
+  .navButton {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+  
+  .navButton svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  /* UPDATED: Keep buttons partially outside */
+  .prevButton {
+    left: -14px;
+  }
+  
+  .nextButton {
+    right: -14px;
+  }
+}

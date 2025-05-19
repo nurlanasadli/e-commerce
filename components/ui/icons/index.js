@@ -1,0 +1,15 @@
+export { default as Icon } from './Icon';
+export { default as ArrowDownIcon } from './ArrowDownIcon';
+export { default as SearchIcon } from './SearchIcon';
+export { default as HeartIcon } from './HeartIcon';
+export { default as CartIcon } from './CartIcon';
+export { default as CartAddIcon } from './CartAddIcon';
+export { default as SunIcon } from './SunIcon';
+export { default as MoonIcon } from './MoonIcon';
+export { default as HamburgerIcon } from './HamburgerIcon';
+export { default as CompareIcon } from './CompareIcon';
+export { default as ChevronDownIcon } from './ChevronDownIcon';
+export { default as UserIcon } from './UserIcon';
+export { default as CatalogIcon } from './CatalogIcon';
+export { default as CommentIcon } from './CommentIcon';
+export { default as StarIcon } from './StarIcon';
