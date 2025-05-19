@@ -260,6 +260,10 @@
   color: var(--color-text, rgba(51, 51, 51, 1));
 }
 
+[data-theme="dark"] .category-nav__mobile-title  {
+  color: rgba(255, 255, 255, 1);
+}
+
 .category-nav__mobile-close {
   background: transparent;
   border: none;
@@ -274,6 +278,15 @@
 
 .category-nav__mobile-close:hover {
   background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .category-nav__mobile-close {
+  color: rgba(255, 255, 255, 1);
+  background: transparent;
+}
+
+[data-theme="dark"] .category-nav__mobile-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .category-nav__mobile-categories {
@@ -316,7 +329,7 @@
 }
 
 [data-theme="dark"] .category-nav__item {
-  color: rgba(180, 180, 180, 1);
+  color: #fff;
 }
 
 [data-theme="dark"] .category-nav__item--active {

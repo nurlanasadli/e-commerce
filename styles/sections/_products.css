@@ -390,7 +390,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   min-height: 32px;
 }
@@ -533,7 +532,7 @@
 }
 
 .product-card__button:hover {
-  background-color: rgba(234, 36, 39, 1);
+  background-color: rgba(234, 36, 39, 1) !important;
   color: rgba(255, 255, 255, 1);
 }
 
@@ -1035,6 +1034,7 @@
     width: 100%;
     padding-bottom: 20px;
   }
+  
   .product-card__rating {
     display: none !important;
   }
@@ -1089,6 +1089,7 @@
     opacity: 0 !important; 
     visibility: hidden !important; 
   }
+  
   .product-card__old-price:empty {
     display: block !important;
     visibility: hidden !important;
@@ -1129,7 +1130,7 @@
     height: 16px !important;
   }
   
- .installment__period {
+  .installment__period {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
@@ -1154,6 +1155,7 @@
     display: block;
     height: 16px;
   }
+  
   .product-card__actions {
     margin-top: auto !important;
     margin-bottom: 5px !important;
@@ -1164,9 +1166,61 @@
     font-size: 16px !important;
     background-color: var(--color-button) !important;
     color: var(--color-text) !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
+    position: relative;
+    z-index: 1;
   }
+  
   .product-card__button-text::after {
     color: var(--color-text) !important;
+  }
+
+  /* Button active state */
+  .product-card__button--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__button--active .product-card__button-text::after {
+    content: "Səbətə keç" !important;
+    color: white !important;
+  }
+  
+  .product-card__button--active .product-card__button-icon-left path {
+    stroke: white !important;
+  }
+  
+  /* Button non-active state */
+  .product-card__button:not(.product-card__button--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
+    content: "Səbətə əlavə et" !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__button:not(.product-card__button--active) .product-card__button-icon-left path {
+    stroke: var(--color-text) !important;
+  }
+
+  /* Button active hover state */
+  .product-card__button--active:hover {
+    background-color: rgba(234, 36, 39, 0.9) !important;
+    color: white !important;
+  }
+  
+  /* Force repaint on transition */
+  .product-card__button::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: transparent;
+    z-index: -1;
   }
 
   [data-theme="dark"] .product-card__image-container {
@@ -1175,11 +1229,16 @@
   }
 
   .product-card__button:hover:not(.product-card__button--active) .product-card__button-text::after {
-    color: rgba(63, 63, 63, 1) !important;
+    color: white !important;
+  }
+
+  .product-card__button:hover:not(.product-card__button--active) {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
   }
 
   .product-card__button:hover:not(.product-card__button--active) .product-card__button-icon-left path {
-    stroke: rgba(63, 63, 63, 1) !important;
+    stroke: white !important;
   }
   
   [data-theme="dark"] .product-card__button .product-card__button-text::after {
@@ -1204,21 +1263,15 @@
     color: rgba(255, 255, 255, 1) !important;
   }
   
-  .product-card__button--active {
+  [data-theme="dark"] .product-card__button--active {
     background-color: rgba(234, 36, 39, 1) !important;
     color: white !important;
   }
   
-  .product-card__button--active .product-card__button-text::after {
-    color: white !important;
-    content: "Səbətə keç" !important;
+  [data-theme="dark"] .product-card__button--active:hover {
+    background-color: rgba(234, 36, 39, 0.9) !important;
   }
   
-  .product-card__button:not(.product-card__button--active) .product-card__button-text::after {
-    content: "Səbətə əlavə et";
-    color: var(--color-text);
-  }
-
   [data-theme="dark"] .product-card__button--active .product-card__button-text::after {
     content: "Səbətə keç" !important;
     color: white !important;
@@ -1236,17 +1289,71 @@
     color: rgba(255, 255, 255, 1) !important;
   }
   
-  [data-theme="dark"] .installment__price {
+  [data-theme="dark"] .product-card__installment__price {
     color: rgba(255, 255, 255, 1) !important;
   }
   
-  [data-theme="dark"] .installment__period {
+  [data-theme="dark"] .product-card__installment__period {
     color: rgba(255, 255, 255, 0.5) !important;
   }
 
+  /* Wishlist button */
   .product-card__wishlist {
     width: 50px !important;
     height: 50px !important;
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease !important;
+  }
+  
+  .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist--active:hover {
+    background-color: rgba(234, 36, 39, 0.9) !important;
+  }
+  
+  .product-card__wishlist--active svg path {
+    fill: none !important;
+    stroke: white !important;
+    stroke-width: 2px !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: var(--color-button) !important;
+    color: var(--color-text) !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active):hover {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  .product-card__wishlist:not(.product-card__wishlist--active) svg path {
+    fill: none !important;
+    stroke: currentColor !important;
+  }
+  
+  .product-card__wishlist svg {
+    color: inherit !important;
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist--active {
+    background-color: rgba(234, 36, 39, 1) !important;
+    color: white !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active) {
+    background-color: #333333 !important;
+    color: #E0E0E0 !important;
+  }
+  
+  [data-theme="dark"] .product-card__wishlist:not(.product-card__wishlist--active) svg path {
+    stroke: #E0E0E0 !important;
   }
   
   .product-card {
@@ -2152,28 +2259,27 @@
     margin-left: auto;
     margin-right: auto;
   }
-}
 
-@media (max-width: 1300px) {
-  .products-section .container {
-    padding: 0 30px;
+  @media (max-width: 1300px) {
+    .products-section .container {
+      padding: 0 30px;
+    }
+    
+    .products-grid {
+      max-width: 1160px;
+    }
   }
   
-  .products-grid {
-    max-width: 1160px;
+  @media (max-width: 1250px) {
+    .products-section .container {
+      padding: 0 40px;
+    }
+    
+    .products-grid {
+      max-width: 1120px;
+    }
   }
 }
-
-@media (max-width: 1250px) {
-  .products-section .container {
-    padding: 0 40px;
-  }
-  
-  .products-grid {
-    max-width: 1120px;
-  }
-}
-
 @media (max-width: 576px) {
   .products-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -2957,91 +3063,6 @@
   }
 }
 
-
-@media (min-width: 768px) and (max-width: 1366px) {
-  /* Enhanced scrolling for category filters */
-  .products-section__filters {
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    overscroll-behavior-x: contain;
-    will-change: scroll-position;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 2px;
-  }
-  
-  .products-section__filters::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .category-button {
-    scroll-snap-align: center;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    user-select: none;
-  }
-  
-  /* Performance optimizations for tablets */
-  .product-card__image {
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-  
-  /* Button interaction improvements for tablets */
-  .product-card__button:active,
-  .product-card__wishlist:active {
-    transform: scale(0.98);
-  }
-  
-  /* Force redraw to prevent visual bugs */
-  .product-card__button::after,
-  .product-card__wishlist::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    pointer-events: none;
-    z-index: -1;
-  }
-  
-  /* Fix for iPad Safari */
-  html.ios .product-card__button,
-  html.ios .product-card__wishlist {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-}
-
-
-@media only screen and (min-device-width: 768px) and (max-device-width: 1366px) and (-webkit-min-device-pixel-ratio: 2) {
-  .products-section__filters {
-    -webkit-overflow-scrolling: touch;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-right: 20px;
-  }
-  
-  .product-card__button--active,
-  .product-card__wishlist--active {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-  
-  .product-card__button:not(.product-card__button--active),
-  .product-card__wishlist:not(.product-card__wishlist--active) {
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-  }
-}
-
-
 @media (max-width: 375px) {
   .products-grid {
     gap: 5px !important;
@@ -3541,7 +3562,6 @@
     color:#333;
     margin-bottom: 13px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-top: 7px;
@@ -4226,7 +4246,6 @@
     font-size: 8px !important;
     min-height: 16px !important;
     line-height: 1.1 !important;
-    -webkit-line-clamp: 2 !important;
     margin: 2px 0 3px !important;
     font-weight: 400 !important;
   }
@@ -4652,8 +4671,5 @@
   
   .product-card__wishlist--active svg {
     color: white !important;
-  }
-  
-  .product-card__wishlist--active svg path {
   }
 }
