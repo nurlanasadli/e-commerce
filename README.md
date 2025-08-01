@@ -1,4 +1,4 @@
-# 🛍️ Wemark Frontend Test Task
+# 🛍️Frontend demo example
 
 This project was developed based on the frontend test task of Wemark and was implemented in accordance with the given requirements.
 
